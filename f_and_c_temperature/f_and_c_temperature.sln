@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "f_and_c_temperature", "f_and_c_temperature\f_and_c_temperature.vcproj", "{1560925C-9DCA-477B-9651-0BDFBF01E008}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1560925C-9DCA-477B-9651-0BDFBF01E008}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1560925C-9DCA-477B-9651-0BDFBF01E008}.Debug|Win32.Build.0 = Debug|Win32
+		{1560925C-9DCA-477B-9651-0BDFBF01E008}.Release|Win32.ActiveCfg = Release|Win32
+		{1560925C-9DCA-477B-9651-0BDFBF01E008}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
