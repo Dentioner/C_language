@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "打印浮点值", "打印浮点值\打印浮点值.vcproj", "{C66126C5-4E44-4B7D-8E6B-4D249085BEF5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C66126C5-4E44-4B7D-8E6B-4D249085BEF5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C66126C5-4E44-4B7D-8E6B-4D249085BEF5}.Debug|Win32.Build.0 = Debug|Win32
+		{C66126C5-4E44-4B7D-8E6B-4D249085BEF5}.Release|Win32.ActiveCfg = Release|Win32
+		{C66126C5-4E44-4B7D-8E6B-4D249085BEF5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
