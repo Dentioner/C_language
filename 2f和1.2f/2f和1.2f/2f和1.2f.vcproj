@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="pizza"
-	ProjectGUID="{78579E3D-6632-488A-96CA-FA662A10F733}"
-	RootNamespace="pizza"
+	Name="2fºÍ1.2f"
+	ProjectGUID="{575079A4-575B-46CB-ACA5-302FE4F56343}"
+	RootNamespace="My2fºÍ12f"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -171,7 +171,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\pizza.c"
+				RelativePath=".\±æÎö.c"
 				>
 			</File>
 		</Filter>

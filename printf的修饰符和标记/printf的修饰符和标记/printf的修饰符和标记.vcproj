@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="pizza"
-	ProjectGUID="{78579E3D-6632-488A-96CA-FA662A10F733}"
-	RootNamespace="pizza"
+	Name="printf的修饰符和标记"
+	ProjectGUID="{DA9FF99A-AD41-4215-8D45-04B65D9A6AD6}"
+	RootNamespace="printf的修饰符和标记"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -171,7 +171,7 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
-				RelativePath=".\pizza.c"
+				RelativePath=".\width.c"
 				>
 			</File>
 		</Filter>
