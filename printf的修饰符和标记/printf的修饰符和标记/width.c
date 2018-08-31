@@ -13,15 +13,15 @@ int main()
 	/*const double RENT = 3852.99;*/
 	double RENT;/*这个double换成float就正常了*/
 	printf("Please input a number.\n");
-	scanf("%f", &RENT);
-	printf("*%f*\n", RENT);
+	scanf("%lf", &RENT);
+	printf("*%lf*\n", RENT);
 	printf("*%e*\n", RENT);
-	printf("*%4.2f*\n", RENT);
-	printf("*%3.1f*\n", RENT);
-	printf("*%10.3f*\n", RENT);
+	printf("*%4.2lf*\n", RENT);
+	printf("*%3.1lf*\n", RENT);
+	printf("*%10.3lf*\n", RENT);
 	printf("*%10.3E*\n", RENT);
-	printf("*%+4.2f*\n", RENT);
-	printf("*%010.2f*\n", RENT);
+	printf("*%+4.2lf*\n", RENT);
+	printf("*%010.2lf*\n", RENT);
 
 	
 	system("pause");
