@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "定义字段宽度", "定义字段宽度\定义字段宽度.vcproj", "{6B071073-6AE0-4B80-B896-7A59D1FD8576}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6B071073-6AE0-4B80-B896-7A59D1FD8576}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6B071073-6AE0-4B80-B896-7A59D1FD8576}.Debug|Win32.Build.0 = Debug|Win32
+		{6B071073-6AE0-4B80-B896-7A59D1FD8576}.Release|Win32.ActiveCfg = Release|Win32
+		{6B071073-6AE0-4B80-B896-7A59D1FD8576}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
