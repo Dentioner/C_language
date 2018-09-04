@@ -96,12 +96,13 @@ T4
 
 	printf("里程(英里)：");
 
-	scanf("%f\n", &goal);
+	scanf("%f", &goal);
 	/*为什么这里回车键要多按一下？*/
+	/*将scanf里面的换行符去掉，就能用了*/
 
 	printf("汽油量(加仑)：");
 
-	scanf("%f\n", &fuel);
+	scanf("%f", &fuel);
 
 
 	printf("相当于%.1f英里消耗了%.1f加仑的油\n", goal, fuel);
