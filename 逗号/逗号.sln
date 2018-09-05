@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "逗号", "逗号\逗号.vcproj", "{E7BEF5CF-11CB-455F-96DA-38D27B0EA830}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7BEF5CF-11CB-455F-96DA-38D27B0EA830}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E7BEF5CF-11CB-455F-96DA-38D27B0EA830}.Debug|Win32.Build.0 = Debug|Win32
+		{E7BEF5CF-11CB-455F-96DA-38D27B0EA830}.Release|Win32.ActiveCfg = Release|Win32
+		{E7BEF5CF-11CB-455F-96DA-38D27B0EA830}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
