@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "第六章编程练习", "第六章编程练习\第六章编程练习.vcproj", "{9A35ADF3-4D9F-45F0-96BB-F4ACC3BE8AEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A35ADF3-4D9F-45F0-96BB-F4ACC3BE8AEC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{9A35ADF3-4D9F-45F0-96BB-F4ACC3BE8AEC}.Debug|Win32.Build.0 = Debug|Win32
+		{9A35ADF3-4D9F-45F0-96BB-F4ACC3BE8AEC}.Release|Win32.ActiveCfg = Release|Win32
+		{9A35ADF3-4D9F-45F0-96BB-F4ACC3BE8AEC}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
