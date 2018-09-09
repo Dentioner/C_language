@@ -1,0 +1,2 @@
+﻿  wordcnt.c
+e:\coding\c_language\7.7(3)\7.7(3)\wordcnt.c(41): fatal error C1010: 在查找预编译头时遇到意外的文件结尾。是否忘记了向源中添加“#include "stdafx.h"”?
