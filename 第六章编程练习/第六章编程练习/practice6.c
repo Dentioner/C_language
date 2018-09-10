@@ -172,9 +172,9 @@ T5
 	printf("Eular const is %lf\n", sequence - log(fenmu));
 */
 
-	char in[256];
+	char in[256] = "abc";
 	//char enter;
-	int i = 0;
+	/*int i = 0;
 	int j;
 	printf("?\n");
 	do
@@ -183,13 +183,14 @@ T5
 		printf("test.\n");//看看循环跑了几次
 		i++;
 	}
-	while (in[i-1] != '\n');
+	while (in[i-1] != '\n');*/
 	printf("\n%d\n", strlen(in));
 	//printf("%s", in);
+	/*
 	for (j =i;j>-1 ;j--)
 	{
 		printf("%c", in[j]);
-	}
+	}*/
 	system("pause");
 	return 0;
 }

@@ -1,0 +1,3 @@
+﻿  wordcnt.c
+e:\github\c_language\7.7\7.7\wordcnt.c(42): warning C4013: “system”未定义；假设外部返回 int
+  7.7.vcxproj -> E:\GitHub\C_language\7.7\Debug\7.7.exe
