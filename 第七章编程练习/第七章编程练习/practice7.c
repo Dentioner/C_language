@@ -169,6 +169,7 @@ T6
 	}
 	printf("\nIn total, %d %s happened.", change, ((change == 1) || (change == 0)) ? "change" : "changes");
 */
+/*
 	float money = 0;
 	float time = 0;
 	const float base = 10.00;
@@ -179,8 +180,11 @@ T6
 	{
 		time_overwork = 1.5*(time - 40);
 
-	}
+	}*/
+
+
 	printf("\nDone\n");
 	system("pause");
 	return 0;
 }
+
