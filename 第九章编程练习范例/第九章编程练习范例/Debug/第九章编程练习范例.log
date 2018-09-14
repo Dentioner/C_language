@@ -1,2 +1,3 @@
 ﻿  范例.c
-  第九章编程练习范例.vcxproj -> E:\coding\C_language\第九章编程练习范例\Debug\第九章编程练习范例.exe
+MSVCRTD.lib(exe_main.obj) : error LNK2019: 无法解析的外部符号 _main，该符号在函数 "int __cdecl invoke_main(void)" (?invoke_main@@YAHXZ) 中被引用
+E:\coding\C_language\第九章编程练习范例\Debug\第九章编程练习范例.exe : fatal error LNK1120: 1 个无法解析的外部命令
