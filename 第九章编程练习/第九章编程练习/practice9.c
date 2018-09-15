@@ -4,7 +4,7 @@ double min(double x, double y);
 bool chline(char ch, int i, int j);
 void pointer_change(double *x, double *y, double*z);
 int where_is_it(char letter);
-double power(double n, int p);
+double power(double n, int p, double consequence);
 int main()
 {	
 	
@@ -88,16 +88,19 @@ int main()
 		printf("字母在第%d位\n", loc);
 	}
 	*/
+
+	//T8&T9
+/*
 	double n;
 	int p;
-	double consequence;
+	
 	char quit;
 	printf("按q退出，其它任意键开始\n");
 	while ((quit = getchar()) != 'q')
 	{
 		while (getchar() != '\n')
 			continue;
-		
+		double consequence=1.0;
 		printf("请输入底数和指数\n");
 		while ((scanf("%lf %d", &n, &p))!=2)
 		{
@@ -106,14 +109,17 @@ int main()
 				continue;
 		}
 
-		consequence = power(n, p);
+		consequence = power(n, p, consequence);
 		printf("结果是%lf\n", consequence);
 
 		printf("按q退出，其它任意键继续\n");
 		while (getchar() != '\n')
 			continue;
+		
 	}
 	
+	*/
+
 	
 	return 0;
 }
@@ -256,11 +262,12 @@ int where_is_it(char letter)
 
 	return location;
 }
-
+/*非递归
 double power(double n, int p)
 {
 	int index;
 	double consequence =1;
+	
 	if (p == 0)
 	{
 		consequence = 1;
@@ -273,6 +280,17 @@ double power(double n, int p)
 		}
 		
 	}
-
+	
+	
+}
+*/
+//下面是递归
+double power(double n, int p, double consequence)
+{
+	consequence *= n;
+	if (p>1)
+	{
+		consequence = power(n, p - 1, consequence);
+	}
 	return consequence;
 }

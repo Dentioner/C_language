@@ -1,4 +1,4 @@
 ﻿  practice9.c
-e:\coding\c_language\第九章编程练习\第九章编程练习\practice9.c(102): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\第九章编程练习\第九章编程练习\practice9.c(105): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
   第九章编程练习.vcxproj -> E:\coding\C_language\第九章编程练习\Debug\第九章编程练习.exe
