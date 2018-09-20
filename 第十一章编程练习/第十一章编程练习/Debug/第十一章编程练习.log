@@ -1,3 +1,5 @@
 ﻿  practice11.c
-e:\coding\c_language\第十一章编程练习\第十一章编程练习\practice11.c(115): warning C4101: “r_sentence”: 未引用的局部变量
+e:\coding\c_language\第十一章编程练习\第十一章编程练习\practice11.c(135): warning C4047: “函数”:“const char *”与“char”的间接级别不同
+e:\coding\c_language\第十一章编程练习\第十一章编程练习\practice11.c(135): warning C4024: “fputs”: 形参和实参 1 的类型不同
+e:\coding\c_language\第十一章编程练习\第十一章编程练习\practice11.c(115): warning C4101: “column”: 未引用的局部变量
   第十一章编程练习.vcxproj -> E:\coding\C_language\第十一章编程练习\Debug\第十一章编程练习.exe

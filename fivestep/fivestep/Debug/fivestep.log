@@ -1,0 +1,3 @@
+﻿  board.c
+e:\coding\c_language\fivestep\fivestep\board.c(13): warning C4013: “system”未定义；假设外部返回 int
+  fivestep.vcxproj -> E:\coding\C_language\fivestep\Debug\fivestep.exe

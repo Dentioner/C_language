@@ -109,13 +109,53 @@ void statistic(char text[], int para[])
 	return;
 }
 
-void reverse(char sentence[])
+/*void reverse(char sentence[])
 {
-	
-	char r_sentence[SIZE];
-	
+	int len;
+	int column;
+	int re_pointer[SIZE];
+	int i_re_ptr = 0;
+	char* re;
+	len = strlen(sentence);
+	for (int i = 0; i < len; i++)
+	{
+		if (sentence[i] == ' ')
+		{
+			re_pointer[i_re_ptr] = i;
+			i_re_ptr++;
+			sentence[i] = '\0';
+		}
+	}
 
+	re_pointer[i_re_ptr] = '\0';
+	for (int i = i_re_ptr-1; i >= 0; i--)
+	{
+		int index = re_pointer[i];
+		re = sentence + index;
+		fputs(re, stdout); 
+	}
+
+//	char r_sentence[SIZE];
+	
+	return;
 }
+
+*/
+
+
+void cut(char arr[], char ch)
+{
+
+	char **output;
+	for (int i = 0; i < strlen(arr); i++)
+	{
+		if (arr[i] == ch)
+		{
+
+		}
+	}
+}
+
 int main()
 {
 	char arr1[SIZE];
@@ -126,15 +166,15 @@ int main()
 	printf("Please input a string.\n");
 	s_get(arr1, SIZE);
 
-	statistic(arr1, para);
+	//statistic(arr1, para);
+	reverse(arr1);
 
-
-	puts(arr1);
-	printf("单词数\t大写数\t小写数\t标点数\t数字数\n");
-	for (int j = 0; j < 5; j++)
+	//puts(arr1);
+	//printf("单词数\t大写数\t小写数\t标点数\t数字数\n");
+	/*for (int j = 0; j < 5; j++)
 	{
 		printf("%d\t", para[j]);
 	}
-
+	*/
 	return 0;
 }
