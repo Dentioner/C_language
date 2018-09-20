@@ -44,15 +44,97 @@ char* my_get(char ch[], int size)
 	return ch;
 }
 
+char* question10(char arr[])
+{
+	int i = 0;
+	char ch;
+	ch = getchar();
+	
+	while (ch != '\n')
+	{
+		if (ch != ' ')
+		{
+			arr[i] = ch;
+			i++;
+		}
+			
+		ch = getchar();
+		
+		//i++;
+	}
+	arr[i] = '\0';
+
+	return arr;
+}
+
+void statistic(char text[], int para[])
+{
+	int i = 0;
+	char ch;
+	ch = getchar();
+	while (ch != EOF)
+	{
+		if ((ch >= 33 && ch <= 47)
+			|| (ch >= 58 && ch <= 64)
+			|| (ch >= 91 && ch <= 96)
+			|| (ch >= 123 && ch <= 126))
+		{
+			para[3]++;
+		}
+		else if ((ch >= 65 && ch <= 90))
+		{
+			para[1]++;
+		}
+		else if ((ch >= 97 && ch <= 122))
+		{
+			para[2]++;
+		}
+		else if ((ch >= 48 && ch <= 57))
+		{
+			para[4]++;
+		}
+		else if (ch == 32)
+		{
+			para[0]++;
+		}
+		else
+			;
+		text[i] = ch;
+		i++;
+
+		ch = getchar();
+	}
+	text[i] = '\0';
+
+	return;
+}
+
+void reverse(char sentence[])
+{
+	
+	char r_sentence[SIZE];
+	
+
+}
 int main()
 {
 	char arr1[SIZE];
 	//char *arr2;
+	int para[5] = { 0,0,0,0,0 };
 	
 
 	printf("Please input a string.\n");
-	my_get(arr1, SIZE);
+	s_get(arr1, SIZE);
+
+	statistic(arr1, para);
+
+
 	puts(arr1);
+	printf("单词数\t大写数\t小写数\t标点数\t数字数\n");
+	for (int j = 0; j < 5; j++)
+	{
+		printf("%d\t", para[j]);
+	}
 
 	return 0;
 }
