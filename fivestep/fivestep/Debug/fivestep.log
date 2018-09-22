@@ -1,12 +1,8 @@
 ﻿  chess_pvp.c
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(45): warning C4047: “函数”:“char *”与“char”的间接级别不同
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(45): warning C4024: “strncpy”: 形参和实参 1 的类型不同
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(49): warning C4047: “函数”:“char *”与“char”的间接级别不同
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(49): warning C4024: “strncpy”: 形参和实参 1 的类型不同
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(13): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\chess_pvp.c(23): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(45): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\chess_pvp.c(67): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\chess_pvp.c(49): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\chess_pvp.c(71): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
   fivestep.vcxproj -> E:\coding\C_language\fivestep\Debug\fivestep.exe

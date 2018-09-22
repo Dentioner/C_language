@@ -1,37 +1,89 @@
 #include<stdio.h>
 #include<string.h>
 
+/*
+void chess_play(char board[][17][2])
+{
+	int raw, column;
+	char black[2] = "○";
+	char white[2] = "●";
+	printf("INPUT:\n");
+	scanf("%d %d", &raw, &column);
+	strncpy(board[raw][column], black, 2);
+}
+*/
+
+
 int main()
 {
-	char column_c;//字母形式的纵坐标
-	int raw, column;
-	//char black[2] = "○";
-	//char white[2] = "●";
-	//下面是用户输入的坐标，还需处理
-	//printf("请选择下一步，先输入一个行数，例如：2\n");
-	while (scanf("%d", &raw)!=1 && (1<= raw && raw<=15))
+	
+/*
+
+	char board[15][17][2] =
 	{
-		printf("无效输入，请重试");
-		while (getchar() != '\n')
-			continue;
+		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
+		{"14","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","14"},
+		{"13","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","13"},
+		{"12","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","12"},
+		{"11","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","11"},
+		{"10","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","10"},
+		{"9","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","9"},
+		{"8","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","8"},
+		{"7","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","7"},
+		{"6","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","6"},
+		{"5","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","5"},
+		{"4","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","4"},
+		{"3","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","3"},
+		{"2","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","2"},
+		{"1","┗","┷","┷","┷","┷","┷","┷","┷","┷","┷","┷","┷","┷","┷","┛","1"}
+
+	};
+
+	char black[2] = "○";
+	char white[2] = "●";
+
+	int i,j,k;
+	int raw = 2;
+	int column = 2;
+	strncpy(board[raw][column], black, 2);
+//	chess_play(**board);
+
+	for ( i = 0; i < 15; i++)
+	{
+		for ( j = 0; j < 17; j++)
+		{
+			for ( k = 0; k < 2; k++)
+				putchar(board[i][j][k]);
+		}
+		putchar('\n');
+
 	}
 
-	while (getchar() != '\n')
-			continue;
+	if (strncmp(board[raw][column], black, 2)==0||strcmp(board[raw][column], white, 2) == 0)
+		printf("error");
 
-	//printf("再输入一个列数，例如：B\n");
-	column_c = getchar();
-	while (getchar() != '\n')
-		continue;
-	while (column_c<'A' || (column_c > 'Z'&&column_c < 'a') || column_c>'z')
+	printf("%d", strcmp("ABCD", "ABCD") );
+	printf("%d", strcmp(board[raw][column], "●") );
+	printf(board[raw][column]);
+*/
+	int i;
+	int index;
+	int index2;
+	index = scanf("%d" ,&i);
+	printf("index = %d\n", index);
+	index2 = (index!=1);
+	printf("index2 = %d\n", index2);
+	while ((1 >= i || 15 <= i) && (index2))
 	{
-		printf("无效输入，请重试");
-		
-		column_c = getchar();
-		while (getchar() != '\n')
-			continue;
+		printf("error\n");
+		fflush(stdin);
+		index = scanf("%d" ,&i);
+		printf("index = %d\n", index);
+		index2 = (index!=1);
+		printf("index2 = %d\n", index2);
 
-	}
+	}	
+	system("pause");
 
 	return 0;
 
