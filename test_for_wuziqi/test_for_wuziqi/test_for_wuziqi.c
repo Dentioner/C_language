@@ -66,6 +66,7 @@ int main()
 	printf("%d", strcmp(board[raw][column], "●") );
 	printf(board[raw][column]);
 */
+	/*
 	int i;
 	int index;
 	int index2;
@@ -82,7 +83,27 @@ int main()
 		index2 = (index!=1);
 		printf("index2 = %d\n", index2);
 
-	}	
+	}
+*/
+
+
+	char black[2] = "○";
+	char white[2] = "●";
+	int step_count;
+	char* chess;
+	scanf("%d", &step_count);
+
+	if (step_count % 2)//如果step数不能整除2的话，就是白子
+	{
+		chess = white;
+	}
+	else
+	{
+		chess = black;
+	}
+
+	puts(chess);
+
 	system("pause");
 
 	return 0;

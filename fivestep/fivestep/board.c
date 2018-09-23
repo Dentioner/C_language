@@ -35,9 +35,19 @@ void main()
 	{
 		DrawBoard(board, 15);
 		chess_play(board, step_count);
+		continue_playing = judgement(board, step_count);
 		step_count++;
 	}
-	
+	DrawBoard(board, 15);
+	if (step_count % 2)
+	{
+		printf("黑子获胜");
+	}
+	else
+	{
+		printf("白子获胜");
+	}
+
 	return;
 }
 

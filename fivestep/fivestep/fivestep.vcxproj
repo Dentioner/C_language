@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="board.c" />
     <ClCompile Include="chess_pvp.c" />
+    <ClCompile Include="winner.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="head.h" />

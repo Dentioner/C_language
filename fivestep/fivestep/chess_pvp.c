@@ -9,34 +9,47 @@ void chess_play(char board[][17][2], int step_count)//传递的第二个参数是下了几局
 	int raw, column;
 	char black[2] = "○";
 	char white[2] = "●";
-	bool invaluable_coordinate = true;//判断选择的那个坐标上面是不是已经覆盖了棋子了
-	
+	int raw_input_index = 0;//接收scanf的返回值
+	bool invalid_coordinate = true;//判断选择的那个坐标上面是不是已经覆盖了棋子了
+	bool invalid_raw = true;//判断输入的raw是否合法
 
-	while (invaluable_coordinate)
+	while (invalid_coordinate)
 	{
 		//下面是用户输入的坐标，还需处理
 		printf("请选择下一步，先输入一个行数，例如：2\n");
-		//下面这个while要优化一下，先写一个while循环，用两个if语句
-		//分别判断scanf("%d", &raw) != 1与 (1 >= raw || 15 <= raw)
-		//有一个错误就continue
-		//待完成
-		while ((scanf("%d", &raw) != 1) && (1 >= raw || 15 <= raw))
+
+		while (invalid_raw)
 		{
-			printf("无效输入，请重试");
+			raw_input_index = scanf("%d", &raw);
 			while (getchar() != '\n')
 				continue;
+
+			if (raw_input_index != 1)
+			{
+				printf("无效输入，请重试\n");
+				continue;
+			}
+			
+			if (1 > raw || 15 < raw)
+			{
+				printf("无效输入，请重试\n");
+				continue;
+			}
+
+			invalid_raw = false;
 		}
 
-		while (getchar() != '\n')
-			continue;
+		//以下区域暂时不用修改
+		/*while (getchar() != '\n')
+			continue;*/
 
 		printf("再输入一个列数，例如：B\n");
 		column_c = getchar();
 		while (getchar() != '\n')
 			continue;
-		while (column_c<'A' || (column_c > 'Z'&&column_c < 'a') || column_c>'z')
+		while (column_c<'A' || (column_c > 'O'&&column_c < 'a') || column_c>'o')
 		{
-			printf("无效输入，请重试");
+			printf("无效输入，请重试\n");
 
 			column_c = getchar();
 			while (getchar() != '\n')
@@ -53,11 +66,13 @@ void chess_play(char board[][17][2], int step_count)//传递的第二个参数是下了几局
 			|| strncmp(board[raw][column], white, 2) == 0)
 		{
 			printf("该位置已经有棋子了，请重新选择一个坐标\n");
+			invalid_raw = true;//这个项用于把之前raw的循环的判断值初始化，
+			//否则不会走输入raw的循环
 			continue;
 		}
 		else
 		{
-			invaluable_coordinate = false;
+			invalid_coordinate = false;
 		}
 	
 	}
