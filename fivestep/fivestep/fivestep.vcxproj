@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ai_ver1.c" />
     <ClCompile Include="board.c" />
     <ClCompile Include="chess_pvp.c" />
     <ClCompile Include="winner.c" />
