@@ -7,6 +7,7 @@
 void main()
 {
 	int step_count = 0; //游戏下了几个子的计数
+	bool my_turn = true; //暂时用不上，这个东西是确认这一步是哪一方下子了
 	bool continue_playing = true; //确认游戏是否继续
 	char board[15][17][2] =
 	{
