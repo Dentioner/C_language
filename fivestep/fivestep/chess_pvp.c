@@ -3,6 +3,9 @@
 #include<ctype.h>
 #include<stdbool.h>
 
+//chess_play这个函数需要重写
+//因为评分函数需要调用raw和column的值
+//需要将raw和column写成全局变量，然后chess_play用来作为输入变量
 void chess_play(char board[][17][2], int step_count)//传递的第二个参数是下了几局了的次数
 {
 	char column_c;//字母形式的纵坐标
@@ -86,3 +89,11 @@ void chess_play(char board[][17][2], int step_count)//传递的第二个参数是下了几局
 		strncpy(board[raw][column], white, 2);
 	}
 }
+
+void chess_play_ver2(char board[][17][2], int step_count, 
+	int raw, int column)
+{
+
+
+}
+

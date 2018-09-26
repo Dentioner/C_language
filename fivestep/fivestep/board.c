@@ -9,6 +9,7 @@ void main()
 	int step_count = 0; //游戏下了几个子的计数
 	bool my_turn = true; //暂时用不上，这个东西是确认这一步是哪一方下子了
 	bool continue_playing = true; //确认游戏是否继续
+	long int value = 0;//评分函数的打分
 	char board[15][17][2] =
 	{
 		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
@@ -31,11 +32,17 @@ void main()
 
 	char black[2] = "○";
 	char white[2] = "●";
-
+	//这里准备写一个判断是PVP还是PVE的语句
+		//如果是PVE，选择黑子还是白子
 	while (continue_playing)
 	{
+		//在这个循环里面试着将评分函数混进去
+		//首先尝试着将自己下的每一步用评分函数打个分吧
 		DrawBoard(board, 15);
 		chess_play(board, step_count);
+		//！！！
+		//这里chess_play的函数不能用了！需要重新写一个！
+		value = evaluation(board, step_count, my_turn);
 		continue_playing = judgement(board, step_count);
 		step_count++;
 	}

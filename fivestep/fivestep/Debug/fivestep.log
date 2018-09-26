@@ -1,2 +1,8 @@
-﻿  ai_ver1.c
+﻿  board.c
+e:\coding\c_language\fivestep\fivestep\board.c(37): warning C4048: “char (*)[33][2]”和“char [15][17][2]”数组的下标不同
+e:\coding\c_language\fivestep\fivestep\board.c(38): warning C4047: “函数”:“char **”与“char [15][17][2]”的间接级别不同
+e:\coding\c_language\fivestep\fivestep\board.c(38): warning C4024: “chess_play”: 形参和实参 1 的类型不同
+e:\coding\c_language\fivestep\fivestep\board.c(42): warning C4048: “char (*)[33][2]”和“char [15][17][2]”数组的下标不同
+e:\coding\c_language\fivestep\fivestep\board.c(56): warning C4028: 形参 1 与声明不同
+e:\coding\c_language\fivestep\fivestep\board.c(57): warning C4013: “system”未定义；假设外部返回 int
   fivestep.vcxproj -> E:\coding\C_language\fivestep\Debug\fivestep.exe
