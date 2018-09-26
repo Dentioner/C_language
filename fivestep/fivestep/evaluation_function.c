@@ -3,17 +3,19 @@
 #include<stdbool.h>
 
 //形态的定义见https://www.cnblogs.com/songdechiu/p/5768999.html
+//https://baike.1688.com/doc/view-d3091513.html
+
 #define Consecutive_Five 10000000//V连五
 #define Open_Four 1000000//V活四
 #define Open_Three 100000//V活三
 #define Gapped_Two_Two 100050//V下面三种都是冲四，这种是两个2子之间缺了一个子  ●●？●●
 #define Capped_Four 100050//V这种冲四是一头被堵住的冲四   ○●●●●和●●●●○
 #define Gapped_Four 100050//V这种冲四是一个活三与一个单独的子之间空了一格  ●?●●●
-#define Gapped_Three 100000//这种是跳活三，是即将形成活四的三  ●？●●
+#define Gapped_Three 100000//V这种是跳活三，是即将形成活四的三  ●？●●
 #define Capped_Three 10000//眠三, 最多只能形成冲四  ○●●●
 /*眠三一共有这几种形态：
-1. ○●●●__
-2. ○●●_●_
+1. V○●●●__
+2. V○●●_●_
 3. ○●_●●_
 4. ●●__●
 5. ●_●_●
@@ -1532,7 +1534,967 @@ long int evaluation(char board[][17][2], int step_count, bool my_turn,
 	}
 
 
+//检查跳活三Gapped_Three  _●_●●_与_●●_●_
+	
+	//水平方向
+	//先检查_●_●●_
+		//_?_●●_
+	if ((strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
 
+		//_●_?●_
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_●?_
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+	//再检查_●●_●_
+		//_●●_?_
+	if ((strncmp(board[raw][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●?_●_
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_?●_●_
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+
+	//竖直方向
+	//先检查_●_●●_
+		//_?_●●_
+	if ((strncmp(board[raw + 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_?●_
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_●?_
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+	//再检查_●●_●_
+		//_●●_?_
+	if ((strncmp(board[raw - 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●?_●_
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_?●_●_
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+	//右上左下方向
+	//先检查_●_●●_
+		//_?_●●_
+	if ((strncmp(board[raw - 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_?●_
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_●?_
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+	//再检查_●●_●_
+		//_●●_?_
+	if ((strncmp(board[raw + 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●?_●_
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_?●_●_
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+	//左上右下方向
+	//先检查_●_●●_
+		//_?_●●_
+	if ((strncmp(board[raw + 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_?●_
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●_●?_
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+	//再检查_●●_●_
+		//_●●_?_
+	if ((strncmp(board[raw - 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_●?_●_
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+		//_?●_●_
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Gapped_Three;
+	}
+
+//检查眠三：Capped_Three
+//1. ○●●●__与__●●●○型
+	//水平方向
+	//先是○●●●__
+		//○?●●__
+
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?●__
+
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●?__
+
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是__●●●○
+		//__●●?○
+
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__●?●○
+
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__?●●○
+
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//竖直方向
+	//先是○●●●__
+		//○?●●__
+
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?●__
+
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●?__
+
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是__●●●○
+		//__●●?○
+
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__●?●○
+
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__?●●○
+
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//右上左下方向
+	//先是○●●●__
+		//○?●●__
+
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?●__
+
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●?__
+
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是__●●●○
+		//__●●?○
+
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__●?●○
+
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__?●●○
+
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//左上右下方向
+	//先是○●●●__
+		//○?●●__
+
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?●__
+	
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●?__
+
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是__●●●○
+		//__●●?○
+
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__●?●○
+
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//__?●●○
+
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+//2.○●●_●_与_●_●●○
+	//水平方向
+	//先是○●●_●_
+		//○?●_●_
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?_●_
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●_?_
+	if ((strncmp(board[raw][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是_●_●●○
+		//_●_●?○
+	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_●_?●○
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_?_●●○
+	if ((strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 4], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//竖直方向
+	//先是○●●_●_
+		//○?●_●_
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?_●_
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●_?_
+	if ((strncmp(board[raw - 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是_●_●●○
+		//_●_●?○
+	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_●_?●○
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_?_●●○
+	if ((strncmp(board[raw + 2][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 4][column], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//右上左下方向
+	//先是○●●_●_
+		//○?●_●_
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?_●_
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●_?_
+	if ((strncmp(board[raw + 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是_●_●●○
+		//_●_●?○
+	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_●_?●○
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_?_●●○
+	if ((strncmp(board[raw - 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//左上右下方向
+	//先是○●●_●_
+		//○?●_●_
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●?_●_
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//○●●_?_
+	if ((strncmp(board[raw - 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+	//再是_●_●●○
+		//_●_●?○
+	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_●_?●○
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+		//_?_●●○
+	if ((strncmp(board[raw + 2][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) == 0)
+		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) == 0)
+		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0))
+	{
+		value += Capped_Three;
+	}
+
+//3.○●_●●_与_●●_●○
+	//水平方向
+	//先是○●_●●_
+		//○?_●●_
+	if ((strncmp(board[raw][column + 2], chess, 2) == 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) == 0))
+		//没写完
 }
 
 
