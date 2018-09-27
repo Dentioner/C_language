@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<string.h>
-
+#define bool int
+#define true 1
+#define false 0
 /*
 void chess_play(char board[][17][2])
 {
@@ -86,7 +88,7 @@ int main()
 	}
 */
 
-
+/*
 	char black[2] = "¡ð";
 	char white[2] = "¡ñ";
 	int step_count;
@@ -108,4 +110,19 @@ int main()
 
 	return 0;
 
+	int a = 5;
+	printf("%d\n", a);
+	printf("%20d\n", a);
+	printf("%20.20d\n", a);
+	printf("%-20.20d\n", a);
+	printf("%-20d\n", a);
+	*/
+	bool a = true;
+	printf("%d\n", a);
+	printf("%d\n", !a);
+	printf("%d\n", a);
+
+
+	system("pause");
+	return 0;
 }

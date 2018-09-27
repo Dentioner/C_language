@@ -3381,6 +3381,7 @@ long int evaluation(char board[][17][2], int step_count,
 		value *= -1;
 	}
 	return value;
+
 }
 
 

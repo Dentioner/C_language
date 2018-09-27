@@ -10,6 +10,8 @@ void main()
 	bool my_turn = true; //暂时用不上，这个东西是确认这一步是哪一方下子了
 	bool continue_playing = true; //确认游戏是否继续
 	long int value = 0;//评分函数的打分
+	long int my_value = 0;//我方得分
+	long int opponent_value = 0;//对方得分
 	char board[15][17][2] =
 	{
 		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
@@ -30,6 +32,7 @@ void main()
 
 	};
 
+	int coordinate[2] = { 0, 0 };
 	char black[2] = "○";
 	char white[2] = "●";
 	//这里准备写一个判断是PVP还是PVE的语句
@@ -38,15 +41,20 @@ void main()
 	{
 		//在这个循环里面试着将评分函数混进去
 		//首先尝试着将自己下的每一步用评分函数打个分吧
-		DrawBoard(board, 15);
-		chess_play(board, step_count);
-		//！！！
-		//这里chess_play的函数不能用了！需要重新写一个！
-		value = evaluation(board, step_count, my_turn);
+		DrawBoard(board, 15, value);
+		//chess_play(board, step_count);老的chessplay函数
+		get_coordinate(coordinate, board, step_count);
+		chess_play_ver2(board, step_count, coordinate);
+		//value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+		my_value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+		opponent_value = evaluation(board, step_count + 1, !my_turn, coordinate[0], coordinate[1]);
+		value = my_value + opponent_value;
+		//上面这个分开打分的可能有问题
 		continue_playing = judgement(board, step_count);
+		my_turn = !my_turn;
 		step_count++;
 	}
-	DrawBoard(board, 15);
+	DrawBoard(board, 15, value);
 	if (step_count % 2)
 	{
 		printf("黑子获胜");
@@ -59,7 +67,7 @@ void main()
 	return;
 }
 
-void DrawBoard(char board[][17][2], int i)
+void DrawBoard(char board[][17][2], int i, long int value)
 {
 	system("cls");   //清屏
 	printf("  ==Welcome to FiveInRow Game==\n\n\n");
@@ -81,6 +89,6 @@ void DrawBoard(char board[][17][2], int i)
 	}
 	printf("   A B C D E F G H I J K L M N O \n");
 	//system("pause");
-
+	printf("value = %ld\n", value);
 
 }

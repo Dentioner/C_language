@@ -27,6 +27,9 @@
     <ClCompile Include="evaluation_function.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="alpha-beta-cutting.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="head.h">
