@@ -4,14 +4,19 @@
 #include<ctype.h>
 #include"head.h"
 
+
 void main()
 {
 	int step_count = 0; //游戏下了几个子的计数
 	bool my_turn = true; //暂时用不上，这个东西是确认这一步是哪一方下子了
 	bool continue_playing = true; //确认游戏是否继续
+	bool ai_first = false;//默认电脑后走
+	bool invalid_mode = true;
 	long int value = 0;//评分函数的打分
 	long int my_value = 0;//我方得分
 	long int opponent_value = 0;//对方得分
+	int mode_choice;
+	int mode_choice_index;
 	char board[15][17][2] =
 	{
 		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
@@ -37,47 +42,137 @@ void main()
 	char white[2] = "●";
 	//这里准备写一个判断是PVP还是PVE的语句
 		//如果是PVE，选择黑子还是白子
-	while (continue_playing)
+	printf("************************************************\n");
+	printf("请选择模式\n");
+	printf("1.pvp\t\t2.pve\n");
+	printf("************************************************\n");
+	while (invalid_mode)
 	{
-		//在这个循环里面试着将评分函数混进去
-		//首先尝试着将自己下的每一步用评分函数打个分吧
-		DrawBoard(board, 15, value);
-		//chess_play(board, step_count);老的chessplay函数
-		get_coordinate(coordinate, board, step_count);
-		chess_play_ver2(board, step_count, coordinate);
-		//value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
-		my_value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
-		opponent_value = evaluation(board, step_count + 1, !my_turn, coordinate[0], coordinate[1]);
-		value = my_value + opponent_value;
-		//上面这个分开打分的可能有问题
-		continue_playing = judgement(board, step_count);
-		my_turn = !my_turn;
-		step_count++;
+
+		mode_choice_index = scanf("%d", &mode_choice);
+		while (getchar() != '\n')
+			continue;
+		if (mode_choice_index != 1)
+		{
+			printf("无效输入，请重试\n");
+
+			continue;
+		}
+		if ((mode_choice != 1) && (mode_choice != 2))
+		{
+			printf("无效输入，请重试\n");
+
+			continue;
+		}
+
+		invalid_mode = false;
 	}
-	DrawBoard(board, 15, value);
-	if (step_count % 2)
+
+	if (mode_choice == 1)
 	{
-		printf("黑子获胜");
+
+		while (continue_playing)
+		{
+			//在这个循环里面试着将评分函数混进去
+			//首先尝试着将自己下的每一步用评分函数打个分吧
+			DrawBoard(board, 15, value, mode_choice);
+			//chess_play(board, step_count);老的chessplay函数
+			get_coordinate(coordinate, board, step_count);
+			chess_play_ver2(board, step_count, coordinate);
+			value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+			//my_value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+			//opponent_value = evaluation(board, step_count + 1, !my_turn, coordinate[0], coordinate[1]);
+			//value = my_value + opponent_value;
+			//上面这个分开打分的可能有问题
+			continue_playing = judgement(board, step_count);
+			my_turn = !my_turn;
+			step_count++;
+		}
+		DrawBoard(board, 15, value, mode_choice);
+		if (step_count % 2)
+		{
+			printf("黑子获胜");
+		}
+		else
+		{
+			printf("白子获胜");
+		}
+
+		return;
+	}
+
+
+	else
+	{
+		//PVE
+		
+		printf("电脑先手还是对方先手？\n");
+		printf("1.电脑先手\t\t2.对方先手\n");
+		printf("************************************************\n");
+		int ai_choice = 0;
+		int ai_choice_index = 0;
+		int floor = FLOOR;//搜索层数
+		bool invalid_ai_choice = true;
+		while (invalid_ai_choice)
+		{
+			ai_choice_index = scanf("%d", &ai_choice);
+			while (getchar() != '\n')
+				continue;
+			if (ai_choice_index != 1)
+			{
+				printf("无效输入，请重试\n");
+
+				continue;
+			}
+			if ((ai_choice != 1) && (ai_choice != 2))
+			{
+				printf("无效输入，请重试\n");
+
+				continue;
+			}
+
+			invalid_ai_choice = false;
+		}
+		
+		if (ai_choice == 1)
+		{
+			ai_first = true;
+		}
+		else
+		{
+			ai_first = false;
+		}
+
+		DrawBoard(board, 15, value, mode_choice);
+		//注意这里无需将my_turn求反了，在αβ剪枝函数中已经做了
+
+		printf("施工中\n");
+		//需要写一个step_count++
+	}
+	
+}
+
+void DrawBoard(char board[][17][2], int i, long int value, int mode_choice)
+{
+	char *mode;
+	if (mode_choice == 1)
+	{
+		mode = "PVP";
 	}
 	else
 	{
-		printf("白子获胜");
+		mode = "PVE";
 	}
-
-	return;
-}
-
-void DrawBoard(char board[][17][2], int i, long int value)
-{
 	system("cls");   //清屏
-	printf("  ==Welcome to FiveInRow Game==\n\n\n");
+	printf("  ==Welcome to FiveInRow Game==\n");
+	printf("          ==%s mode==\n\n", mode);
 
-	
+
 
 	printf("   A B C D E F G H I J K L M N O \n");
 
-	
-	
+
+
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 17; j++)
@@ -92,3 +187,5 @@ void DrawBoard(char board[][17][2], int i, long int value)
 	printf("value = %ld\n", value);
 
 }
+	
+
