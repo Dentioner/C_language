@@ -112,6 +112,8 @@ void main()
 		int ai_choice = 0;
 		int ai_choice_index = 0;
 		int floor = FLOOR;//搜索层数
+		char *chess;
+		char *opponent_chess;
 		bool invalid_ai_choice = true;
 		while (invalid_ai_choice)
 		{
@@ -143,11 +145,113 @@ void main()
 			ai_first = false;
 		}
 
+		if (ai_first)
+		{
+			my_turn = true;
+			chess = black;
+			opponent_chess = white;
+			strncpy(board[8][7], chess, 2);
+		}
+		else
+		{
+			my_turn = false;
+			chess = white;
+			opponent_chess = black;
+			
+		}
+		while (continue_playing)
+		{
+			DrawBoard(board, 15, value, mode_choice);
+			//注意这里无需将my_turn求反了，在αβ剪枝函数中已经做了
+			if (my_turn)
+			{
+
+				if (step_count > 4)
+				{
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate);
+					chess_play_ver2(board, step_count, coordinate);
+				}
+				else
+				{
+					for (int p = 0; p < 15; p++)
+					{
+						for (int q = 0; q < 17; q++)
+						{
+							if ((strncmp(board[p][q], opponent_chess, 2)) == 0)
+							{
+								if (((strncmp(board[p + 1][q], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p + 1][q], chess, 2)) != 0))
+								{
+									strncpy(board[p + 1][q], chess, 2);
+								}
+
+								else if (((strncmp(board[p][q + 1], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p][q + 1], chess, 2)) != 0))
+								{
+									strncpy(board[p][q + 1], chess, 2);
+								}
+								else if (((strncmp(board[p - 1][q], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p - 1][q], chess, 2)) != 0))
+								{
+									strncpy(board[p - 1][q], chess, 2);
+								}
+								else if (((strncmp(board[p][q - 1], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p][q - 1], chess, 2)) != 0))
+								{
+									strncpy(board[p][q - 1], chess, 2);
+								}
+								else if (((strncmp(board[p - 1][q - 1], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p - 1][q - 1], chess, 2)) != 0))
+								{
+									strncpy(board[p - 1][q - 1], chess, 2);
+								}
+								else if (((strncmp(board[p - 1][q + 1], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p - 1][q + 1], chess, 2)) != 0))
+								{
+									strncpy(board[p - 1][q + 1], chess, 2);
+								}
+								else if (((strncmp(board[p + 1][q + 1], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p + 1][q + 1], chess, 2)) != 0))
+								{
+									strncpy(board[p + 1][q + 1], chess, 2);
+								}
+								else if (((strncmp(board[p + 1][q - 1], opponent_chess, 2)) != 0)
+									&& ((strncmp(board[p + 1][q - 1], chess, 2)) != 0))
+								{
+									strncpy(board[p + 1][q - 1], chess, 2);
+								}
+
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				get_coordinate(coordinate, board, step_count);
+				chess_play_ver2(board, step_count, coordinate);
+				value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+			}
+			
+			continue_playing = judgement(board, step_count);
+			my_turn = !my_turn;
+			step_count++;
+		}
 		DrawBoard(board, 15, value, mode_choice);
-		//注意这里无需将my_turn求反了，在αβ剪枝函数中已经做了
+		if (step_count % 2)
+		{
+			printf("黑子获胜");
+		}
+		else
+		{
+			printf("白子获胜");
+		}
+
+		return;
+		
 
 		printf("施工中\n");
-		//需要写一个step_count++
+		
 	}
 	
 }

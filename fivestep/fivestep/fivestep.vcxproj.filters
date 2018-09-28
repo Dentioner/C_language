@@ -27,7 +27,7 @@
     <ClCompile Include="evaluation_function.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="alpha-beta-cutting.c">
+    <ClCompile Include="minimax.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
