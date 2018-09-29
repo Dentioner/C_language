@@ -16,6 +16,7 @@
 
 //PVE的chess由my_turn决定（暂定）
 */
+/*
 int Minimax(char board[][17][2], int step_count, 
 	bool my_turn, bool ai_first, int floor, 
 	int child_coordinate[], int coordinate[])//coordinate由board.c定义
@@ -186,7 +187,7 @@ int Minimax(char board[][17][2], int step_count,
 →第二层给3个坐标打分→给第1层最大值/最小值的坐标→第1层获得最大值/最小值的坐标后打分
 →给第0层最大值/最小值的坐标→第0层打分→返回给外面一个最优的坐标
 在这个过程中还要下棋，下完棋之后还得将棋盘变回去
-*/
+
 	printf("floor = %d\nFLOOR - floor = %d\n.", floor, FLOOR - floor);
 	
 	if (floor != 0)//还没到最底层的话就递归
@@ -198,7 +199,7 @@ int Minimax(char board[][17][2], int step_count,
 			ai_first, floor - 1, child_coordinate2);
 		Minimax(board, step_count + 1, !my_turn,
 			ai_first, floor - 1, child_coordinate3);
-*/
+
 
 
 	}
@@ -232,13 +233,13 @@ int Minimax(char board[][17][2], int step_count,
 		{
 			*coordinate = **min_coordinate;
 		}
-	}*/
+	}
 
 
 	strncpy(board[child_coordinate[0]][child_coordinate[1]], 
 		temp_blank, 2);//将棋盘复原
 
-}
+}*/
 
 
 long int Minimax2(char board[][17][2], int step_count,
@@ -251,11 +252,12 @@ long int Minimax2(char board[][17][2], int step_count,
 	char *chess;
 	char *opponent_chess;
 	//下面是在建立ai先手、回合数与“是否是我方回合”的关系
-	if (ai_first)
+
+	if ((step_count % 2) == 0)
 	{
 		chess = black;
 		opponent_chess = white;
-		if ((step_count % 2) == 0)//如果step数不能整除2的话，就是白子走
+		if (ai_first)
 		{
 			my_turn = true;
 		}
@@ -268,7 +270,7 @@ long int Minimax2(char board[][17][2], int step_count,
 	{
 		chess = white;
 		opponent_chess = black;
-		if ((step_count % 2) == 0)
+		if (ai_first)
 		{
 			my_turn = false;
 		}
@@ -276,10 +278,11 @@ long int Minimax2(char board[][17][2], int step_count,
 		{
 			my_turn = true;
 		}
+
 	}
 	int best_score = 0;
 	int best_coordinate[2] = { 0,0 };
-	long int temp_score;
+	long int temp_score = 0;
 	/*
 	//找最佳的点与最值
 	if (my_turn)
@@ -326,14 +329,14 @@ long int Minimax2(char board[][17][2], int step_count,
 	//printf("floor = %d\nFLOOR - floor = %d\n.", floor, FLOOR - floor);
 	//不是最底层↓
 
-
+	
 	if (floor != 0)
 	{
 		if (my_turn)
 		{
-			for (int raw = 3; raw < 12; raw++)
+			for (int raw = 0; raw < 15; raw++)
 			{
-				for (int column = 3; column < 14; column++)
+				for (int column = 1; column < 16; column++)
 				{//每一个点落子，产生子节点，因此实际上每一个点都会产生255个子节点
 					//↓
 					if ((strncmp(board[raw][column], chess, 2) != 0)
@@ -341,13 +344,19 @@ long int Minimax2(char board[][17][2], int step_count,
 					{
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
+						DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate);
+						//DrawBoard(board, 15, temp_score, 2);
+						if ((temp_score != 0)&&(best_score == 0))
+						{
+							best_score = temp_score;
+						}
 						if (temp_score > best_score)
 						{
 							best_score = temp_score;
-							if ((FLOOR - floor) == 0)
+							if (floor == FLOOR)
 								//如果是最外层，记录此时坐标
 							{
 								best_coordinate[0] = raw;
@@ -365,22 +374,34 @@ long int Minimax2(char board[][17][2], int step_count,
 		else
 		{
 			
-			for (int raw = 3; raw < 12; raw++)
+			for (int raw = 0; raw < 15; raw++)
 			{
-				for (int column = 3; column < 14; column++)
+				for (int column = 1; column < 16; column++)
 				{
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
+						//DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate);
+						if ((temp_score != 0) && (best_score == 0))
+						{
+							best_score = temp_score;
+						}
 						if (temp_score < best_score)
 						{
 							best_score = temp_score;
 							//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的
+						
+							if (floor == FLOOR)
+								//如果是最外层，记录此时坐标
+							{
+								best_coordinate[0] = raw;
+								best_coordinate[1] = column;
+							}
 						}
 						strncpy(board[raw][column], temp_blank, 2);
 					}
@@ -392,20 +413,25 @@ long int Minimax2(char board[][17][2], int step_count,
 	//最底层↓
 	else
 	{
+		long int temp_score1 = 0;
+		long int temp_score2 = 0;
 		//找最佳的点与最值
 		if (my_turn)
 		{
 			temp_score = 0;
 			//在设计优先级函数之前，先如下凑合着用
 			//raw和column的搜索范围缩小一点，这样可以减少运算量，棋盘边缘就不搜索了
-			for (int raw = 3; raw < 12; raw++)
+			for (int raw = 0; raw < 15; raw++)
 			{
-				for (int column = 3; column < 14; column++)
+				for (int column = 1; column < 16; column++)
 				{
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
 						temp_score = evaluation(board, step_count, my_turn, raw, column);
+						/*temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score = temp_score1 + temp_score2;*/
 						if (temp_score > best_score)
 						{
 							best_score = temp_score;
@@ -421,12 +447,15 @@ long int Minimax2(char board[][17][2], int step_count,
 			temp_score = 0;
 			for (int raw = 0; raw < 15; raw++)
 			{
-				for (int column = 0; column < 17; column++)
+				for (int column = 1; column < 16; column++)
 				{
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
 						temp_score = evaluation(board, step_count, my_turn, raw, column);
+						/*temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score = temp_score1 + temp_score2;*/
 						if (temp_score < best_score)
 						{
 							best_score = temp_score;
@@ -445,8 +474,11 @@ long int Minimax2(char board[][17][2], int step_count,
 	{
 		*coordinate = *best_coordinate;
 		*(coordinate + 1) = *(best_coordinate + 1);
+		best_score = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 	}
 
 //strncpy(board[best_coordinate[0]][best_coordinate[1]], temp_blank, 2);
+	
+	
 	return best_score;
 }

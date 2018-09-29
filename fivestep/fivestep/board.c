@@ -4,7 +4,7 @@
 #include<ctype.h>
 #include"head.h"
 
-
+//注意写好之后要按照老师给的规范进行优化，见五子棋规则的doc文件
 void main()
 {
 	int step_count = 0; //游戏下了几个子的计数

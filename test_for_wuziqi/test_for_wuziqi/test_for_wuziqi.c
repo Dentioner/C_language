@@ -1,26 +1,27 @@
 #include<stdio.h>
 #include<string.h>
+
 #define bool int
 #define true 1
 #define false 0
-/*
-void chess_play(char board[][17][2])
-{
-	int raw, column;
-	char black[2] = "○";
-	char white[2] = "●";
-	printf("INPUT:\n");
-	scanf("%d %d", &raw, &column);
-	strncpy(board[raw][column], black, 2);
-}
-*/
+#define FLOOR 3
 
 
 int main()
 {
-	
-/*
-
+	int i,j,k;
+	int step_count = 0; //游戏下了几个子的计数
+	bool my_turn = true; //暂时用不上，这个东西是确认这一步是哪一方下子了
+	bool continue_playing = true; //确认游戏是否继续
+	bool ai_first = false;//默认电脑后走
+	bool invalid_mode = true;
+	long int value = 0;//评分函数的打分
+	long int my_value = 0;//我方得分
+	long int opponent_value = 0;//对方得分
+	int mode_choice;
+	int mode_choice_index;
+	int raw = 0;
+	int column = 0;
 	char board[15][17][2] =
 	{
 		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
@@ -41,88 +42,23 @@ int main()
 
 	};
 
-	char black[2] = "○";
-	char white[2] = "●";
-
-	int i,j,k;
-	int raw = 2;
-	int column = 2;
-	strncpy(board[raw][column], black, 2);
-//	chess_play(**board);
-
-	for ( i = 0; i < 15; i++)
+	
+	for (i = 0; i < 15; i++)
 	{
-		for ( j = 0; j < 17; j++)
+		for (j = 0; j < 17; j++)
 		{
-			for ( k = 0; k < 2; k++)
+			for (k = 0; k < 2; k++)
 				putchar(board[i][j][k]);
 		}
 		putchar('\n');
-
 	}
+	printf("   A B C D E F G H I J K L M N O \n");
 
-	if (strncmp(board[raw][column], black, 2)==0||strcmp(board[raw][column], white, 2) == 0)
-		printf("error");
-
-	printf("%d", strcmp("ABCD", "ABCD") );
-	printf("%d", strcmp(board[raw][column], "●") );
-	printf(board[raw][column]);
-*/
-	/*
-	int i;
-	int index;
-	int index2;
-	index = scanf("%d" ,&i);
-	printf("index = %d\n", index);
-	index2 = (index!=1);
-	printf("index2 = %d\n", index2);
-	while ((1 >= i || 15 <= i) && (index2))
-	{
-		printf("error\n");
-		fflush(stdin);
-		index = scanf("%d" ,&i);
-		printf("index = %d\n", index);
-		index2 = (index!=1);
-		printf("index2 = %d\n", index2);
-
-	}
-*/
-
-/*
-	char black[2] = "○";
-	char white[2] = "●";
-	int step_count;
-	char* chess;
-	scanf("%d", &step_count);
-
-	if (step_count % 2)//如果step数不能整除2的话，就是白子
-	{
-		chess = white;
-	}
-	else
-	{
-		chess = black;
-	}
-
-	puts(chess);
-
-	system("pause");
-
-	return 0;
-
-	int a = 5;
-	printf("%d\n", a);
-	printf("%20d\n", a);
-	printf("%20.20d\n", a);
-	printf("%-20.20d\n", a);
-	printf("%-20d\n", a);
-	*/
-	bool a = true;
-	printf("%d\n", a);
-	printf("%d\n", !a);
-	printf("%d\n", a);
-
+	value = evaluation(board, step_count, my_turn, raw, column);
+	printf("value = %ld\n", value);
 
 	system("pause");
 	return 0;
 }
+	
+
