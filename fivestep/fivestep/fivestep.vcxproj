@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="auto_play.c" />
     <ClCompile Include="minimax.c" />
     <ClCompile Include="evaluation_function.c" />
     <ClCompile Include="board.c" />

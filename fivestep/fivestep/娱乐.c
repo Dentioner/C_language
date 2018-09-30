@@ -292,4 +292,6 @@ void DrawBoard(char board[][17][2], int i, long int value, int mode_choice)
 
 }
 
+
+
 */

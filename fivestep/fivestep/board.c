@@ -15,6 +15,7 @@ void main()
 	long int value = 0;//评分函数的打分
 	long int my_value = 0;//我方得分
 	long int opponent_value = 0;//对方得分
+	long int best_score_of_upper = 0;//给minimax里面的剪枝用的
 	int mode_choice;
 	int mode_choice_index;
 	char board[15][17][2] =
@@ -168,12 +169,13 @@ void main()
 
 				if (step_count > 4)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate);
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper);
 					chess_play_ver2(board, step_count, coordinate);
 				}
 				else
 				{
-					for (int p = 0; p < 15; p++)
+					auto_play(board, chess, opponent_chess);
+					/*for (int p = 0; p < 15; p++)
 					{
 						for (int q = 0; q < 17; q++)
 						{
@@ -183,6 +185,7 @@ void main()
 									&& ((strncmp(board[p + 1][q], chess, 2)) != 0))
 								{
 									strncpy(board[p + 1][q], chess, 2);
+									
 								}
 
 								else if (((strncmp(board[p][q + 1], opponent_chess, 2)) != 0)
@@ -223,7 +226,7 @@ void main()
 
 							}
 						}
-					}
+					}*/
 				}
 			}
 			else
