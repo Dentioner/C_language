@@ -15,9 +15,21 @@ void main()
 	long int value = 0;//评分函数的打分
 	long int my_value = 0;//我方得分
 	long int opponent_value = 0;//对方得分
-	long int best_score_of_upper = 0;//给minimax里面的剪枝用的
+	long int best_score_of_upper[FLOOR] = {0};//给minimax里面的剪枝用的
 	int mode_choice;
 	int mode_choice_index;
+	int priority[3][10][2] =
+	{
+	{{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}},
+	{{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}},
+	{{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0}}
+	};
+	//第一层数组表示的是，minimax函数搜索的层数，每一层用一个本维度的数组
+	//第二层数组从左到右依次对应的坐标是：
+	//我方连五，对方连五，我方（双）活四，对方（双）活四（这个规则可能需要进一步细分）
+	//我方双活三，对方双活三，我方冲四，对方冲四，我方活三，对方活三
+	//第三层就是横纵坐标了
+
 	char board[15][17][2] =
 	{
 		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
@@ -41,6 +53,7 @@ void main()
 	int coordinate[2] = { 0, 0 };
 	char black[2] = "○";
 	char white[2] = "●";
+
 	//这里准备写一个判断是PVP还是PVE的语句
 		//如果是PVE，选择黑子还是白子
 	printf("************************************************\n");
@@ -169,7 +182,7 @@ void main()
 
 				if (step_count > 4)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper);
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority);
 					chess_play_ver2(board, step_count, coordinate);
 				}
 				else
