@@ -1,4 +1,4 @@
-#define FLOOR 2
+#define FLOOR 3
 #define Consecutive_Five 10000000//连五
 #define Open_Four 1000000//活四
 #define Open_Three 100000//活三
@@ -27,5 +27,5 @@ void chess_play_ver2(char board[][17][2], int step_count, int coordinate[]);
 long int Minimax2(char board[][17][2], int step_count, bool my_turn, bool ai_first, int floor, int coordinate[], long int best_score_of_upper, int priority[][10][2]);
 void auto_play(char board[][17][2], char chess[], char opponent_chess[]);
 bool verify_coordinate(char board[][17][2], int raw, int column, char chess, char opponent_chess);
-void before_evaluation(char board[][17][2], int priority[][10][2], int floor, int step_count, bool my_turn);
+bool before_evaluation(char board[][17][2], int priority[][10][2], int floor, int step_count, bool my_turn);
 

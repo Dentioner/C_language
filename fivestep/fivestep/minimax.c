@@ -244,14 +244,14 @@ int Minimax(char board[][17][2], int step_count,
 
 long int Minimax2(char board[][17][2], int step_count,
 	bool my_turn, bool ai_first,
-	int floor, int coordinate[], long int best_score_of_upper[], int priority[][10][2])
+	int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2])
 {
 	char black[2] = "○";
 	char white[2] = "●";
 	char temp_blank[2];//用这个来还原棋盘，相当于悔棋一样的
 	char *chess;
 	char *opponent_chess;
-
+	bool final_hit = false;
 	//bool valid_coordinate = false;
 	//下面是在建立ai先手、回合数与“是否是我方回合”的关系
 
@@ -337,8 +337,16 @@ long int Minimax2(char board[][17][2], int step_count,
 		if (my_turn)
 		{
 			//先将优先的那些点找到并递归
-			before_evaluation(board, priority, floor, step_count, my_turn);
-			for (int a = 0; a < 10; a++)
+			final_hit = before_evaluation(board, priority, floor, step_count, my_turn);
+			if (final_hit
+				&&(FLOOR == floor))
+			{
+				coordinate[0] = priority[0][0][0];
+				coordinate[1] = priority[0][0][1];
+				best_score = evaluation(board, step_count, my_turn, priority[0][0][0], priority[0][0][1]);
+				return best_score;
+			}
+			for (int a = 0; a < 26; a++)
 			{
 				int raw = priority[FLOOR - floor][a][0];
 				int column = priority[FLOOR - floor][a][1];
@@ -445,7 +453,7 @@ long int Minimax2(char board[][17][2], int step_count,
 		else
 		{
 			before_evaluation(board, priority, floor, step_count, my_turn);
-			for (int a = 0; a < 10; a++)
+			for (int a = 0; a < 26; a++)
 			{
 				int raw = priority[FLOOR - floor][a][0];
 				int column = priority[FLOOR - floor][a][1];

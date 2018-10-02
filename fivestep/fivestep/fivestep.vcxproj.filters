@@ -30,13 +30,13 @@
     <ClCompile Include="minimax.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="娱乐.c">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="auto_play.c">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="enlighting_searching.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="废弃代码区.c">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
