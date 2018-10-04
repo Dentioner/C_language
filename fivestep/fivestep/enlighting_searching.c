@@ -7,7 +7,7 @@
 
 //启发式搜索，按照优先级顺序，对分支进行排序，提高剪枝速度
 //见https://github.com/lihongxun945/gobang/blob/master/src/ai/board.js
-bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
+bool before_evaluation(char board[][17][2], int priority[][26][2], int floor,
 	int step_count, bool my_turn)
 //step_count及其后面的几个形参是用来给evaluation的
 {

@@ -494,7 +494,7 @@ long int Minimax2(char board[][17][2], int step_count,
 					{
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
-						//DrawBoard(board, 15, temp_score, 2);
+						DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate, best_score_of_upper, priority);
