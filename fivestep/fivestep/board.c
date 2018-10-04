@@ -213,7 +213,15 @@ void main()
 				if (step_count > 4)
 				{
 					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority);
-					chess_play_ver2(board, step_count, coordinate);
+					if ((coordinate[0] == 0) && (coordinate[1] == 1))
+					{
+						auto_play(board, chess, opponent_chess);
+					}
+					else
+					{
+						chess_play_ver2(board, step_count, coordinate);
+					}
+					
 				}
 				else
 				{

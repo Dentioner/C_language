@@ -44,6 +44,14 @@ bool before_evaluation(char board[][17][2], int priority[][26][2], int floor,
 	bool find_opponent_three2 = false;
 	bool find_opponent_three3 = false;
 	bool final_hit = false;//发现我方连五直接返回
+	//先初始化，将之前别的分支用过的记录归为0
+
+	for (int ele = 0; ele < 26; ele++)
+	{
+		priority[FLOOR - floor][ele][0] = 0;
+		priority[FLOOR - floor][ele][1] = 0;
+	}
+	//下面开始正式记录
 	for (my_raw = 0; my_raw < 15; my_raw++)
 	{
 		for (my_column = 1; my_column < 16; my_column++)

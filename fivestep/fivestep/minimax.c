@@ -353,11 +353,22 @@ long int Minimax2(char board[][17][2], int step_count,
 			
 			if (final_hit
 				&&(FLOOR == floor))
-			{
+			{//如果发现有连五，直接秒了
 				coordinate[0] = priority[0][0][0];
 				coordinate[1] = priority[0][0][1];
 				best_score = evaluation(board, step_count, my_turn, priority[0][0][0], priority[0][0][1]);
 				return best_score;
+			}
+			if (!final_hit && (FLOOR == floor))
+			{//如果发现对方马上形成连五，但是自己没有连五，赶紧堵上去
+				if ((priority[0][1][0] != 0) || (priority[0][1][1]) != 0)
+				{
+					coordinate[0] = priority[0][1][0];
+					coordinate[1] = priority[0][1][1];
+					best_score = evaluation(board, step_count, my_turn, priority[0][1][0], priority[0][1][1]);
+					return best_score;
+				}
+				
 			}
 			for (int a = 0; a < 26; a++)
 			{
@@ -596,10 +607,10 @@ long int Minimax2(char board[][17][2], int step_count,
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
-						temp_score = evaluation(board, step_count, my_turn, raw, column);
-						/*temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						//temp_score = evaluation(board, step_count, my_turn, raw, column);
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-						temp_score = temp_score1 + temp_score2;*/
+						temp_score = temp_score1 + temp_score2;
 						if (temp_score > best_score_of_upper[floor])//剪枝
 						{
 							
@@ -625,10 +636,10 @@ long int Minimax2(char board[][17][2], int step_count,
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
-						temp_score = evaluation(board, step_count, my_turn, raw, column);
-						/*temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						//temp_score = evaluation(board, step_count, my_turn, raw, column);
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-						temp_score = temp_score1 + temp_score2;*/
+						temp_score = temp_score1 + temp_score2;
 						if (temp_score < best_score_of_upper[floor])//剪枝
 						{
 
