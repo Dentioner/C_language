@@ -2,6 +2,7 @@
 #include<string.h>
 #include<stdbool.h>
 #include<ctype.h>
+#include<math.h>
 #include"head.h"
 
 //注意写好之后要按照老师给的规范进行优化，见五子棋规则的doc文件

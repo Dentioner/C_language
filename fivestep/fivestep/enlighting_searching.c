@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdbool.h>
 #include<string.h>
+#include<math.h>
 #include"head.h"
 
 
@@ -51,7 +52,9 @@ bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
 				&& (strncmp(board[my_raw][my_column], white, 2) != 0))
 			{
 				my_value = evaluation(board, step_count, my_turn, my_raw, my_column);
+				my_value = labs(my_value);
 				opponent_value = evaluation(board, step_count + 1, !my_turn, my_raw, my_column);
+				opponent_value = labs(opponent_value);
 				if (my_value >= Consecutive_Five)//如果发现了我方连五的地方
 				{
 					priority[FLOOR - floor][0][0] = my_raw;
@@ -60,7 +63,7 @@ bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
 					final_hit = true;
 					return final_hit;
 				}
-				else if (opponent_value <= -Consecutive_Five)//如果发现了对方连五的地方
+				else if (opponent_value >= Consecutive_Five)//如果发现了对方连五的地方
 				{
 					priority[FLOOR - floor][1][0] = my_raw;
 					priority[FLOOR - floor][1][1] = my_column;
@@ -88,7 +91,7 @@ bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
 						find_OpenFour3 = true;
 					}
 				}
-				else if (opponent_value <= -Open_Four)
+				else if (opponent_value >= Open_Four)
 				{
 					if (!find_opponent_OpenFour1)//如果第一个活四的位置是空的
 					{//第6,7,8属于三个活四的坐标，也就是567号位
@@ -132,7 +135,7 @@ bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
 						find_DoubleThree3 = true;
 					}
 				}
-				else if (opponent_value <= -2 * Open_Three)
+				else if (opponent_value >= 2 * Open_Three)
 				{
 					if (!find_opponent_DoubleThree1)//如果第一个双活三的位置是空的
 					{//第12，13，14属于三个双活三的坐标，也就是11,12,13号位
@@ -174,7 +177,7 @@ bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
 						find_CapFour3 = true;
 					}
 				}
-				else if (opponent_value <= -Capped_Four)
+				else if (opponent_value >= Capped_Four)
 				{
 					if (!find_opponent_CapFour1)//如果第一个冲四的位置是空的
 					{//第18，19，20属于三个冲四的坐标，也就是17,18,19号位
@@ -216,7 +219,7 @@ bool before_evaluation(char board[][17][2], int priority[][10][2], int floor,
 						find_three3 = true;
 					}
 				}
-				else if (opponent_value <= -Open_Three)
+				else if (opponent_value >= Open_Three)
 				{
 					if (!find_opponent_three1)//如果第一个活三的位置是空的
 					{//第24，25，26属于三个活三的坐标，也就是23,24,25号位
