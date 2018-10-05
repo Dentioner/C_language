@@ -336,6 +336,7 @@ long int Minimax2(char board[][17][2], int step_count,
 	{
 		if (my_turn)
 		{
+			//best_score_of_upper[floor] = 0;
 			//先将优先的那些点找到并递归
 			final_hit = before_evaluation(board, priority, floor, step_count, my_turn);
 			for (int test_raw = 0; test_raw < 4; test_raw++)
@@ -416,7 +417,11 @@ long int Minimax2(char board[][17][2], int step_count,
 						}
 						//复原
 						strncpy(board[raw][column], temp_blank, 2);
-						best_score_of_upper[floor - 1] = best_score;
+						if (best_score < best_score_of_upper[floor - 1])
+						{
+							best_score_of_upper[floor - 1] = best_score;
+						}
+						
 					}
 				}
 
@@ -481,6 +486,7 @@ long int Minimax2(char board[][17][2], int step_count,
 		}
 		else
 		{
+			//best_score_of_upper[floor] = 0;
 			before_evaluation(board, priority, floor, step_count, my_turn);
 			for (int test_raw = 0; test_raw < 4; test_raw++)
 			{
@@ -535,7 +541,11 @@ long int Minimax2(char board[][17][2], int step_count,
 							}
 						}
 						strncpy(board[raw][column], temp_blank, 2);
-						best_score_of_upper[floor - 1] = best_score;
+						if (best_score > best_score_of_upper[floor - 1])
+						{
+							best_score_of_upper[floor - 1] = best_score;
+						}
+						
 					}
 				}
 				
@@ -598,8 +608,7 @@ long int Minimax2(char board[][17][2], int step_count,
 		if (my_turn)
 		{
 			temp_score = 0;
-			//在设计优先级函数之前，先如下凑合着用
-			//raw和column的搜索范围缩小一点，这样可以减少运算量，棋盘边缘就不搜索了
+			//best_score_of_upper[floor] = 0;
 			for (int raw = 0; raw < 15; raw++)
 			{
 				for (int column = 1; column < 16; column++)
@@ -629,6 +638,7 @@ long int Minimax2(char board[][17][2], int step_count,
 		else
 		{
 			temp_score = 0;
+			//best_score_of_upper[floor] = 0;
 			for (int raw = 0; raw < 15; raw++)
 			{
 				for (int column = 1; column < 16; column++)

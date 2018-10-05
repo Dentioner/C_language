@@ -228,7 +228,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 4], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&&(column+4 <= 15)&&(column - 1>= 1))
 	{
 		value += Open_Four;
 	}
@@ -240,7 +241,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&&(column + 3 <= 15)&&(column - 2 >= 1))
 	{
 		value += Open_Four;
 	}
@@ -252,7 +254,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
+		&&(column - 3 >= 1)&&(column + 2 <= 15))
 	{
 		value += Open_Four;
 	}
@@ -264,7 +267,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 4], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0)
+		&&(column - 4 >= 1)&& (column + 1 <= 15))
 	{
 		value += Open_Four;
 	}
@@ -277,7 +281,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 4][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&&(raw + 4 <= 14)&&(raw -1 >=0))
 	{
 		value += Open_Four;
 	}
@@ -290,7 +295,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+		&&(raw - 2>=0)&&(raw +3 <= 14))
 	{
 		value += Open_Four;
 	}
@@ -302,7 +308,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+		&&(raw - 3 >= 0)&&(raw + 2 <= 14))
 	{
 		value += Open_Four;
 	}
@@ -314,7 +321,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 4][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0)
+		&&(raw - 4 >= 0)&&(raw + 1 <= 14))
 	{
 		value += Open_Four;
 	}
@@ -327,7 +335,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)
-		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0)
+		&&(raw -4 >= 0)&&(raw + 1 <= 14)&&(column + 4 <= 15)&&(column- 1 >=1))
 	{
 		value += Open_Four;
 	}
@@ -339,7 +348,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&&(raw + 2 <= 14)&&(raw - 3 >=0)&&(column - 2 >= 1)&&(column + 3 <=15))
 	{
 		value += Open_Four;
 	}
@@ -351,11 +361,12 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+		&&(raw - 2>=0)&&(raw + 3 <= 14)&&(column + 2 <= 15)&&(column - 3 >= 1))
 	{
 		value += Open_Four;
 	}
-
+	
 		//_¡ñ¡ñ¡ñ?_ÐÍ
 	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
@@ -363,7 +374,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 4][column - 4], chess, 2) != 0)
 		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&&(raw - 1 >= 0)&&(raw + 4 <= 14)&&(column + 1 <= 15)&&(column - 4 >= 1))
 	{
 		value += Open_Four;
 	}
@@ -376,7 +388,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)
 		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&&(raw + 4 <=14)&&(raw - 1 >= 0)&&(column - 1 >=1)&& (column + 4 <=15))
 	{
 		value += Open_Four;
 	}
@@ -388,7 +401,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+		&&(raw - 2 >= 0)&&(raw + 3 <= 14)&&(column - 2 >= 1)&&(column + 3 <=15))
 	{
 		value += Open_Four;
 	}
@@ -400,7 +414,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+		&&(raw - 3 >= 0)&&(raw + 2 <= 14)&&(column - 3 >= 1)&&(column + 2 <= 15))
 	{
 		value += Open_Four;
 	}
@@ -412,7 +427,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 4][column - 4], chess, 2) != 0)
-		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0)
+		&& (raw - 4 >= 0)&&(raw + 1 <=14)&&(column + 1 <= 15)&& (column - 4>= 1))
 	{
 		value += Open_Four;
 	}
@@ -428,14 +444,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (column - 1 >= 1))
 	{
 		if ((strncmp(board[raw][column + 4], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw][column + 4], chess, 2) != 0)
-			&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0)
+			&& (column + 4 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -447,14 +465,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&&(column - 2 >=1))
 	{
 		if ((strncmp(board[raw][column + 3], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw][column + 3], chess, 2) != 0)
-			&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
+			&&(column + 3<=15))
 		{
 			value += Open_Three;
 		}
@@ -466,14 +486,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
 		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&&(column - 3 >= 1))
 	{
 		if ((strncmp(board[raw][column + 2], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw][column + 2], chess, 2) != 0)
-			&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+			&&(column + 2 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -486,7 +508,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column - 5], chess, 2) != 0)
 		&& (strncmp(board[raw][column - 5], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&&(column - 5 >= 1))
 	{
 		value += Gapped_Four;
 	}
@@ -498,14 +521,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+		&&(raw - 1 >= 0))
 	{
 		if ((strncmp(board[raw + 4][column], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 4][column], chess, 2) != 0)
-			&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0)
+			&&(raw + 4 <= 14))
 		{
 			value += Open_Three;
 		}
@@ -517,14 +542,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&&(raw - 2 >= 0))
 	{
 		if ((strncmp(board[raw + 3][column], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 3][column], chess, 2) != 0)
-			&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+			&&(raw + 3 <= 14))
 		{
 			value += Open_Three;
 		}
@@ -537,14 +564,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+		&&(raw - 3 >= 0))
 	{
 		if ((strncmp(board[raw + 2][column], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 2][column], chess, 2) != 0)
-			&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+			&&(raw + 2 <= 14))
 		{
 			value += Open_Three;
 		}
@@ -557,7 +586,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 5][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 5][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 5][column], opponent_chess, 2) != 0)
+		&&(raw - 5 >= 0))
 	{
 		value += Gapped_Four;
 	}
@@ -569,14 +599,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+		&&(raw + 1<=14)&&(column - 1 >= 1))
 	{
 		if ((strncmp(board[raw - 4][column + 4], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 4][column + 4], chess, 2) != 0)
-			&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0)
+			&&(raw - 4 >= 0)&&(column + 4<=15))
 		{
 			value += Open_Three;
 		}
@@ -588,14 +620,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&&(raw + 2 <= 14)&&(column - 2 >= 1))
 	{
 		if ((strncmp(board[raw - 3][column + 3], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 3][column + 3], chess, 2) != 0)
-			&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+			&&(raw - 3 >= 0)&&(column + 3 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -608,14 +642,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
+		&&(raw + 3 <= 14)&&(column - 3 >= 1))
 	{
 		if ((strncmp(board[raw - 2][column + 2], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 2][column + 2], chess, 2) != 0)
-			&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+			&&(raw - 2 >= 0)&&(column + 2 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -628,7 +664,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column - 5], chess, 2) != 0)
-		&& (strncmp(board[raw + 5][column - 5], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 5][column - 5], opponent_chess, 2) != 0)
+		&&(raw + 5 <= 14)&&(column - 5 >= 1))
 	{
 		value += Gapped_Four;
 	}
@@ -640,14 +677,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+		&&(raw - 1>= 0)&&(column - 1>=1))
 	{
 		if ((strncmp(board[raw + 4][column + 4], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 4][column + 4], chess, 2) != 0)
-			&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0)
+			&&(raw + 4 <= 14)&&(column + 4 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -659,14 +698,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&&(raw - 2 >= 0)&&(column - 2>= 1))
 	{
 		if ((strncmp(board[raw + 3][column + 3], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 3][column + 3], chess, 2) != 0)
-			&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+			&&(raw + 3 <= 14)&&(column + 3 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -679,14 +720,16 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+		&&(raw - 3 >= 0)&&(column - 3 >= 1))
 	{
 		if ((strncmp(board[raw + 2][column + 2], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 2][column + 2], chess, 2) != 0)
-			&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+			&&(raw + 2 <= 14)&&(column + 2 <= 15))
 		{
 			value += Open_Three;
 		}
@@ -699,7 +742,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 5][column - 5], chess, 2) != 0)
-		&& (strncmp(board[raw - 5][column - 5], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 5][column - 5], opponent_chess, 2) != 0)
+		&&(raw - 5 >= 0)&&(column - 5 >= 1))
 	{
 		value += Gapped_Four;
 	}
@@ -715,19 +759,22 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
 		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&&(column + 1 <= 15))
 	{
 		if ((strncmp(board[raw][column - 4], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw][column - 4], chess, 2) != 0)
-			&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0)
+			&&(column - 4 >= 1))
 		{
 			value += Open_Three;
 
 			if ((strncmp(board[raw][column + 2], chess, 2) != 0)
-				&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+				&&(column + 2 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -740,18 +787,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
 		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&&(column + 2 <= 15))
 	{
 		if ((strncmp(board[raw][column - 3], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw][column - 3], chess, 2) != 0)
-			&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
+			&&(column - 3 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw][column + 3], chess, 2) != 0)
-				&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
+				&&(column + 3 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -764,18 +814,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&&(column + 3 <= 15))
 	{
 		if ((strncmp(board[raw][column - 2], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw][column - 2], chess, 2) != 0)
-			&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+			&&(column - 2 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw][column + 4], chess, 2) != 0)
-				&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0)
+				&&(column + 4 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -789,7 +842,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 5], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 5], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&&(column + 5 <= 15))
 	{
 		value += Gapped_Four;
 	}
@@ -801,18 +855,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+		&&(raw + 1 <= 14))
 	{
 		if ((strncmp(board[raw - 4][column], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 4][column], chess, 2) != 0)
-			&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0)
+			&&(raw - 4 >= 0))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw + 2][column], chess, 2) != 0)
-				&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+				&&(raw + 2 <= 14))
 			{
 				value -= Open_Three;
 			}
@@ -825,18 +882,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&&(raw + 2 <= 14))
 	{
 		if ((strncmp(board[raw - 3][column], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 3][column], chess, 2) != 0)
-			&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+			&&(raw - 3 >= 0))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw + 3][column], chess, 2) != 0)
-				&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+				&&(raw + 3 <= 14))
 			{
 				value -= Open_Three;
 			}
@@ -849,18 +909,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+		&&(raw + 3 <= 14))
 	{
 		if ((strncmp(board[raw - 2][column], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 2][column], chess, 2) != 0)
-			&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+			&&(raw - 2 >= 0))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw + 4][column], chess, 2) != 0)
-				&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0)
+				&&(raw + 4 <= 14))
 			{
 				value -= Open_Three;
 			}
@@ -874,7 +937,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 5][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 5][column], opponent_chess, 2) != 0)
+		&&(raw + 5 <= 14))
 	{
 		value += Gapped_Four;
 	}
@@ -888,18 +952,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
+		&&(raw - 1 >= 0)&&(column + 1 <= 15))
 	{
 		if ((strncmp(board[raw + 4][column - 4], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 4][column - 4], chess, 2) != 0)
-			&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0)
+			&&(raw + 4 <= 14)&&(column - 4 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw - 2][column + 2], chess, 2) != 0)
-				&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+				&&(raw - 2 >= 0)&&(column + 2 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -913,18 +980,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&&(raw - 2>= 0)&&(column + 2 <= 15))
 	{
 		if ((strncmp(board[raw + 3][column - 3], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 3][column - 3], chess, 2) != 0)
-			&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
+			&&(raw + 3 <= 14)&&(column - 3 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw - 3][column + 3], chess, 2) != 0)
-				&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+				&&(raw - 3 >= 0)&&(column + 3 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -937,18 +1007,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+		&&(raw - 3 >= 0)&&(column + 3 <= 15))
 	{
 		if ((strncmp(board[raw + 2][column - 2], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw + 2][column - 2], chess, 2) != 0)
-			&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+			&&(raw + 2 <= 14)&&(column - 2 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw - 4][column + 4], chess, 2) != 0)
-				&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0)
+				&&(raw - 4 >= 0)&&(column + 4 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -962,7 +1035,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 5][column + 5], chess, 2) != 0)
-		&& (strncmp(board[raw - 5][column + 5], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 5][column + 5], opponent_chess, 2) != 0)
+		&&(raw - 5>= 0)&&(column + 5 <= 15))
 	{
 		value += Gapped_Four;
 	}
@@ -974,18 +1048,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+		&&(raw + 1 <= 14)&&(column + 1 <= 15))
 	{
 		if ((strncmp(board[raw - 4][column - 4], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 4][column - 4], chess, 2) != 0)
-			&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0)
+			&&(raw - 4>= 0)&&(column - 4 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw + 2][column + 2], chess, 2) != 0)
-				&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+				&&(raw + 2 <= 14)&&(column + 2<=15))
 			{
 				value -= Open_Three;
 			}
@@ -998,18 +1075,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&&(raw + 2 <= 14)&&(column + 2<= 15))
 	{
 		if ((strncmp(board[raw - 3][column - 3], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 3][column - 3], chess, 2) != 0)
-			&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+			&&(raw - 3>= 0)&(column - 3 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw + 3][column + 3], chess, 2) != 0)
-				&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+				&&(raw + 3 <= 14)&&(column + 3 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -1023,18 +1103,21 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+		&&(raw + 3 <= 14)&&(column + 3 <= 15))
 	{
 		if ((strncmp(board[raw - 2][column - 2], chess, 2) == 0))
 		{
 			value += Gapped_Four;
 		}
 		else if ((strncmp(board[raw - 2][column - 2], chess, 2) != 0)
-			&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0))
+			&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+			&&(raw - 2 >= 0)&(column - 2 >= 1))
 		{
 			value += Open_Three;
 			if ((strncmp(board[raw + 4][column + 4], chess, 2) != 0)
-				&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+				&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0)
+				&&(raw + 4 <= 14)&&(column + 4 <= 15))
 			{
 				value -= Open_Three;
 			}
@@ -1048,7 +1131,8 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column + 5], chess, 2) != 0)
-		&& (strncmp(board[raw + 5][column + 5], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 5][column + 5], opponent_chess, 2) != 0)
+		&&(raw + 5 <= 14)&&(column + 5 <= 15))
 	{
 		value += Gapped_Four;
 	}
@@ -1227,9 +1311,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 3], chess, 2) == 0)
-		&& (strncmp(board[raw][column - 1], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column - 1], opponent_chess, 2) == 0)||(column - 1 < 1))
 		&& (strncmp(board[raw][column + 4], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 4], opponent_chess, 2) != 0)
+		&&(column + 4 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1238,9 +1323,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
-		&& (strncmp(board[raw][column - 2], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column - 2], opponent_chess, 2) == 0)||(column - 2 < 1))
 		&& (strncmp(board[raw][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
+		&&(column + 3 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1248,9 +1334,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) == 0)
-		&& (strncmp(board[raw][column - 3], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column - 3], opponent_chess, 2) == 0)||(column - 3 < 1))
 		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&&(column + 2 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1258,9 +1345,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 3], chess, 2) == 0)
-		&& (strncmp(board[raw][column - 4], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column - 4], opponent_chess, 2) == 0)||(column - 4 < 1))
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&&(column + 1 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1269,9 +1357,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 3][column], chess, 2) == 0)
-		&& (strncmp(board[raw - 1][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 1][column], opponent_chess, 2) == 0)||(raw - 1 < 0))
 		&& (strncmp(board[raw + 4][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 4][column], opponent_chess, 2) != 0)
+		&&(raw + 4 <= 14))
 	{
 		value += Capped_Four;
 	}
@@ -1281,9 +1370,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
-		&& (strncmp(board[raw - 2][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 2][column], opponent_chess, 2) == 0)||(raw - 2 < 0))
 		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+		&&(raw + 3 <= 14))
 	{
 		value += Capped_Four;
 	}
@@ -1291,9 +1381,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 1][column], chess, 2) == 0)
-		&& (strncmp(board[raw - 3][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 3][column], opponent_chess, 2) == 0)||(raw - 3 <0))
 		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&&(raw + 2 <= 14))
 	{
 		value += Capped_Four;
 	}
@@ -1301,9 +1392,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 3][column], chess, 2) == 0)
-		&& (strncmp(board[raw - 4][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 4][column], opponent_chess, 2) == 0)||(raw - 4 < 0))
 		&& (strncmp(board[raw + 1][column], chess, 2) != 0)
-		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
+		&&(raw + 1 <= 14))
 	{
 		value += Capped_Four;
 	}
@@ -1313,9 +1405,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) == 0)
-		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 1][column - 1], opponent_chess, 2) == 0)||(raw + 1 > 14)||(column - 1 < 1))
 		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)
-		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) != 0)
+		&& (raw - 4 >= 0)&& (column + 4 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1324,9 +1417,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
-		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 2][column - 2], opponent_chess, 2) == 0)||(raw + 2 > 14)||(column - 2 < 1))
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+		&& (raw - 3 >= 0)&&(column + 3 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1335,9 +1429,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) == 0)
-		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 3][column - 3], opponent_chess, 2) == 0)||(raw + 3 > 14)||(column - 3 < 1))
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
+		&& (raw - 2 >= 0) && (column + 2 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1346,9 +1441,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) == 0)
-		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 4][column - 4], opponent_chess, 2) == 0)||(raw + 4 > 14)||(column - 4 < 1))
 		&& (strncmp(board[raw - 1][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
+		&& (raw - 1 >= 0)&& (column + 1 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1358,9 +1454,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) == 0)
-		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 1][column - 1], opponent_chess, 2) == 0)||(raw - 1 < 0)||(column - 1 < 1))
 		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)
-		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) != 0)
+		&& (raw + 4 <= 14) && (column + 4 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1369,9 +1466,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
-		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 2][column - 2], opponent_chess, 2) == 0)||(raw - 2 < 0)||(column - 2 < 1))
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+		&& (raw + 3 <= 14)&&(column + 3 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1380,9 +1478,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) == 0)
-		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 3][column - 3], opponent_chess, 2) == 0)||(raw - 3 < 0)||(column - 3 < 1))
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&& (raw + 2 <= 14)&&(column + 2 <= 15))
 	{
 		value += Capped_Four;
 	}
@@ -1391,10 +1490,11 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) == 0)
-		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 4][column - 4], opponent_chess, 2) == 0)||(raw - 4 < 0)||(column - 4 < 1))
 		&& (strncmp(board[raw + 1][column + 1], chess, 2) != 0)
-		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0))
-	{
+		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
+		&& (raw + 1 <= 14) && (column + 1 <= 15))
+	{ 
 		value += Capped_Four;
 	}
 
@@ -1404,9 +1504,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 3], chess, 2) == 0)
-		&& (strncmp(board[raw][column + 1], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column + 1], opponent_chess, 2) == 0)||(column + 1 > 15))
 		&& (strncmp(board[raw][column - 4], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 4], opponent_chess, 2) != 0)
+		&& (column - 4 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1414,9 +1515,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 2], chess, 2) == 0)
-		&& (strncmp(board[raw][column + 2], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column + 2], opponent_chess, 2) == 0)||(column + 2 > 15))
 		&& (strncmp(board[raw][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
+		&& (column - 3 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1425,9 +1527,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) == 0)
-		&& (strncmp(board[raw][column + 3], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column + 3], opponent_chess, 2) == 0)||(column + 3 > 15))
 		&& (strncmp(board[raw][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
+		&& (column - 2 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1436,9 +1539,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw][column + 3], chess, 2) == 0)
-		&& (strncmp(board[raw][column + 4], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw][column + 4], opponent_chess, 2) == 0)||(column + 4 > 15))
 		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (column - 1 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1448,9 +1552,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 3][column], chess, 2) == 0)
-		&& (strncmp(board[raw + 1][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 1][column], opponent_chess, 2) == 0)||(raw + 1 > 14))
 		&& (strncmp(board[raw - 4][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 4][column], opponent_chess, 2) != 0)
+		&& (raw - 4 >= 0))
 	{
 		value += Capped_Four;
 	}
@@ -1459,9 +1564,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column], chess, 2) == 0)
-		&& (strncmp(board[raw + 2][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 2][column], opponent_chess, 2) == 0)||(raw + 2 > 14))
 		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+		&& (raw - 3 >= 0))
 	{
 		value += Capped_Four;
 	}
@@ -1470,9 +1576,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
 		&& (strncmp(board[raw - 1][column], chess, 2) == 0)
-		&& (strncmp(board[raw + 3][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 3][column], opponent_chess, 2) == 0)||(raw + 3 > 14))
 		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&& (raw - 2 >= 0))
 	{
 		value += Capped_Four;
 	}
@@ -1481,9 +1588,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column], chess, 2) == 0)
 		&& (strncmp(board[raw + 3][column], chess, 2) == 0)
-		&& (strncmp(board[raw + 4][column], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 4][column], opponent_chess, 2) == 0)||(raw + 4 > 14))
 		&& (strncmp(board[raw - 1][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
+		&& (raw - 1 >= 0))
 	{
 		value += Capped_Four;
 	}
@@ -1493,9 +1601,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) == 0)
-		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 1][column + 1], opponent_chess, 2) == 0)||(raw - 1 < 0)||(column + 1 > 15))
 		&& (strncmp(board[raw + 4][column - 4], chess, 2) != 0)
-		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 4][column - 4], opponent_chess, 2) != 0)
+		&& (raw + 4 <= 14) && (column - 4 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1504,9 +1613,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) == 0)
-		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 2][column + 2], opponent_chess, 2) == 0)||(raw - 2 < 0 )||(column + 2 > 15))
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
+		&& (raw + 3 <= 14) && (column - 3 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1515,9 +1625,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) == 0)
-		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 3][column + 3], opponent_chess, 2) == 0)||(raw - 3 < 0)||(column + 3 > 15))
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&& (raw + 2 <= 14) && (column - 2 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1526,9 +1637,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) == 0)
-		&& (strncmp(board[raw - 4][column + 4], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw - 4][column + 4], opponent_chess, 2) == 0)||(raw - 4 < 0)||(column + 4 > 15))
 		&& (strncmp(board[raw + 1][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
+		&& (raw + 1 <= 14) && (column - 1 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1538,9 +1650,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw - 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) == 0)
-		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 1][column + 1], opponent_chess, 2) == 0)||(raw + 1 > 14)||(column + 1 > 15))
 		&& (strncmp(board[raw - 4][column - 4], chess, 2) != 0)
-		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 4][column - 4], opponent_chess, 2) != 0)
+		&& (raw - 4 >= 0) && (column - 4 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1549,9 +1662,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) == 0)
-		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 2][column + 2], opponent_chess, 2) == 0)||(raw + 2 > 14)||(column + 2 > 15))
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
-		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+		&& (raw - 3 >= 0) && (column - 3 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1561,9 +1675,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) == 0)
-		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 3][column + 3], opponent_chess, 2) == 0)||(raw + 3 > 14)||(column + 3 > 15))
 		&& (strncmp(board[raw - 2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
+		&& (raw - 2 >= 0) && (column - 2 >= 1))
 	{
 		value += Capped_Four;
 	}
@@ -1572,9 +1687,10 @@ long int evaluation(char board[][17][2], int step_count,
 	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) == 0)
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) == 0)
-		&& (strncmp(board[raw + 4][column + 4], opponent_chess, 2) == 0)
+		&& ((strncmp(board[raw + 4][column + 4], opponent_chess, 2) == 0)||(raw + 4 > 14)||(column + 4 > 15))
 		&& (strncmp(board[raw - 1][column - 1], chess, 2) != 0)
-		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0))
+		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
+		&& (raw - 1 >= 0) && (column - 1 >= 1))
 	{
 		value += Capped_Four;
 	}
