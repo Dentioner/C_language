@@ -16,7 +16,7 @@ void main()
 	long int value = 0;//评分函数的打分
 	long int my_value = 0;//我方得分
 	long int opponent_value = 0;//对方得分
-	long int best_score_of_upper[FLOOR] = {0};//给minimax里面的剪枝用的
+	long int best_score_of_upper[FLOOR] = { 89999900 , -89999900 ,89999900 };//给minimax里面的剪枝用的
 	int mode_choice;
 	int mode_choice_index;
 
