@@ -16,7 +16,7 @@ void main()
 	long int value = 0;//评分函数的打分
 	long int my_value = 0;//我方得分
 	long int opponent_value = 0;//对方得分
-	long int best_score_of_upper[FLOOR] = { 89999900 , -89999900 ,89999900 };//给minimax里面的剪枝用的
+	
 	int mode_choice;
 	int mode_choice_index;
 
@@ -207,12 +207,14 @@ void main()
 			//我方连五，对方连五，我方（双）活四，对方（双）活四（这个规则可能需要进一步细分）
 			//我方双活三，对方双活三，我方冲四，对方冲四，我方活三，对方活三
 			//第三层就是横纵坐标了
+			long int best_score_of_upper[FLOOR] = { 89999900 , -89999900 ,89999900 };//给minimax里面的剪枝用的
+			bool not_in_the_same_branch[FLOOR] = { true, true, true };
 			if (my_turn)
 			{
 
 				if (step_count > 4)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority);
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
 					if ((coordinate[0] == 0) && (coordinate[1] == 1))
 					{
 						auto_play(board, chess, opponent_chess);

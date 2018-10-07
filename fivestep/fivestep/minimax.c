@@ -244,7 +244,7 @@ int Minimax(char board[][17][2], int step_count,
 
 long int Minimax2(char board[][17][2], int step_count,
 	bool my_turn, bool ai_first,
-	int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2])
+	int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2], bool not_in_the_same_branch[])
 {
 	char black[2] = "○";
 	char white[2] = "●";
@@ -372,7 +372,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				
 			}
 
-			bool not_in_the_same_branch = true;//判断是否在同一分支中，以免误剪枝
+			not_in_the_same_branch[floor - 1] = true;//判断是否在同一分支中，以免误剪枝
 			for (int a = 0; a < 26; a++)
 			{
 				int raw = priority[FLOOR - floor][a][0];
@@ -387,7 +387,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
-							floor - 1, coordinate, best_score_of_upper, priority);
+							floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
 
 						//DrawBoard(board, 15, temp_score, 2);
 						if ((temp_score != 0) && (best_score == 0))
@@ -395,7 +395,7 @@ long int Minimax2(char board[][17][2], int step_count,
 							best_score = temp_score;
 
 						}
-						if (temp_score < best_score)
+						if ((temp_score != 0) && (temp_score > best_score))
 						{
 							best_score = temp_score;
 
@@ -410,11 +410,12 @@ long int Minimax2(char board[][17][2], int step_count,
 							//这个剪枝待修改
 							else
 							{
-								if ((best_score < best_score_of_upper[floor])&&(not_in_the_same_branch))//剪枝
+								if ((best_score > best_score_of_upper[floor])&&(not_in_the_same_branch[floor]))//剪枝
 								{
 									strncpy(board[raw][column], temp_blank, 2);
-									return -89999900;
+									return 89999900;
 								}
+								
 							}
 						}
 						//复原
@@ -422,7 +423,11 @@ long int Minimax2(char board[][17][2], int step_count,
 						if (best_score < best_score_of_upper[floor - 1])
 						{
 							best_score_of_upper[floor - 1] = best_score;
-							not_in_the_same_branch = false;
+							not_in_the_same_branch[floor - 1] = false;
+						}
+						if (best_score == 89999900)
+						{
+							return best_score;
 						}
 						
 					}
@@ -503,7 +508,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				printf("\n");
 			}
 
-			bool not_in_the_same_branch = true;
+			not_in_the_same_branch[floor - 1] = true;
 			for (int a = 0; a < 26; a++)
 			{
 				int raw = priority[FLOOR - floor][a][0];
@@ -518,13 +523,13 @@ long int Minimax2(char board[][17][2], int step_count,
 						DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
-							floor - 1, coordinate, best_score_of_upper, priority);
+							floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
 						if ((temp_score != 0) && (best_score == 0))
 						{
 							best_score = temp_score;
 
 						}
-						if (temp_score > best_score)
+						if ((temp_score != 0) && (temp_score < best_score))
 						{
 							best_score = temp_score;
 							//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的
@@ -537,10 +542,10 @@ long int Minimax2(char board[][17][2], int step_count,
 							}
 							else
 							{
-								if ((best_score > best_score_of_upper[floor])&&not_in_the_same_branch)//剪枝
+								if ((best_score < best_score_of_upper[floor])&&not_in_the_same_branch[floor])//剪枝
 								{
 									strncpy(board[raw][column], temp_blank, 2);
-									return 89999900;
+									return -89999900;
 								}
 							}
 						}
@@ -548,7 +553,11 @@ long int Minimax2(char board[][17][2], int step_count,
 						if (best_score > best_score_of_upper[floor - 1])
 						{
 							best_score_of_upper[floor - 1] = best_score;
-							not_in_the_same_branch = false;
+							not_in_the_same_branch[floor - 1] = false;
+						}
+						if (best_score == -89999900)
+						{
+							return best_score;
 						}
 						
 					}
@@ -625,16 +634,28 @@ long int Minimax2(char board[][17][2], int step_count,
 						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
 						temp_score = temp_score1 + temp_score2;
-						if (temp_score < best_score_of_upper[floor])//剪枝
+						if (temp_score != 0)
 						{
-							
-							return -89999900;
-						}
-						if (temp_score < best_score)
-						{
-							best_score = temp_score;
-							//best_coordinate[0] = raw;
-								//best_coordinate[1] = column;
+
+						
+							if (best_score == 0)
+							{
+								best_score = temp_score;
+
+							}
+							if (temp_score > best_score)
+							{
+								best_score = temp_score;
+								//best_coordinate[0] = raw;
+									//best_coordinate[1] = column;
+							}
+							/*
+							if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
+							{
+
+								return -89999900;
+							}
+							*/
 						}
 					}
 				}
@@ -655,16 +676,29 @@ long int Minimax2(char board[][17][2], int step_count,
 						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
 						temp_score = temp_score1 + temp_score2;
-						if (temp_score > best_score_of_upper[floor])//剪枝
+						if (temp_score != 0)
 						{
 
-							return 89999900;
-						}
-						if (temp_score > best_score)
-						{
-							best_score = temp_score;
-							//best_coordinate[0] = raw;
-								//best_coordinate[1] = column;
+
+							if (best_score == 0)
+							{
+								best_score = temp_score;
+
+							}
+
+							if (temp_score < best_score)
+							{
+								best_score = temp_score;
+								//best_coordinate[0] = raw;
+									//best_coordinate[1] = column;
+							}
+							/*
+							if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
+							{
+
+								return 89999900;
+							}
+							*/
 						}
 					}
 			
