@@ -8,7 +8,7 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 
 	for (int p = 0; p < 15; p++)
 	{
-		for (int q = 0; q < 17; q++)
+		for (int q = 1; q < 16; q++)
 		{
 			if ((strncmp(board[p][q], opponent_chess, 2)) == 0)
 			{
@@ -36,7 +36,7 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 				}
 				else if (((strncmp(board[p][q - 1], opponent_chess, 2)) != 0)
 					&& ((strncmp(board[p][q - 1], chess, 2)) != 0)
-					&&(q-1>=0))
+					&&(q-1>=1))
 				{
 					strncpy(board[p][q - 1], chess, 2);
 					return;
@@ -44,7 +44,7 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 				else if (((strncmp(board[p - 1][q - 1], opponent_chess, 2)) != 0)
 					&& ((strncmp(board[p - 1][q - 1], chess, 2)) != 0)
 					&&(p-1>=0)
-					&&(q-1>=0))
+					&&(q-1>=1))
 				{
 					strncpy(board[p - 1][q - 1], chess, 2);
 					return;
@@ -68,7 +68,7 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 				else if (((strncmp(board[p + 1][q - 1], opponent_chess, 2)) != 0)
 					&& ((strncmp(board[p + 1][q - 1], chess, 2)) != 0)
 					&&(p+1<=14)
-					&&(q-1>=0))
+					&&(q-1>=1))
 				{
 					strncpy(board[p + 1][q - 1], chess, 2);
 					return;

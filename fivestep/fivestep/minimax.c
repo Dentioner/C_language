@@ -339,6 +339,8 @@ long int Minimax2(char board[][17][2], int step_count,
 			//best_score_of_upper[floor] = 0;
 			//先将优先的那些点找到并递归
 			final_hit = before_evaluation(board, priority, floor, step_count, my_turn);
+			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
+			/*
 			for (int test_raw = 0; test_raw < 4; test_raw++)
 			{
 				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
@@ -350,7 +352,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				}
 				printf("\n");
 			}
-			
+			*/
 			
 			if (final_hit
 				&&(FLOOR == floor))
@@ -372,9 +374,10 @@ long int Minimax2(char board[][17][2], int step_count,
 				
 			}
 
-			not_in_the_same_branch[floor - 1] = true;//判断是否在同一分支中，以免误剪枝
+		
 			for (int a = 0; a < 26; a++)
 			{
+				not_in_the_same_branch[floor - 1] = true;//判断是否在同一分支中，以免误剪枝
 				int raw = priority[FLOOR - floor][a][0];
 				int column = priority[FLOOR - floor][a][1];
 				if ((raw != 0) || (column != 0))
@@ -384,7 +387,8 @@ long int Minimax2(char board[][17][2], int step_count,
 					{
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
-						DrawBoard(board, 15, temp_score, 2);
+						//下面这行是在测试的时候使用的，正式使用的时候关掉
+						//DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
@@ -395,7 +399,7 @@ long int Minimax2(char board[][17][2], int step_count,
 							best_score = temp_score;
 
 						}
-						if ((temp_score != 0) && (temp_score > best_score))
+						if ((temp_score != 0) && (temp_score >= best_score))
 						{
 							best_score = temp_score;
 
@@ -420,7 +424,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						}
 						//复原
 						strncpy(board[raw][column], temp_blank, 2);
-						if (best_score < best_score_of_upper[floor - 1])
+						if (best_score > best_score_of_upper[floor - 1])
 						{
 							best_score_of_upper[floor - 1] = best_score;
 							not_in_the_same_branch[floor - 1] = false;
@@ -496,6 +500,8 @@ long int Minimax2(char board[][17][2], int step_count,
 		{
 			//best_score_of_upper[floor] = 0;
 			before_evaluation(board, priority, floor, step_count, my_turn);
+			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
+			/*
 			for (int test_raw = 0; test_raw < 4; test_raw++)
 			{
 				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
@@ -507,10 +513,11 @@ long int Minimax2(char board[][17][2], int step_count,
 				}
 				printf("\n");
 			}
-
-			not_in_the_same_branch[floor - 1] = true;
+			*/
+		
 			for (int a = 0; a < 26; a++)
 			{
+				not_in_the_same_branch[floor - 1] = true;
 				int raw = priority[FLOOR - floor][a][0];
 				int column = priority[FLOOR - floor][a][1];
 				if ((raw != 0) || (column != 0))
@@ -520,7 +527,8 @@ long int Minimax2(char board[][17][2], int step_count,
 					{
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
-						DrawBoard(board, 15, temp_score, 2);
+						//下面这个是在测试的时候输出的，正式使用的时候可以关掉
+						//DrawBoard(board, 15, temp_score, 2);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
@@ -529,7 +537,7 @@ long int Minimax2(char board[][17][2], int step_count,
 							best_score = temp_score;
 
 						}
-						if ((temp_score != 0) && (temp_score < best_score))
+						if ((temp_score != 0) && (temp_score <= best_score))
 						{
 							best_score = temp_score;
 							//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的

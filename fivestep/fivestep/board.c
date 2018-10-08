@@ -207,7 +207,7 @@ void main()
 			//我方连五，对方连五，我方（双）活四，对方（双）活四（这个规则可能需要进一步细分）
 			//我方双活三，对方双活三，我方冲四，对方冲四，我方活三，对方活三
 			//第三层就是横纵坐标了
-			long int best_score_of_upper[FLOOR] = { 89999900 , -89999900 ,89999900 };//给minimax里面的剪枝用的
+			long int best_score_of_upper[FLOOR] = { -89999900 , 89999900 , -89999900 };//给minimax里面的剪枝用的
 			bool not_in_the_same_branch[FLOOR] = { true, true, true };
 			if (my_turn)
 			{
