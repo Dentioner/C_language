@@ -173,8 +173,8 @@ void chess_play_ver2(char board[][17][2], int step_count,
 	int coordinate[])
 {
 	int raw, column;
-	char black[2] = "○";
-	char white[2] = "●";
+	char black[2] = "△";
+	char white[2] = "▲";
 	raw = coordinate[0];
 	column = coordinate[1];
 	if (step_count % 2 == 0)
@@ -188,3 +188,21 @@ void chess_play_ver2(char board[][17][2], int step_count,
 
 }
 
+void return_to_normal_chess(char board[][17][2], int step_count,
+	int coordinate[])
+//此函数是用来将△类型的棋子恢复成○类型的棋子
+{
+	int raw, column;
+	char black[2] = "○";
+	char white[2] = "●";
+	raw = coordinate[0];
+	column = coordinate[1];
+	if (step_count % 2 == 0)
+	{
+		strncpy(board[raw][column], black, 2);
+	}
+	else
+	{
+		strncpy(board[raw][column], white, 2);
+	}
+}

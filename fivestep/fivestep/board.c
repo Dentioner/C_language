@@ -4,6 +4,7 @@
 #include<ctype.h>
 #include<math.h>
 #include"head.h"
+#include<time.h>
 
 //注意写好之后要按照老师给的规范进行优化，见五子棋规则的doc文件
 void main()
@@ -16,7 +17,7 @@ void main()
 	long int value = 0;//评分函数的打分
 	long int my_value = 0;//我方得分
 	long int opponent_value = 0;//对方得分
-	
+
 	int mode_choice;
 	int mode_choice_index;
 
@@ -75,12 +76,14 @@ void main()
 
 	if (mode_choice == 1)
 	{
-
+		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
 			//在这个循环里面试着将评分函数混进去
 			//首先尝试着将自己下的每一步用评分函数打个分吧
-			DrawBoard(board, 15, value, mode_choice);
+
+
+
 			//chess_play(board, step_count);老的chessplay函数
 			get_coordinate(coordinate, board, step_count);
 			chess_play_ver2(board, step_count, coordinate);
@@ -89,11 +92,16 @@ void main()
 			//opponent_value = evaluation(board, step_count + 1, !my_turn, coordinate[0], coordinate[1]);
 			//value = my_value + opponent_value;
 			//上面这个分开打分的可能有问题
+			DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+
+
+			return_to_normal_chess(board, step_count, coordinate, coordinate);
+
 			continue_playing = judgement(board, step_count);
 			my_turn = !my_turn;
 			step_count++;
 		}
-		DrawBoard(board, 15, value, mode_choice);
+		DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 		if (step_count % 2)
 		{
 			printf("黑子获胜");
@@ -110,7 +118,7 @@ void main()
 	else
 	{
 		//PVE
-		
+
 		printf("电脑先手还是对方先手？\n");
 		printf("1.电脑先手\t\t2.对方先手\n");
 		printf("************************************************\n");
@@ -140,7 +148,7 @@ void main()
 
 			invalid_ai_choice = false;
 		}
-		
+
 		if (ai_choice == 1)
 		{
 			ai_first = true;
@@ -155,20 +163,23 @@ void main()
 			my_turn = true;
 			chess = black;
 			opponent_chess = white;
-			strncpy(board[8][7], chess, 2);
+			strncpy(board[7][8], chess, 2);
+			my_turn = false;
+			step_count++;
 		}
 		else
 		{
 			my_turn = false;
 			chess = white;
 			opponent_chess = black;
-			
+
 		}
+		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
-			DrawBoard(board, 15, value, mode_choice);
+			
 			//注意这里无需将my_turn求反了，在αβ剪枝函数中已经做了
-			int priority[4][26][2] =
+			int priority[6][26][2] =
 			{
 				{
 					{0,0},{0,0},//连五
@@ -194,6 +205,20 @@ void main()
 					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//连三
 				},
 
+				{
+					{0,0},{0,0},//连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//活四
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//双活三
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//冲四
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//连三
+				},
+				{
+					{0,0},{0,0},//连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//活四
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//双活三
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//冲四
+					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//连三
+				},
 				{
 					{0,0},{0,0},//连五
 					{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},//活四
@@ -207,27 +232,36 @@ void main()
 			//我方连五，对方连五，我方（双）活四，对方（双）活四（这个规则可能需要进一步细分）
 			//我方双活三，对方双活三，我方冲四，对方冲四，我方活三，对方活三
 			//第三层就是横纵坐标了
-			long int best_score_of_upper[FLOOR] = { -89999900 , 89999900 , -89999900 };//给minimax里面的剪枝用的
-			bool not_in_the_same_branch[FLOOR] = { true, true, true };
+			long int best_score_of_upper[6] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900 };//给minimax里面的剪枝用的
+			bool not_in_the_same_branch[6] = { true, true, true, true, true, true };
 			if (my_turn)
 			{
-
+				double start_time = clock();
+				double end_time, cost_time;
 				if (step_count > 4)
 				{
 					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
 					if ((coordinate[0] == 0) && (coordinate[1] == 1))
 					{
-						auto_play(board, chess, opponent_chess);
+						auto_play(board, chess, opponent_chess, coordinate);
+						chess_play_ver2(board, step_count, coordinate);
+						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
 					else
 					{
 						chess_play_ver2(board, step_count, coordinate);
+						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
-					
+
 				}
 				else
 				{
-					auto_play(board, chess, opponent_chess);
+					auto_play(board, chess, opponent_chess, coordinate);
+					chess_play_ver2(board, step_count, coordinate);
+					DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+					return_to_normal_chess(board, step_count, coordinate, coordinate);
 					/*for (int p = 0; p < 15; p++)
 					{
 						for (int q = 0; q < 17; q++)
@@ -238,9 +272,8 @@ void main()
 									&& ((strncmp(board[p + 1][q], chess, 2)) != 0))
 								{
 									strncpy(board[p + 1][q], chess, 2);
-									
-								}
 
+								}
 								else if (((strncmp(board[p][q + 1], opponent_chess, 2)) != 0)
 									&& ((strncmp(board[p][q + 1], chess, 2)) != 0))
 								{
@@ -276,24 +309,31 @@ void main()
 								{
 									strncpy(board[p + 1][q - 1], chess, 2);
 								}
-
 							}
 						}
 					}*/
 				}
+				end_time = clock();
+				cost_time = (end_time - start_time) / CLK_TCK;
+				printf("time=%fs.\n", cost_time);
+				//printf("暂停中，按enter键继续");
+				//system("pause");
 			}
 			else
 			{
 				get_coordinate(coordinate, board, step_count);
-				chess_play_ver2(board, step_count, coordinate);
+				//把value和chessplay换过位置了，不知道会怎样
 				value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+				chess_play_ver2(board, step_count, coordinate);
+				DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+				return_to_normal_chess(board, step_count, coordinate, coordinate);
 			}
-			
+
 			continue_playing = judgement(board, step_count);
 			my_turn = !my_turn;
 			step_count++;
 		}
-		DrawBoard(board, 15, value, mode_choice);
+		DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 		if (step_count % 2)
 		{
 			printf("黑子获胜");
@@ -304,16 +344,20 @@ void main()
 		}
 
 		return;
-		
 
-		printf("施工中\n");
-		
+
+
+
 	}
-	
+
 }
 
-void DrawBoard(char board[][17][2], int i, long int value, int mode_choice)
+void DrawBoard(char board[][17][2], int i, long int value, int mode_choice, int coordinate[], int step_count)
 {
+	char c_column;
+	int i_raw;
+	i_raw = 15 - coordinate[0];
+	c_column = 64 + coordinate[1];
 	char *mode;
 	if (mode_choice == 1)
 	{
@@ -344,8 +388,10 @@ void DrawBoard(char board[][17][2], int i, long int value, int mode_choice)
 	}
 	printf("   A B C D E F G H I J K L M N O \n");
 	//system("pause");
-	printf("value = %ld\n", value);
-
-}
+	if (step_count != -1)
+	{ 
+		printf("最后落子(%d, %c), value = %ld\n", i_raw, c_column, value);
+	}
 	
-
+	
+}

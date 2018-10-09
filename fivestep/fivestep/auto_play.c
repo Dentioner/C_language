@@ -2,7 +2,7 @@
 #include<stdbool.h>
 #include<string.h>
 
-void auto_play(char board[][17][2], char chess[], char opponent_chess[])
+void auto_play(char board[][17][2], char chess[], char opponent_chess[], int coordinate[])
 {
 
 
@@ -16,7 +16,9 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 					&& ((strncmp(board[p + 1][q], chess, 2)) != 0)
 					&&(p+1<=14))
 				{
-					strncpy(board[p + 1][q], chess, 2);
+					coordinate[0] = p + 1;
+					coordinate[1] = q;
+					//strncpy(board[p + 1][q], chess, 2);
 					return;
 				}
 
@@ -24,21 +26,27 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 					&& ((strncmp(board[p][q + 1], chess, 2)) != 0)
 					&&(q+1<=15))
 				{
-					strncpy(board[p][q + 1], chess, 2);
+					coordinate[0] = p;
+					coordinate[1] = q + 1;
+					//strncpy(board[p][q + 1], chess, 2);
 					return;
 				}
 				else if (((strncmp(board[p - 1][q], opponent_chess, 2)) != 0)
 					&& ((strncmp(board[p - 1][q], chess, 2)) != 0)
 					&&(p-1>=0))
 				{
-					strncpy(board[p - 1][q], chess, 2);
+					coordinate[0] = p - 1;
+					coordinate[1] = q;
+					//strncpy(board[p - 1][q], chess, 2);
 					return;
 				}
 				else if (((strncmp(board[p][q - 1], opponent_chess, 2)) != 0)
 					&& ((strncmp(board[p][q - 1], chess, 2)) != 0)
 					&&(q-1>=1))
 				{
-					strncpy(board[p][q - 1], chess, 2);
+					coordinate[0] = p;
+					coordinate[1] = q - 1;
+					//strncpy(board[p][q - 1], chess, 2);
 					return;
 				}
 				else if (((strncmp(board[p - 1][q - 1], opponent_chess, 2)) != 0)
@@ -46,7 +54,9 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 					&&(p-1>=0)
 					&&(q-1>=1))
 				{
-					strncpy(board[p - 1][q - 1], chess, 2);
+					coordinate[0] = p - 1;
+					coordinate[1] = q - 1;
+					//strncpy(board[p - 1][q - 1], chess, 2);
 					return;
 				}
 				else if (((strncmp(board[p - 1][q + 1], opponent_chess, 2)) != 0)
@@ -54,7 +64,9 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 					&&(p-1>=0)
 					&&(q+1<=15))
 				{
-					strncpy(board[p - 1][q + 1], chess, 2);
+					coordinate[0] = p - 1;
+					coordinate[1] = q + 1;
+					//strncpy(board[p - 1][q + 1], chess, 2);
 					return;
 				}
 				else if (((strncmp(board[p + 1][q + 1], opponent_chess, 2)) != 0)
@@ -62,7 +74,9 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 					&&(p+1<=14)
 					&&(q+1<=15))
 				{
-					strncpy(board[p + 1][q + 1], chess, 2);
+					coordinate[0] = p + 1;
+					coordinate[1] = q + 1;
+					//strncpy(board[p + 1][q + 1], chess, 2);
 					return;
 				}
 				else if (((strncmp(board[p + 1][q - 1], opponent_chess, 2)) != 0)
@@ -70,13 +84,15 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[])
 					&&(p+1<=14)
 					&&(q-1>=1))
 				{
-					strncpy(board[p + 1][q - 1], chess, 2);
+					coordinate[0] = p + 1;
+					coordinate[1] = q - 1;
+					//strncpy(board[p + 1][q - 1], chess, 2);
 					return;
 				}
 
 			}
 		}
-}
+	}
 
 }
 

@@ -2,7 +2,7 @@
 #include<stdbool.h>
 #include<string.h>
 #include"head.h"
-
+#include<time.h>
 
 /*
 下面是伪代码
@@ -388,7 +388,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
 						//下面这行是在测试的时候使用的，正式使用的时候关掉
-						//DrawBoard(board, 15, temp_score, 2);
+						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
@@ -528,7 +528,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
 						//下面这个是在测试的时候输出的，正式使用的时候可以关掉
-						//DrawBoard(board, 15, temp_score, 2);
+						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						temp_score = Minimax2(board, step_count + 1,
 							!my_turn, ai_first,
 							floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch);

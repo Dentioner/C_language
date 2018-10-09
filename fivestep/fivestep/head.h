@@ -1,4 +1,5 @@
-#define FLOOR 3
+#define FLOOR 5
+//每次更改FLOOR，需要将board.c中的priority, best_score_of_upper, not_in_the_same_branch这三个数组的大小改一下
 #define Consecutive_Five 10000000//连五
 #define Open_Four 1000000//活四
 #define Open_Three 100000//活三
@@ -18,14 +19,14 @@
 6. ○_●●●_○
 */
 
-void DrawBoard(char board[][17][2], int i, long int value, int mode_choice);
+void DrawBoard(char board[][17][2], int i, long int value, int mode_choice, int coordinate[], int step_count);
 void chess_play(char **board, int step_count);
 bool judgement(char board[][17][2], int step_count);
 long int evaluation(char board[][17][2], int step_count, bool my_turn, int raw, int column);
 void get_coordinate(int coordinate[], char board[][17][2], int step_count);
 void chess_play_ver2(char board[][17][2], int step_count, int coordinate[]);
 long int Minimax2(char board[][17][2], int step_count, bool my_turn, bool ai_first, int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2], bool not_in_the_same_branch[]);
-void auto_play(char board[][17][2], char chess[], char opponent_chess[]);
+void auto_play(char board[][17][2], char chess[], char opponent_chess[], int coordinate[]);
 bool verify_coordinate(char board[][17][2], int raw, int column, char chess, char opponent_chess);
 bool before_evaluation(char board[][17][2], int priority[][26][2], int floor, int step_count, bool my_turn);
-
+void return_to_normal_chess(char board[][17][2], int step_count, int coordinate[]);
