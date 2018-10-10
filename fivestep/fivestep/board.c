@@ -45,7 +45,7 @@ void main()
 	int coordinate[2] = { 0, 0 };
 	char black[2] = "○";
 	char white[2] = "●";
-
+	char roaming[2] = "△";//随便定义的一个，这个是用来记录上一步的空格在哪个位置，便于悔棋
 	//这里准备写一个判断是PVP还是PVE的语句
 		//如果是PVE，选择黑子还是白子
 	printf("************************************************\n");
@@ -79,13 +79,11 @@ void main()
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
-			//在这个循环里面试着将评分函数混进去
-			//首先尝试着将自己下的每一步用评分函数打个分吧
-
-
-
+			
+			
 			//chess_play(board, step_count);老的chessplay函数
 			get_coordinate(coordinate, board, step_count);
+			strncpy(roaming, board[coordinate[0]][coordinate[1]], 2);//记录上一步的状态
 			chess_play_ver2(board, step_count, coordinate);
 			value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 			//my_value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
@@ -93,10 +91,19 @@ void main()
 			//value = my_value + opponent_value;
 			//上面这个分开打分的可能有问题
 			DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
-
-
 			return_to_normal_chess(board, step_count, coordinate, coordinate);
-
+			printf("是否想要悔棋？按y悔棋，按别的任意键正常继续游戏.\n");
+			char c_getback = ' ';
+			c_getback = getchar();
+			while (getchar() != '\n')
+				continue;
+			int i_getback = c_getback;
+			if (i_getback == 89 || i_getback == 121)
+			{
+				strncpy(board[coordinate[0]][coordinate[1]], roaming, 2);
+				DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+				continue;
+			}
 			continue_playing = judgement(board, step_count);
 			my_turn = !my_turn;
 			step_count++;
@@ -238,7 +245,7 @@ void main()
 			{
 				double start_time = clock();
 				double end_time, cost_time;
-				if (step_count > 4)
+				if (step_count > 2)
 				{
 					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
 					if ((coordinate[0] == 0) && (coordinate[1] == 1))
@@ -323,10 +330,25 @@ void main()
 			{
 				get_coordinate(coordinate, board, step_count);
 				//把value和chessplay换过位置了，不知道会怎样
+				strncpy(roaming, board[coordinate[0]][coordinate[1]], 2);//记录上一步的状态
 				value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 				chess_play_ver2(board, step_count, coordinate);
 				DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 				return_to_normal_chess(board, step_count, coordinate, coordinate);
+				//下面是悔棋代码，可能会有问题			
+				printf("是否想要悔棋？按y悔棋，按别的任意键正常继续游戏.\n");
+				char c_getback = ' ';
+				c_getback = getchar();
+				while (getchar() != '\n')
+					continue;
+				int i_getback = c_getback;
+				if (i_getback == 89 || i_getback == 121)
+				{
+					strncpy(board[coordinate[0]][coordinate[1]], roaming, 2);
+					DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+					continue;
+				}
+			
 			}
 
 			continue_playing = judgement(board, step_count);
