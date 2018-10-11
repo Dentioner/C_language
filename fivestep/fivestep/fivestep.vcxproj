@@ -146,6 +146,7 @@
     <ClCompile Include="board.c" />
     <ClCompile Include="chess_pvp.c" />
     <ClCompile Include="winner.c" />
+    <ClCompile Include="zobrist_hashing.c" />
     <ClCompile Include="废弃代码区.c" />
   </ItemGroup>
   <ItemGroup>
