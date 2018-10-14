@@ -135,6 +135,11 @@ void main()
 		char *chess;
 		char *opponent_chess;
 		bool invalid_ai_choice = true;
+		//下面几个变量是zobrist哈希算法使用的
+		long long int key[15][15][2] = { 0 };//第三维度分别代表黑子和白子，0为空白
+		long long int hashing_value[depth_of_hashing][3] = { {0,0,0} };
+		//第二维度的[0]是整个棋盘的哈希值，[1]与[2]是此哈希值对应的棋盘评分，应该定义在函数外面
+		long long int hashing_value_now = 0;//目前的哈希值，这个是要在minimax.c里面进行运算的
 		while (invalid_ai_choice)
 		{
 			ai_choice_index = scanf("%d", &ai_choice);
@@ -182,6 +187,7 @@ void main()
 
 		}
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
+		initialize_hashing_sheet(key);
 		while (continue_playing)
 		{
 			
@@ -252,12 +258,14 @@ void main()
 					{
 						auto_play(board, chess, opponent_chess, coordinate);
 						chess_play_ver2(board, step_count, coordinate);
+						hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
 						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
 					else
 					{
 						chess_play_ver2(board, step_count, coordinate);
+						hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
 						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
@@ -267,6 +275,7 @@ void main()
 				{
 					auto_play(board, chess, opponent_chess, coordinate);
 					chess_play_ver2(board, step_count, coordinate);
+					hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
 					DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 					return_to_normal_chess(board, step_count, coordinate, coordinate);
 					/*for (int p = 0; p < 15; p++)
@@ -333,6 +342,7 @@ void main()
 				strncpy(roaming, board[coordinate[0]][coordinate[1]], 2);//记录上一步的状态
 				value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 				chess_play_ver2(board, step_count, coordinate);
+				hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
 				DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 				return_to_normal_chess(board, step_count, coordinate, coordinate);
 				//下面是悔棋代码，可能会有问题			
@@ -345,6 +355,7 @@ void main()
 				if (i_getback == 89 || i_getback == 121)
 				{
 					strncpy(board[coordinate[0]][coordinate[1]], roaming, 2);
+					hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
 					DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 					continue;
 				}

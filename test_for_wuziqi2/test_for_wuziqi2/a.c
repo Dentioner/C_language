@@ -7,6 +7,8 @@ void main()
 {
 
 
+
+
 	int zob_raw, zob_column, zob_status;
 	long long int a, b, c, d;
 	srand(time(NULL));
@@ -35,4 +37,22 @@ void main()
 	printf("d = %d\n", d);
 
 	system("pause");
+
+
+/*
+	long long int key[15][15][2] = { 0 };
+	for (int i = 0; i < 15; i++)
+	{
+		for (int j = 0; j < 15; j++)
+		{
+				printf("%d,%d  ", key[i][j][0], key[i][j][1]);
+		}
+		printf("\n");
+	}
+	
+
+	int step;
+	scanf("%d", &step);
+	printf("%d", step % 2);
+*/
 }

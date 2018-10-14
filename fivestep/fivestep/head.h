@@ -18,7 +18,7 @@
 6. ¡ð_¡ñ¡ñ¡ñ_¡ð
 */
 #define Open_two 1000//Á¬¶þ
-
+#define depth_of_hashing 10000
 void DrawBoard(char board[][17][2], int i, long int value, int mode_choice, int coordinate[], int step_count);
 void chess_play(char **board, int step_count);
 bool judgement(char board[][17][2], int step_count);
@@ -30,3 +30,5 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[], int coo
 bool verify_coordinate(char board[][17][2], int raw, int column, char chess, char opponent_chess);
 bool before_evaluation(char board[][17][2], int priority[][26][2], int floor, int step_count, bool my_turn);
 void return_to_normal_chess(char board[][17][2], int step_count, int coordinate[]);
+void initialize_hashing_sheet(long long int key[][15][2]);
+long int Zobrist_hashing(long long int hashing_value[][2], long long int key[][15][2], int best_raw, int best_column, bool write_new_coordinate, int step_count, char board[][17][2], bool my_turn, long long int hashing_value_now);
