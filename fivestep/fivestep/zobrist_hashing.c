@@ -7,10 +7,12 @@
 #include<time.h>
 #include<stdlib.h>
 
+/*
 long long int key[15][15][2] = { 0 };//第三维度分别代表黑子和白子，0为空白
 long long int hashing_value[depth_of_hashing][3] = { {0,0,0} };
 //第二维度的[0]是整个棋盘的哈希值，[1][2]是此哈希值对应的棋盘评分，应该定义在函数外面
 long long int hashing_value_now = 0;//目前的哈希值，这个是要在minimax.c里面进行运算的
+*/
 
 void initialize_hashing_sheet(long long int key[][15][2])
 {//本程序每场比赛只要在最开始执行一次就行，不能多次执行
@@ -28,11 +30,11 @@ void initialize_hashing_sheet(long long int key[][15][2])
 				b = rand();
 				c = rand();
 				key[zob_raw][zob_column][zob_status] = a * 10000 + b * 1000 + c;
-				printf("%lld ", key[zob_raw][zob_column][zob_status]);
+				//printf("%lld ", key[zob_raw][zob_column][zob_status]);
 			}
-			printf("\n");
+			//printf("\n");
 		}
-		printf("\n\n");
+		//printf("\n\n");
 	}
 }
 
@@ -68,6 +70,8 @@ long int Zobrist_hashing(long long int hashing_value[][2], long long int key[][1
 		{
 			if (hashing_value[index][0] == hashing_value_now)//如果这个哈希值与外面的哈希值相等
 			{
+				//这两行是用来测试这张表是否有用，正常工作时要消除的
+				exit(0);
 				//在表中就找到了对应的哈希值，那就返回对应的评分
 				if (my_turn)
 				{//目前[1]记录的是我方的得分

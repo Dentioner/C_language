@@ -253,7 +253,7 @@ void main()
 				double end_time, cost_time;
 				if (step_count > 2)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch);
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashing_value_now, key, hashing_value);
 					if ((coordinate[0] == 0) && (coordinate[1] == 1))
 					{
 						auto_play(board, chess, opponent_chess, coordinate);

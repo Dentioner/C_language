@@ -6,7 +6,7 @@
 void main()
 {
 
-
+/*
 
 
 	int zob_raw, zob_column, zob_status;
@@ -37,7 +37,7 @@ void main()
 	printf("d = %d\n", d);
 
 	system("pause");
-
+	*/
 
 /*
 	long long int key[15][15][2] = { 0 };
@@ -55,4 +55,14 @@ void main()
 	scanf("%d", &step);
 	printf("%d", step % 2);
 */
+	int i = 0;
+	while (1)
+	{
+		i++;
+		if (i == 10)
+		{
+			printf("%d", i);
+			exit(0);
+		}
+	}
 }

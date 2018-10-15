@@ -1,15 +1,2 @@
 ﻿  a.c
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(14): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(32): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“__int64”
-  e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(32): note: 请考虑在格式字符串中使用“%lld”
-  e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(32): note: 请考虑在格式字符串中使用“%I64d”
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(35): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“__int64”
-  e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(35): note: 请考虑在格式字符串中使用“%lld”
-  e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(35): note: 请考虑在格式字符串中使用“%I64d”
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(37): warning C4477: “printf”: 格式字符串“%d”需要类型“int”的参数，但可变参数 1 拥有了类型“__int64”
-  e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(37): note: 请考虑在格式字符串中使用“%lld”
-  e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(37): note: 请考虑在格式字符串中使用“%I64d”
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(12): warning C4101: “zob_column”: 未引用的局部变量
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(12): warning C4101: “zob_status”: 未引用的局部变量
-e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(12): warning C4101: “zob_raw”: 未引用的局部变量
   test_for_wuziqi2.vcxproj -> E:\coding\C_language\test_for_wuziqi2\Debug\test_for_wuziqi2.exe
