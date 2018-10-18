@@ -341,8 +341,8 @@ long int Minimax2(char board[][17][2], int step_count,
 			//先将优先的那些点找到并递归
 			final_hit = before_evaluation(board, priority, floor, step_count, my_turn);
 			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
-			/*
-			for (int test_raw = 0; test_raw < 4; test_raw++)
+			
+			for (int test_raw = 0; test_raw < 10; test_raw++)
 			{
 				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
 				{
@@ -353,7 +353,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				}
 				printf("\n");
 			}
-			*/
+			
 			
 			if (final_hit
 				&&(FLOOR == floor))
@@ -390,7 +390,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						strncpy(board[raw][column], chess, 2);
 						hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
 						//下面这行是在测试的时候使用的，正式使用的时候关掉
-						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
+						DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						long int temp_score1 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count, board, my_turn, hashing_value_now);
 						long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
 						if (temp_score1 == 0 && temp_score2 == 0)
@@ -403,7 +403,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						{
 							temp_score = temp_score1 + temp_score2;
 						}
-						//DrawBoard(board, 15, temp_score, 2);
+						DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						if ((temp_score != 0) && (best_score == 0))
 						{
 							best_score = temp_score;
@@ -513,8 +513,8 @@ long int Minimax2(char board[][17][2], int step_count,
 			//best_score_of_upper[floor] = 0;
 			before_evaluation(board, priority, floor, step_count, my_turn);
 			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
-			/*
-			for (int test_raw = 0; test_raw < 4; test_raw++)
+			
+			for (int test_raw = 0; test_raw < 10; test_raw++)
 			{
 				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
 				{
@@ -525,7 +525,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				}
 				printf("\n");
 			}
-			*/
+			
 		
 			for (int a = 0; a < 26; a++)
 			{
@@ -544,7 +544,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
 						
 						//下面这个是在测试的时候输出的，正式使用的时候可以关掉
-						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
+						DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						if (temp_score1 == 0 && temp_score2 == 0)
 						{
 							temp_score = Minimax2(board, step_count + 1,
