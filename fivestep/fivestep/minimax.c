@@ -286,52 +286,6 @@ long int Minimax2(char board[][17][2], int step_count,
 	long int best_score = 0;
 	int best_coordinate[2] = { 0,1 };
 	long int temp_score = 0;
-	/*
-	//找最佳的点与最值
-	if (my_turn)
-	{
-		temp_score = 0;
-		//在设计优先级函数之前，先如下凑合着用
-		//raw和column的搜索范围缩小一点，这样可以减少运算量，棋盘边缘就不搜索了
-		for (int raw = 3; raw < 12; raw++)
-		{
-			for (int column = 3; column < 14; column++)
-			{
-				temp_score = evaluation(board, step_count, my_turn, raw, column);
-				if (temp_score > best_score)
-				{
-					best_score = temp_score;
-					best_coordinate[0] = raw;
-					best_coordinate[1] = column;
-				}
-			}
-		}
-	}
-	else
-	{
-		temp_score = 0;
-		for (int raw = 0; raw < 15; raw++)
-		{
-			for (int column = 0; column < 17; column++)
-			{
-				temp_score = evaluation(board, step_count, my_turn, raw, column);
-				if (temp_score < best_score)
-				{
-					best_score = temp_score;
-					best_coordinate[0] = raw;
-					best_coordinate[1] = column;
-				}
-			}
-		}
-	}
-
-	strncpy(temp_blank, board[best_coordinate[0]][best_coordinate[1]], 2);
-	strncpy(board[best_coordinate[0]][best_coordinate[1]], chess, 2);
-	//下面开始递归
-	*/
-	//printf("floor = %d\nFLOOR - floor = %d\n.", floor, FLOOR - floor);
-	//不是最底层↓
-
 	
 	if (floor != 0)
 	{
@@ -340,8 +294,11 @@ long int Minimax2(char board[][17][2], int step_count,
 			//best_score_of_upper[floor] = 0;
 			//先将优先的那些点找到并递归
 			final_hit = before_evaluation(board, priority, floor, step_count, my_turn);
-			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
 			
+			
+			
+			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
+			/*
 			for (int test_raw = 0; test_raw < 10; test_raw++)
 			{
 				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
@@ -353,7 +310,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				}
 				printf("\n");
 			}
-			
+			*/
 			
 			if (final_hit
 				&&(FLOOR == floor))
@@ -386,11 +343,17 @@ long int Minimax2(char board[][17][2], int step_count,
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
+						//初始化剪枝的参数
+						if (floor - 2 >= 0)
+						{
+							best_score_of_upper[floor - 2] = 89999900;
+							//not_in_the_same_branch[floor - 2] = true;
+						}
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
 						hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
 						//下面这行是在测试的时候使用的，正式使用的时候关掉
-						DrawBoard(board, 15, 0, 2, coordinate, step_count);
+						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						long int temp_score1 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count, board, my_turn, hashing_value_now);
 						long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
 						if (temp_score1 == 0 && temp_score2 == 0)
@@ -403,7 +366,8 @@ long int Minimax2(char board[][17][2], int step_count,
 						{
 							temp_score = temp_score1 + temp_score2;
 						}
-						DrawBoard(board, 15, 0, 2, coordinate, step_count);
+						//下面这行是在测试的时候使用的，正式使用的时候关掉
+						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						if ((temp_score != 0) && (best_score == 0))
 						{
 							best_score = temp_score;
@@ -453,67 +417,17 @@ long int Minimax2(char board[][17][2], int step_count,
 
 
 			}
-			//这行下面全遍历棋盘的循环先废弃了
-			/*
-			for (int raw = 0; raw < 15; raw++)
-			{
-				for (int column = 1; column < 16; column++)
-				{//每一个点落子，产生子节点，因此实际上每一个点都会产生255个子节点
-					//↓
-					if ((strncmp(board[raw][column], chess, 2) != 0)
-						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
-					{
-						strncpy(temp_blank, board[raw][column], 2);
-						strncpy(board[raw][column], chess, 2);
-					//	DrawBoard(board, 15, temp_score, 2);
-						temp_score = Minimax2(board, step_count + 1,
-							!my_turn, ai_first,
-							floor - 1, coordinate, best_score_of_upper);
-				
-							//DrawBoard(board, 15, temp_score, 2);
-						if ((temp_score != 0)&&(best_score == 0))
-						{
-							best_score = temp_score;
-							
-						}
-						if (temp_score > best_score)
-						{
-							best_score = temp_score;
-							
-							//valid_coordinate = verify_coordinate(board, raw, column, chess, opponent_chess);
-							//if ((floor == FLOOR)&&valid_coordinate)
-							if (floor == FLOOR)
-								//如果是最外层，记录此时坐标
-							{
-								best_coordinate[0] = raw;
-								best_coordinate[1] = column;
-							}
-							//这个剪枝待修改
-							else
-							{
-								if (best_score > best_score_of_upper[floor])//剪枝
-								{
-									strncpy(board[raw][column], temp_blank, 2);
-									return 89999900;
-								}
-							}
-						}
-						//复原
-						strncpy(board[raw][column], temp_blank, 2);
-						best_score_of_upper[floor - 1] = best_score;
-					}
-
-					
-				}
-			}*/
 			
 		}
 		else
 		{
 			//best_score_of_upper[floor] = 0;
 			before_evaluation(board, priority, floor, step_count, my_turn);
-			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
 			
+
+			
+			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
+			/*
 			for (int test_raw = 0; test_raw < 10; test_raw++)
 			{
 				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
@@ -525,7 +439,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				}
 				printf("\n");
 			}
-			
+			*/
 		
 			for (int a = 0; a < 26; a++)
 			{
@@ -537,6 +451,12 @@ long int Minimax2(char board[][17][2], int step_count,
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
+						//初始化剪枝的参数
+						if (floor - 2 >= 0)
+						{
+							best_score_of_upper[floor - 2] = -89999900;
+							//not_in_the_same_branch[floor - 2] = true;
+						}
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
 						hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
@@ -544,7 +464,7 @@ long int Minimax2(char board[][17][2], int step_count,
 						long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
 						
 						//下面这个是在测试的时候输出的，正式使用的时候可以关掉
-						DrawBoard(board, 15, 0, 2, coordinate, step_count);
+						//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						if (temp_score1 == 0 && temp_score2 == 0)
 						{
 							temp_score = Minimax2(board, step_count + 1,
@@ -598,51 +518,7 @@ long int Minimax2(char board[][17][2], int step_count,
 				
 			}
 			
-			//下面是废弃的原来的遍历整个棋盘的循环
-			/*
-			for (int raw = 0; raw < 15; raw++)
-			{
-				for (int column = 1; column < 16; column++)
-				{
-					if ((strncmp(board[raw][column], chess, 2) != 0)
-						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
-					{
-						strncpy(temp_blank, board[raw][column], 2);
-						strncpy(board[raw][column], chess, 2);
-						//DrawBoard(board, 15, temp_score, 2);
-						temp_score = Minimax2(board, step_count + 1,
-							!my_turn, ai_first,
-							floor - 1, coordinate, best_score_of_upper);
-						if ((temp_score != 0) && (best_score == 0))
-						{
-							best_score = temp_score;
-							
-						}
-						if (temp_score < best_score)
-						{
-							best_score = temp_score;
-							//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的
-						
-							if (floor == FLOOR)
-								//如果是最外层，记录此时坐标
-							{
-								best_coordinate[0] = raw;
-								best_coordinate[1] = column;
-							}
-							else
-							{
-								if (best_score < best_score_of_upper[floor])//剪枝
-								{
-									strncpy(board[raw][column], temp_blank, 2);
-									return -89999900;
-								}
-							}
-						}
-						strncpy(board[raw][column], temp_blank, 2);
-						best_score_of_upper[floor - 1] = best_score;
-					}
-				}
-			}*/
+
 		}
 		
 	}

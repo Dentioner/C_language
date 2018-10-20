@@ -1,4 +1,4 @@
-#define FLOOR 3
+#define FLOOR 5
 //每次更改FLOOR，需要将board.c中的priority, best_score_of_upper, not_in_the_same_branch这三个数组的大小改一下
 #define Consecutive_Five 10000000//连五
 #define Open_Four 1000000//活四
