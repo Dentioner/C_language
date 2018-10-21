@@ -211,16 +211,27 @@ long int Minimax2(char board[][17][2], int step_count,
 			*/
 
 			//下面这个if是新加的迭代加深
-			if (!final_hit && (FLOOR == floor))
+			if (!final_hit)
 			{
-				if ((priority[0][1][0] != 0) || (priority[0][1][1]) != 0)
+				if ((priority[FLOOR - floor][1][0] != 0) || (priority[FLOOR- floor][1][1]) != 0)
 				{
 					
-					best_score = evaluation(board, step_count, my_turn, priority[0][1][0], priority[0][1][1]);
+					best_score = evaluation(board, step_count, my_turn, priority[FLOOR - floor][1][0], priority[FLOOR - floor][1][1]);
 					return best_score;
 				}
 
 			}
+			//下面这个else if 的实用性待验证，先试着用一下
+			
+			else if (final_hit)
+			{
+				if ((priority[FLOOR - floor][1][0] == 0) && ((priority[FLOOR - floor][1][1]) == 0))
+				{
+					best_score = evaluation(board, step_count, my_turn, priority[FLOOR - floor][0][0], priority[FLOOR - floor][0][1]);
+					return best_score;
+				}
+			}
+			
 			for (int a = 0; a < 26; a++)
 			{
 				not_in_the_same_branch[floor - 1] = true;
@@ -431,7 +442,7 @@ long int Minimax2(char board[][17][2], int step_count,
 
 			
 			//best_score_of_upper[floor] = 0;
-				for (int raw = 0; raw < 15; raw++)
+			for (int raw = 0; raw < 15; raw++)
 			{
 				for (int column = 1; column < 16; column++)
 				{
