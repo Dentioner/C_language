@@ -26,10 +26,13 @@ bool judgement(char board[][17][2], int step_count);
 long int evaluation(char board[][17][2], int step_count, bool my_turn, int raw, int column);
 void get_coordinate(int coordinate[], char board[][17][2], int step_count);
 void chess_play_ver2(char board[][17][2], int step_count, int coordinate[]);
-long int Minimax2(char board[][17][2], int step_count, bool my_turn, bool ai_first, int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2], bool not_in_the_same_branch[], long long int hashing_value_now, long long int key[][15][2], long long int hashing_value[][2]);
+long int Minimax2(char board[][17][2], int step_count, bool my_turn, bool ai_first, int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2], bool not_in_the_same_branch[], long long int hashing_value_now, long long int key[][15][2], long long int hashing_value[][2], int fatal_priority[][22][2], long int fatal_best_score_of_upper[], bool fatal_not_in_the_same_branch[]);
 void auto_play(char board[][17][2], char chess[], char opponent_chess[], int coordinate[]);
 bool verify_coordinate(char board[][17][2], int raw, int column, char chess, char opponent_chess);
 bool before_evaluation(char board[][17][2], int priority[][26][2], int floor, int step_count, bool my_turn);
 void return_to_normal_chess(char board[][17][2], int step_count, int coordinate[]);
 void initialize_hashing_sheet(long long int key[][15][2]);
 long int Zobrist_hashing(long long int hashing_value[][2], long long int key[][15][2], int best_raw, int best_column, bool write_new_coordinate, int step_count, char board[][17][2], bool my_turn, long long int hashing_value_now);
+bool find_fatal_point(char board[][17][2], int fatal_priority[][20][2], int floor_vcx, int step_count, bool my_turn);
+long int fatal_step(char board[][17][2], int step_count, bool my_turn, bool ai_first, int floor_vcx, int coordinate[], long int fatal_best_score_of_upper[], int fatal_priority[][20][2], bool fatal_not_in_the_same_branch[]);
+

@@ -8,6 +8,7 @@
 
 //算杀函数
 //数组的第一维度是搜索深度
+/*
 int fatal_priority[6][22][2] =
 {
 	{
@@ -64,6 +65,7 @@ int fatal_priority[6][22][2] =
 };
 long int fatal_best_score_of_upper[7] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900, -89999900 };//给minimax里面的剪枝用的
 bool fatal_not_in_the_same_branch[7] = { true, true, true, true, true, true, true };
+*/
 bool find_fatal_point(char board[][17][2], int fatal_priority[][20][2], int floor_vcx,
 	int step_count, bool my_turn)
 {

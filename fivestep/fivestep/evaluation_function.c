@@ -752,6 +752,7 @@ long int evaluation(char board[][17][2], int step_count,
 //分别是形如_●●●__ 和 _●●●_●的
 //各自倒过来又是一种：__●●●_和 ●_●●●_
 //现在是下面那两种  需要排除这种情况__●●●__，这种就和之前的重复了。
+//还需要排除__●●●_●这个情况
 	//水平方向
 		//__●●?_和 ●_●●?_
 	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
@@ -760,6 +761,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column - 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 2], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(column + 1 <= 15))
 	{
 		if ((strncmp(board[raw][column - 4], chess, 2) == 0))
@@ -788,6 +790,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column - 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 3], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(column + 2 <= 15))
 	{
 		if ((strncmp(board[raw][column - 3], chess, 2) == 0))
@@ -815,6 +818,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 3], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column - 1], chess, 2) != 0)
 		&& (strncmp(board[raw][column - 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 4], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(column + 3 <= 15))
 	{
 		if ((strncmp(board[raw][column - 2], chess, 2) == 0))
@@ -843,6 +847,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw][column + 5], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], chess, 2) != 0)
 		&& (strncmp(board[raw][column + 1], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw][column + 6], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(column + 5 <= 15))
 	{
 		value += Gapped_Four;
@@ -856,6 +861,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 1 <= 14))
 	{
 		if ((strncmp(board[raw - 4][column], chess, 2) == 0))
@@ -883,6 +889,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 2 <= 14))
 	{
 		if ((strncmp(board[raw - 3][column], chess, 2) == 0))
@@ -910,6 +917,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 3 <= 14))
 	{
 		if ((strncmp(board[raw - 2][column], chess, 2) == 0))
@@ -938,6 +946,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column], chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 6][column], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 5 <= 14))
 	{
 		value += Gapped_Four;
@@ -953,6 +962,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column - 3], chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column - 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 2][column + 2], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw - 1 >= 0)&&(column + 1 <= 15))
 	{
 		if ((strncmp(board[raw + 4][column - 4], chess, 2) == 0))
@@ -981,6 +991,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column + 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column - 2], chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column - 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw - 2>= 0)&&(column + 2 <= 15))
 	{
 		if ((strncmp(board[raw + 3][column - 3], chess, 2) == 0))
@@ -1008,6 +1019,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column + 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 4][column + 4], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw - 3 >= 0)&&(column + 3 <= 15))
 	{
 		if ((strncmp(board[raw + 2][column - 2], chess, 2) == 0))
@@ -1036,6 +1048,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 5][column + 5], chess, 2) != 0)
 		&& (strncmp(board[raw - 5][column + 5], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw - 6][column + 6], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw - 5>= 0)&&(column + 5 <= 15))
 	{
 		value += Gapped_Four;
@@ -1049,6 +1062,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column - 3], chess, 2) != 0)
 		&& (strncmp(board[raw - 3][column - 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 1 <= 14)&&(column + 1 <= 15))
 	{
 		if ((strncmp(board[raw - 4][column - 4], chess, 2) == 0))
@@ -1076,6 +1090,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 2][column - 2], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column + 2], chess, 2) != 0)
 		&& (strncmp(board[raw + 2][column + 2], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 2 <= 14)&&(column + 2<= 15))
 	{
 		if ((strncmp(board[raw - 3][column - 3], chess, 2) == 0))
@@ -1104,6 +1119,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw - 1][column - 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column + 3], chess, 2) != 0)
 		&& (strncmp(board[raw + 3][column + 3], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 4][column + 4], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 3 <= 14)&&(column + 3 <= 15))
 	{
 		if ((strncmp(board[raw - 2][column - 2], chess, 2) == 0))
@@ -1132,6 +1148,7 @@ long int evaluation(char board[][17][2], int step_count,
 		&& (strncmp(board[raw + 1][column + 1], opponent_chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column + 5], chess, 2) != 0)
 		&& (strncmp(board[raw + 5][column + 5], opponent_chess, 2) != 0)
+		&& (strncmp(board[raw + 6][column + 6], chess, 2) != 0)//排除__●●●_●这个情况
 		&&(raw + 5 <= 14)&&(column + 5 <= 15))
 	{
 		value += Gapped_Four;

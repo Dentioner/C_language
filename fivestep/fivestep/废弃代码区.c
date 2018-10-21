@@ -2038,3 +2038,193 @@ else
 		printf("施工中\n");
 
 */
+
+
+
+/*
+	else
+	{
+	long int temp_score1 = 0;
+	long int temp_score2 = 0;
+	int best_raw = 0;
+	int best_column = 1;
+	//找最佳的点与最值
+	if (my_turn)
+	{
+		temp_score = 0;
+		//best_score_of_upper[floor] = 0;
+		//先搜索哈希表，如果有就不打分了
+		temp_score1 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count, board, my_turn, hashing_value_now);
+		temp_score2 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count + 1, board, !my_turn, hashing_value_now);
+		if (temp_score1 == 0 && temp_score2 == 0)
+		{//如果哈希表没有值
+			for (int raw = 0; raw < 15; raw++)
+			{
+				for (int column = 1; column < 16; column++)
+				{
+					if ((strncmp(board[raw][column], chess, 2) != 0)
+						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+					{
+						//temp_score = evaluation(board, step_count, my_turn, raw, column);
+
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score = temp_score1 + temp_score2;
+						if (temp_score != 0)
+						{
+
+
+							if (best_score == 0)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
+
+							}
+							if (temp_score > best_score)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
+								//best_coordinate[0] = raw;
+									//best_coordinate[1] = column;
+							}
+							/*
+							if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
+							{
+
+								return -89999900;
+							}
+							*//*
+						}
+					}
+				}
+			}
+
+
+			//在循环结束后，将最佳的坐标输入进哈希表里面
+			Zobrist_hashing(hashing_value, key, best_raw, best_column, true, step_count, board, my_turn, hashing_value_now);
+
+
+
+		}*/
+		/*
+		for (int raw = 0; raw < 15; raw++)
+		{
+			for (int column = 1; column < 16; column++)
+			{
+				if ((strncmp(board[raw][column], chess, 2) != 0)
+					&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+				{
+					//temp_score = evaluation(board, step_count, my_turn, raw, column);
+
+					temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+					temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+					temp_score = temp_score1 + temp_score2;
+					if (temp_score != 0)
+					{
+
+
+						if (best_score == 0)
+						{
+							best_score = temp_score;
+							best_raw = raw;
+							best_column = column;
+
+						}
+						if (temp_score > best_score)
+						{
+							best_score = temp_score;
+							best_raw = raw;
+							best_column = column;
+							//best_coordinate[0] = raw;
+								//best_coordinate[1] = column;
+						}
+						/*
+						if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
+						{
+
+							return -89999900;
+						}
+						*/
+
+		/*
+		else
+		{
+			best_score = temp_score1 + temp_score2;
+		}
+
+
+
+
+
+
+	}
+	else
+	{
+		temp_score = 0;
+		temp_score1 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count, board, my_turn, hashing_value_now);
+		temp_score2 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count + 1, board, !my_turn, hashing_value_now);
+		if (temp_score1 == 0 && temp_score2 == 0)
+		{
+
+
+			//best_score_of_upper[floor] = 0;
+			for (int raw = 0; raw < 15; raw++)
+			{
+				for (int column = 1; column < 16; column++)
+				{
+					if ((strncmp(board[raw][column], chess, 2) != 0)
+						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+					{
+						//temp_score = evaluation(board, step_count, my_turn, raw, column);
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score = temp_score1 + temp_score2;
+						if (temp_score != 0)
+						{
+
+
+							if (best_score == 0)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
+							}
+
+							if (temp_score < best_score)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
+								//best_coordinate[0] = raw;
+									//best_coordinate[1] = column;
+							}
+							/*
+							if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
+							{
+
+								return 89999900;
+							}
+							*/
+		/*
+						}
+					}
+
+				}
+			}
+
+			//在循环结束后，将最佳的坐标输入进哈希表里面
+			Zobrist_hashing(hashing_value, key, best_raw, best_column, true, step_count, board, my_turn, hashing_value_now);
+
+
+
+		}
+		else
+		{
+			best_score = temp_score1 + temp_score2;
+		}
+
+	}
+	}
+	*/

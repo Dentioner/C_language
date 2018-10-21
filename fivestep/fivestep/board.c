@@ -276,13 +276,70 @@ void main()
 			long int best_score_of_upper[11] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900, - 89999900 , 89999900 , -89999900, 89999900, -89999900 };//给minimax里面的剪枝用的
 			//注意上下这两个数组的编号问题。floor是从11往0递归的，因此要保持最后一个元素不变。
 			bool not_in_the_same_branch[11] = { true, true, true, true, true, true, true, true, true, true, true };
+			//下面3个带fatal_字头的是杀棋专用的数组
+			int fatal_priority[6][22][2] =
+			{
+				{
+					{0,0},//自己的连五
+					{0,0},//对方的连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},//自己的活三
+					{0,0},{0,0},{0,0},{0,0},{0,0},//对面的活三
+					{0,0},{0,0},{0,0},{0,0},{0,0},//自己的冲四
+					{0,0},{0,0},{0,0},{0,0},{0,0},//对面的冲四
+				},
+				//下同
+				{
+					{0,0},//自己的连五
+					{0,0},//对方的连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+				},
+
+				{
+					{0,0},//自己的连五
+					{0,0},//对方的连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+				},
+
+				{
+					{0,0},//自己的连五
+					{0,0},//对方的连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+				},
+				{
+					{0,0},//自己的连五
+					{0,0},//对方的连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+				},
+				{
+					{0,0},//自己的连五
+					{0,0},//对方的连五
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+					{0,0},{0,0},{0,0},{0,0},{0,0},
+				}
+			};
+			long int fatal_best_score_of_upper[7] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900, -89999900 };
+			bool fatal_not_in_the_same_branch[7] = { true, true, true, true, true, true, true };
 			if (my_turn)
 			{
 				double start_time = clock();
 				double end_time, cost_time;
 				if (step_count > 2)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashing_value_now, key, hashing_value);
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashing_value_now, key, hashing_value, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
 					if ((coordinate[0] == 0) && (coordinate[1] == 1))
 					{
 						auto_play(board, chess, opponent_chess, coordinate);

@@ -122,7 +122,7 @@ bool before_evaluation(char board[][17][2], int priority[][26][2], int floor,
 
 
 				}
-				else if (my_value >= 2 * Open_Three)
+				else if (my_value >= 2 * Gapped_Three)
 				{
 					if (!find_DoubleThree1)//如果第一个双活三的位置是空的
 					{//第9，10，11属于三个双活三的坐标，也就是8,9,10号位
@@ -143,7 +143,7 @@ bool before_evaluation(char board[][17][2], int priority[][26][2], int floor,
 						find_DoubleThree3 = true;
 					}
 				}
-				else if (opponent_value >= 2 * Open_Three)
+				else if (opponent_value >= 2 * Gapped_Three)
 				{
 					if (!find_opponent_DoubleThree1)//如果第一个双活三的位置是空的
 					{//第12，13，14属于三个双活三的坐标，也就是11,12,13号位
@@ -206,7 +206,7 @@ bool before_evaluation(char board[][17][2], int priority[][26][2], int floor,
 						find_opponent_CapFour3 = true;
 					}
 				}
-				else if (my_value >= Open_Three)
+				else if (my_value >= Gapped_Three)
 				{
 					if (!find_three1)//如果第一个活三的位置是空的
 					{//第21，22，23属于三个活三的坐标，也就是20,21,22号位
@@ -227,7 +227,7 @@ bool before_evaluation(char board[][17][2], int priority[][26][2], int floor,
 						find_three3 = true;
 					}
 				}
-				else if (opponent_value >= Open_Three)
+				else if (opponent_value >= Gapped_Three)
 				{
 					if (!find_opponent_three1)//如果第一个活三的位置是空的
 					{//第24，25，26属于三个活三的坐标，也就是23,24,25号位
