@@ -2,7 +2,7 @@
 #include<string.h>
 #include<stdbool.h>
 
-bool judgement(char board[][17][2], int step_count)
+bool judgement(char board[][17][3], int step_count)
 //两个参数，一个是棋盘，另一个是步数，用于判断是哪一方赢
 //返回值先设成布尔型
 {

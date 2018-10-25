@@ -7,7 +7,7 @@
 
 
 
-long int evaluation(char board[][17][2], int step_count, 
+long int evaluation(char board[][17][3], int step_count, 
 	bool my_turn, int raw, int column)
 //step_count的作用是，确认这盘是黑子还是白子
 //my_turn 的作用是，确认这盘是我方还是敌方

@@ -6,7 +6,7 @@
 //chess_play这个函数需要重写
 //因为评分函数需要调用raw和column的值
 //需要将raw和column写成全局变量，然后chess_play用来作为输入变量
-void chess_play(char board[][17][2], int step_count)//传递的第二个参数是下了几局了的次数
+void chess_play(char board[][17][3], int step_count)//传递的第二个参数是下了几局了的次数
 {
 	char column_c;//字母形式的纵坐标
 	int raw, column;
@@ -90,7 +90,7 @@ void chess_play(char board[][17][2], int step_count)//传递的第二个参数是下了几局
 	}
 }
 
-void get_coordinate(int coordinate[], char board[][17][2], int step_count)
+void get_coordinate(int coordinate[], char board[][17][3], int step_count)
 {
 	char column_c;//字母形式的纵坐标
 	int raw, column;
@@ -169,7 +169,7 @@ void get_coordinate(int coordinate[], char board[][17][2], int step_count)
 	
 }
 
-void chess_play_ver2(char board[][17][2], int step_count, 
+void chess_play_ver2(char board[][17][3], int step_count, 
 	int coordinate[])
 {
 	int raw, column;
@@ -188,7 +188,7 @@ void chess_play_ver2(char board[][17][2], int step_count,
 
 }
 
-void return_to_normal_chess(char board[][17][2], int step_count,
+void return_to_normal_chess(char board[][17][3], int step_count,
 	int coordinate[])
 //此函数是用来将△类型的棋子恢复成○类型的棋子
 {

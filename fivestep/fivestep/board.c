@@ -22,7 +22,7 @@ void main()
 	int mode_choice_index;
 
 
-	char board[15][17][2] =
+	char board[15][17][3] =
 	{
 		{"15","┏","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┯","┓","15"},
 		{"14","┠","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┼","┨","14"},
@@ -43,9 +43,9 @@ void main()
 	};
 
 	int coordinate[2] = { 0, 0 };
-	char black[2] = "○";
-	char white[2] = "●";
-	char roaming[2] = "△";//随便定义的一个，这个是用来记录上一步的空格在哪个位置，便于悔棋
+	char black[3] = "○";
+	char white[3] = "●";
+	char roaming[3] = "△";//随便定义的一个，这个是用来记录上一步的空格在哪个位置，便于悔棋
 	//这里准备写一个判断是PVP还是PVE的语句
 		//如果是PVE，选择黑子还是白子
 	printf("************************************************\n");
@@ -471,7 +471,7 @@ void main()
 
 }
 
-void DrawBoard(char board[][17][2], int i, long int value, int mode_choice, int coordinate[], int step_count)
+void DrawBoard(char board[][17][3], int i, long int value, int mode_choice, int coordinate[], int step_count)
 {
 	char c_column;
 	int i_raw;

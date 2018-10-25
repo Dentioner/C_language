@@ -66,7 +66,7 @@ int fatal_priority[6][22][2] =
 long int fatal_best_score_of_upper[7] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900, -89999900 };//给minimax里面的剪枝用的
 bool fatal_not_in_the_same_branch[7] = { true, true, true, true, true, true, true };
 */
-bool find_fatal_point(char board[][17][2], int fatal_priority[][20][2], int floor_vcx,
+bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floor_vcx,
 	int step_count, bool my_turn)
 {
 	int my_raw = 0;
@@ -324,7 +324,7 @@ bool find_fatal_point(char board[][17][2], int fatal_priority[][20][2], int floo
 
 
 
-long int fatal_step(char board[][17][2], int step_count,
+long int fatal_step(char board[][17][3], int step_count,
 	bool my_turn, bool ai_first,
 	int floor_vcx, int coordinate[], long int fatal_best_score_of_upper[], int fatal_priority[][20][2], bool fatal_not_in_the_same_branch[])
 {

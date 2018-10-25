@@ -46,7 +46,7 @@ long int Zobrist_hashing(long long int hashing_value[][2], long long int key[][1
 	//long int my_value, long int opponent_value,
 	bool write_new_coordinate,
 	//这个布尔值是控制此函数的功能，如果是true的话，此函数才会记录新的哈希值及其评分，否则仅仅作为一个查询哈希值的函数
-	int step_count, char board[][17][2], 
+	int step_count, char board[][17][3], 
 	bool my_turn, long long int hashing_value_now)
 {
 	int black = 0;

@@ -2,7 +2,7 @@
 #include<stdbool.h>
 #include<string.h>
 
-void auto_play(char board[][17][2], char chess[], char opponent_chess[], int coordinate[])
+void auto_play(char board[][17][3], char chess[], char opponent_chess[], int coordinate[])
 {
 
 
@@ -98,7 +98,7 @@ void auto_play(char board[][17][2], char chess[], char opponent_chess[], int coo
 
 //此函数用于防止ai自杀，落在奇怪的位置上面
 //此函数待优化，目前用了反而会让ai自杀
-bool verify_coordinate(char board[][17][2], int raw, int column, 
+bool verify_coordinate(char board[][17][3], int raw, int column, 
 	char chess, char opponent_chess)
 {
 	char black[2] = "○";

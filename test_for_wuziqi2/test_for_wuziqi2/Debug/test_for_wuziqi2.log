@@ -1,2 +1,4 @@
 ﻿  a.c
+e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(15): warning C4098: “main”:“void”函数返回值
+e:\coding\c_language\test_for_wuziqi2\test_for_wuziqi2\a.c(14): warning C4700: 使用了未初始化的局部变量“stat”
   test_for_wuziqi2.vcxproj -> E:\coding\C_language\test_for_wuziqi2\Debug\test_for_wuziqi2.exe
