@@ -9,7 +9,7 @@ long int Minimax2(char board[][17][3], int step_count,
 	bool my_turn, bool ai_first,
 	int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2], bool not_in_the_same_branch[], 
 	long long int hashing_value_now, long long int key[][15][2], long long int hashing_value[][2],
-	int fatal_priority[][22][2], long int fatal_best_score_of_upper[], bool fatal_not_in_the_same_branch[])
+	int fatal_priority[][32][2], long int fatal_best_score_of_upper[], bool fatal_not_in_the_same_branch[])
 {
 	char black[2] = "¡ð";
 	char white[2] = "¡ñ";

@@ -9,7 +9,7 @@
 //算杀函数
 //数组的第一维度是搜索深度
 /*
-int fatal_priority[6][22][2] =
+int fatal_priority[6][32][2] =
 {
 	{
 		{0,0},//自己的连五
@@ -66,7 +66,7 @@ int fatal_priority[6][22][2] =
 long int fatal_best_score_of_upper[7] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900, -89999900 };//给minimax里面的剪枝用的
 bool fatal_not_in_the_same_branch[7] = { true, true, true, true, true, true, true };
 */
-bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floor_vcx,
+bool find_fatal_point(char board[][17][3], int fatal_priority[][32][2], int floor_vcx,
 	int step_count, bool my_turn)
 {
 	int my_raw = 0;
@@ -78,6 +78,16 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 	bool final_hit = false;
 	bool find_five = false;
 	bool find_opponent_five = false;
+	bool find_double_three1 = false;
+	bool find_double_three2 = false;
+	bool find_double_three3 = false;
+	bool find_double_three4 = false;
+	bool find_double_three5 = false;
+	bool find_opponent_double_three1 = false;
+	bool find_opponent_double_three2 = false;
+	bool find_opponent_double_three3 = false;
+	bool find_opponent_double_three4 = false;
+	bool find_opponent_double_three5 = false;
 	bool find_CapFour1 = false;
 	bool find_CapFour2 = false;
 	bool find_CapFour3 = false;
@@ -101,7 +111,7 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 
 	//先初始化，将之前别的分支用过的记录归为0
 
-	for (int ele = 0; ele < 22; ele++)
+	for (int ele = 0; ele < 32; ele++)
 	{
 		fatal_priority[FLOOR_VCX - floor_vcx][ele][0] = 0;
 		fatal_priority[FLOOR_VCX - floor_vcx][ele][1] = 0;
@@ -132,36 +142,71 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 					}
 				}
 				
+				else if (my_value >= 2 * Gapped_Three)
+				{
+					if (!find_double_three1)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][2][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][2][1] = my_column;
+						find_double_three1 = true;
+					}
+					else if (!find_double_three2)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][3][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][3][1] = my_column;
+						find_double_three2 = true;
+					}
+					else if (!find_double_three3)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][4][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][4][1] = my_column;
+						find_double_three3 = true;
+					}
+					else if (!find_double_three4)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][5][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][5][1] = my_column;
+						find_double_three4 = true;
+					}
+					else if (!find_double_three5)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][6][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][6][1] = my_column;
+						find_double_three5 = true;
+					}
+
+
+				}
 				else if (my_value >= Capped_Four)
 				{
 					if (!find_CapFour1)//如果第一个冲四的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][12][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][12][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][22][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][22][1] = my_column;
 						find_CapFour1 = true;
 					}
 					else if (!find_CapFour2)//如果第2个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][13][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][13][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][23][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][23][1] = my_column;
 						find_CapFour2 = true;
 					}
 					else if (!find_CapFour3)//如果第3个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][14][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][14][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][24][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][24][1] = my_column;
 						find_CapFour3 = true;
 					}
 					else if (!find_CapFour4)//如果第4个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][15][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][15][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][25][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][25][1] = my_column;
 						find_CapFour4 = true;
 					}
 					else if (!find_CapFour5)//如果第5个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][16][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][16][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][26][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][26][1] = my_column;
 						find_CapFour5 = true;
 					}
 				}
@@ -169,32 +214,32 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 				{
 					if (!find_three1)//如果第一个活三的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][2][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][2][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][12][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][12][1] = my_column;
 						find_three1 = true;
 					}
 					else if (!find_three2)//如果第2个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][3][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][3][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][13][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][13][1] = my_column;
 						find_three2 = true;
 					}
 					else if (!find_three3)//如果第3个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][4][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][4][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][14][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][14][1] = my_column;
 						find_three3 = true;
 					}
 					else if (!find_three4)//如果第4个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][5][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][5][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][15][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][15][1] = my_column;
 						find_three4 = true;
 					}
 					else if (!find_three5)//如果第5个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][6][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][6][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][16][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][16][1] = my_column;
 						find_three5 = true;
 					}
 				}
@@ -211,37 +256,69 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 						return final_hit;
 					}
 				}
-
+				else if (opponent_value >= 2 * Gapped_Three)
+				{
+					if (!find_opponent_double_three1)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][7][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][7][1] = my_column;
+						find_opponent_double_three1 = true;
+					}
+					else if (!find_opponent_double_three2)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][8][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][8][1] = my_column;
+						find_opponent_double_three2 = true;
+					}
+					else if (!find_opponent_double_three3)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][9][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][9][1] = my_column;
+						find_opponent_double_three3 = true;
+					}
+					else if (!find_opponent_double_three4)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][10][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][10][1] = my_column;
+						find_opponent_double_three4 = true;
+					}
+					else if (!find_opponent_double_three5)
+					{
+						fatal_priority[FLOOR_VCX - floor_vcx][11][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][11][1] = my_column;
+						find_opponent_double_three5 = true;
+					}
+				}
 				else if (opponent_value >= Capped_Four)
 				{
 					if (!find_opponent_CapFour1)//如果第一个冲四的位置是空的
 					{//第18，19，20属于三个冲四的坐标，也就是17,18,19号位
-						fatal_priority[FLOOR_VCX - floor_vcx][17][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][17][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][27][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][27][1] = my_column;
 						find_opponent_CapFour1 = true;
 					}
 					else if (!find_opponent_CapFour2)//如果第2个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][18][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][18][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][28][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][28][1] = my_column;
 						find_opponent_CapFour2 = true;
 					}
 					else if (!find_opponent_CapFour3)//如果第3个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][19][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][19][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][29][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][29][1] = my_column;
 						find_opponent_CapFour3 = true;
 					}
 					else if (!find_opponent_CapFour4)//如果第4个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][20][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][20][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][30][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][30][1] = my_column;
 						find_opponent_CapFour4 = true;
 					}
 					else if (!find_opponent_CapFour5)//如果第5个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][21][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][21][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][31][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][31][1] = my_column;
 						find_opponent_CapFour5 = true;
 					}
 				}
@@ -250,32 +327,32 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 				{
 					if (!find_opponent_three1)//如果第一个活三的位置是空的
 					{//第24，25，26属于三个活三的坐标，也就是23,24,25号位
-						fatal_priority[FLOOR_VCX - floor_vcx][7][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][7][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][17][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][17][1] = my_column;
 						find_opponent_three1 = true;
 					}
 					else if (!find_opponent_three2)//如果第2个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][8][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][8][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][18][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][18][1] = my_column;
 						find_opponent_three2 = true;
 					}
 					else if (!find_opponent_three3)//如果第3个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][9][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][9][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][19][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][19][1] = my_column;
 						find_opponent_three3 = true;
 					}
 					else if (!find_opponent_three4)//如果第4个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][10][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][10][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][20][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][20][1] = my_column;
 						find_opponent_three4 = true;
 					}
 					else if (!find_opponent_three5)//如果第5个的位置是空的
 					{
-						fatal_priority[FLOOR_VCX - floor_vcx][11][0] = my_raw;
-						fatal_priority[FLOOR_VCX - floor_vcx][11][1] = my_column;
+						fatal_priority[FLOOR_VCX - floor_vcx][21][0] = my_raw;
+						fatal_priority[FLOOR_VCX - floor_vcx][21][1] = my_column;
 						find_opponent_three5 = true;
 					}
 
@@ -293,6 +370,16 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 				&& find_CapFour3
 				&& find_CapFour4
 				&& find_CapFour5
+				&& find_double_three1
+				&& find_double_three2
+				&& find_double_three3
+				&& find_double_three4
+				&& find_double_three5
+				&& find_opponent_double_three1
+				&& find_opponent_double_three2
+				&& find_opponent_double_three3
+				&& find_opponent_double_three4
+				&& find_opponent_double_three5
 				&& find_opponent_CapFour1
 				&& find_opponent_CapFour2
 				&& find_opponent_CapFour3
@@ -326,7 +413,7 @@ bool find_fatal_point(char board[][17][3], int fatal_priority[][20][2], int floo
 
 long int fatal_step(char board[][17][3], int step_count,
 	bool my_turn, bool ai_first,
-	int floor_vcx, int coordinate[], long int fatal_best_score_of_upper[], int fatal_priority[][20][2], bool fatal_not_in_the_same_branch[])
+	int floor_vcx, int coordinate[], long int fatal_best_score_of_upper[], int fatal_priority[][32][2], bool fatal_not_in_the_same_branch[])
 {
 	char black[2] = "○";
 	char white[2] = "●";
@@ -376,6 +463,21 @@ long int fatal_step(char board[][17][3], int step_count,
 		{
 
 			final_hit = find_fatal_point(board, fatal_priority, floor_vcx, step_count, my_turn);
+			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
+			
+			for (int test_raw = 0; test_raw < 6; test_raw++)
+			{
+				for (int test_raw2 = 0; test_raw2 < 32; test_raw2++)
+				{
+
+					printf("%d,", fatal_priority[test_raw][test_raw2][0]);
+					printf("%d", fatal_priority[test_raw][test_raw2][1]);
+					printf(" ");
+				}
+				printf("\n");
+			}
+			
+			
 			if (final_hit)
 			{
 				if (fatal_priority[FLOOR_VCX - floor_vcx][0][0] != 0 || fatal_priority[FLOOR_VCX - floor_vcx][0][1] != 0)
@@ -402,7 +504,7 @@ long int fatal_step(char board[][17][3], int step_count,
 					}
 				}
 			}
-			for (int a = 0; a < 22; a++)
+			for (int a = 0; a < 32; a++)
 			{
 				fatal_not_in_the_same_branch[floor_vcx - 1] = true;//判断是否在同一分支中，以免误剪枝
 				int raw = fatal_priority[FLOOR_VCX - floor_vcx][a][0];
@@ -425,6 +527,10 @@ long int fatal_step(char board[][17][3], int step_count,
 						//long int temp_score1 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count, board, my_turn, hashing_value_now);
 						//long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
 						//if (temp_score1 == 0 && temp_score2 == 0)
+
+						//下面这行是在测试的时候使用的，正式使用的时候关掉
+						DrawBoard(board, 15, 0, 2, coordinate, step_count);
+						
 						temp_score = fatal_step(board, step_count + 1,
 							!my_turn, ai_first,
 							floor_vcx - 1, coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
@@ -482,8 +588,21 @@ long int fatal_step(char board[][17][3], int step_count,
 		else
 		{
 			//best_score_of_upper[floor_vcx] = 0;
-			final_hit = before_evaluation(board, fatal_priority, floor_vcx, step_count, my_turn);
-			
+			final_hit = find_fatal_point(board, fatal_priority, floor_vcx, step_count, my_turn);
+			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
+
+			for (int test_raw = 0; test_raw < 6; test_raw++)
+			{
+				for (int test_raw2 = 0; test_raw2 < 32; test_raw2++)
+				{
+
+					printf("%d,", fatal_priority[test_raw][test_raw2][0]);
+					printf("%d", fatal_priority[test_raw][test_raw2][1]);
+					printf(" ");
+				}
+				printf("\n");
+			}
+
 			if (final_hit)
 			{
 				if (fatal_priority[FLOOR_VCX - floor_vcx][1][0] != 0 || fatal_priority[FLOOR_VCX - floor_vcx][1][1] != 0)
@@ -503,7 +622,7 @@ long int fatal_step(char board[][17][3], int step_count,
 				}
 			}
 
-			for (int a = 0; a < 22; a++)
+			for (int a = 0; a < 32; a++)
 			{
 				fatal_not_in_the_same_branch[floor_vcx - 1] = true;
 				int raw = fatal_priority[FLOOR_VCX - floor_vcx][a][0];
@@ -522,7 +641,8 @@ long int fatal_step(char board[][17][3], int step_count,
 
 						strncpy(temp_blank, board[raw][column], 2);
 						strncpy(board[raw][column], chess, 2);
-						
+						//下面这行是在测试的时候使用的，正式使用的时候关掉
+						DrawBoard(board, 15, 0, 2, coordinate, step_count);
 						temp_score = fatal_step(board, step_count + 1,
 							!my_turn, ai_first,
 							floor_vcx - 1, coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);

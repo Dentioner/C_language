@@ -134,14 +134,14 @@ int main(void)
     hashValue ^= ZobristTable[2][5][indexOf(piece)];
     board[1][5] = piece;
     hashValue ^= ZobristTable[1][5][indexOf(piece)];
-    printf("The new hash vlaue is  : %llu\n", hashValue);
+    printf("The new hash vlaue is  : %llu\n", hashValue);//从char piece = board[2][5]开始到这一句，是在干嘛？
     //restore the 'x' to the board[2][5]
     piece = board[1][5];
     board[1][5] = '-';
     hashValue ^= ZobristTable[1][5][indexOf(piece)];
     board[2][5] = piece;
     hashValue ^= ZobristTable[2][5][indexOf(piece)];
-    printf("after restore step, the hash vlaue is  : %llu\n", hashValue);
+    printf("after restore step, the hash vlaue is  : %llu\n", hashValue);//从上一个注释到这一句，又是在干嘛？
     system("pause");
     return 0;
 }
