@@ -672,7 +672,7 @@ long int fatal_step(char board[][17][3], int step_count,
 							}
 						}
 						strncpy(board[raw][column], temp_blank, 2);
-						if (best_score > fatal_best_score_of_upper[floor_vcx - 1])
+						if (best_score < fatal_best_score_of_upper[floor_vcx - 1])
 						{
 							fatal_best_score_of_upper[floor_vcx - 1] = best_score;
 							fatal_not_in_the_same_branch[floor_vcx - 1] = false;
