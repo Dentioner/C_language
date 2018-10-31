@@ -556,7 +556,7 @@ long int fatal_step(char board[][17][3], int step_count,
 							//’‚∏ˆºÙ÷¶¥˝–ﬁ∏ƒ
 							else
 							{
-								if ((best_score > fatal_best_score_of_upper[floor_vcx]) && (fatal_not_in_the_same_branch[floor_vcx]))//ºÙ÷¶
+								if ((best_score >= fatal_best_score_of_upper[floor_vcx]) && (fatal_not_in_the_same_branch[floor_vcx]))//ºÙ÷¶
 								{
 									strncpy(board[raw][column], temp_blank, 2);
 									return 89999900;
@@ -664,7 +664,7 @@ long int fatal_step(char board[][17][3], int step_count,
 							}
 							else
 							{
-								if ((best_score < fatal_best_score_of_upper[floor_vcx]) && fatal_not_in_the_same_branch[floor_vcx])//ºÙ÷¶
+								if ((best_score <= fatal_best_score_of_upper[floor_vcx]) && fatal_not_in_the_same_branch[floor_vcx])//ºÙ÷¶
 								{
 									strncpy(board[raw][column], temp_blank, 2);
 									return -89999900;
