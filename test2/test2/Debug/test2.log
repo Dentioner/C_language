@@ -1,4 +1,4 @@
 ﻿  test2.c
-e:\coding\c_language\test2\test2\test2.c(9): warning C4013: “strpbrk”未定义；假设外部返回 int
-e:\coding\c_language\test2\test2\test2.c(9): warning C4047: “初始化”:“char *”与“int”的间接级别不同
+e:\coding\c_language\test2\test2\test2.c(10): warning C4013: “strpbrk”未定义；假设外部返回 int
+e:\coding\c_language\test2\test2\test2.c(10): warning C4047: “初始化”:“char *”与“int”的间接级别不同
   test2.vcxproj -> E:\coding\C_language\test2\Debug\test2.exe
