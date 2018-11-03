@@ -102,7 +102,7 @@ long int Minimax2(char board[][17][3], int step_count,
 				
 			}
 			//下面是尝试加上算杀，目前只想到在最外层开搜，在别的层数搜索暂时无法实现
-
+/*
 			if (priority[FLOOR - floor][8][0] != 0 || priority[FLOOR - floor][8][1] != 0 
 				|| priority[FLOOR - floor][11][0] != 0 || priority[FLOOR - floor][11][1] != 0)//如果找到了双活三的点的话，就进行算杀
 			{
@@ -110,32 +110,7 @@ long int Minimax2(char board[][17][3], int step_count,
 				{
 					int floor_vcx = FLOOR_VCX;
 					int fatal_best_coordinate[2] = { 0,1 };
-					/*
-					for (int b = 0; b < 6; b++)//只在6个双活三的点开搜
-					{
-						if (priority[FLOOR - floor][8 + b][0] != 0 || priority[FLOOR - floor][8 + b][1] != 0)
-
-						{
-							temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-							if ((temp_score != 0) && (best_score == 0))
-							{
-								best_score = temp_score;
-
-							}
-							if ((temp_score != 0) && (temp_score >= best_score))
-							{
-								best_score = temp_score;
-								
-
-
-
-							}
-
-						
-						
-						}
-					}
-					*/
+				
 					best_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
 					printf("%d,%d\n", priority[FLOOR - floor][8][0], priority[FLOOR - floor][8][1]);
 					printf("%d,%d\n", priority[FLOOR - floor][11][0], priority[FLOOR - floor][11][1]);
@@ -143,8 +118,10 @@ long int Minimax2(char board[][17][3], int step_count,
 				}
 				
 			}
-			else
-			{
+			*/
+
+			//else
+			//{
 
 			
 				for (int a = 0; a < 26; a++)
@@ -202,7 +179,7 @@ long int Minimax2(char board[][17][3], int step_count,
 								//这个剪枝待修改
 								else
 								{
-									if ((best_score > best_score_of_upper[floor])&&(not_in_the_same_branch[floor]))//剪枝
+									if ((best_score >= best_score_of_upper[floor])&&(not_in_the_same_branch[floor]))//剪枝
 									{
 										strncpy(board[raw][column], temp_blank, 2);
 										return 89999900;
@@ -232,7 +209,7 @@ long int Minimax2(char board[][17][3], int step_count,
 
 				}
 		
-			}
+			//}
 		}
 		else
 		{
@@ -330,7 +307,7 @@ long int Minimax2(char board[][17][3], int step_count,
 								}
 								else
 								{
-									if ((best_score < best_score_of_upper[floor])&&not_in_the_same_branch[floor])//剪枝
+									if ((best_score <= best_score_of_upper[floor])&&not_in_the_same_branch[floor])//剪枝
 									{
 										strncpy(board[raw][column], temp_blank, 2);
 										return -89999900;
