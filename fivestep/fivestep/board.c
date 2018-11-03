@@ -46,6 +46,18 @@ void main()
 	char black[3] = "○";
 	char white[3] = "●";
 	char roaming[3] = "△";//随便定义的一个，这个是用来记录上一步的空格在哪个位置，便于悔棋
+
+	//下面几个变量是zobrist哈希算法使用的
+	long long int key[15][15][2] = { 0 };//第三维度分别代表黑子和白子，0为空白
+	long long int hashing_value[depth_of_hashing][3] = { {0,0,0} };
+	//第二维度的[0]是整个棋盘的哈希值，[1]与[2]是此哈希值对应的棋盘评分，应该定义在函数外面
+	long long int hashing_value_now = 0;//目前的哈希值，这个是要在minimax.c里面进行运算的
+	//以上是旧的哈希相关的变量
+
+	unsigned long long ZobristTable[15][15][2];//梅森旋转的哈希键值表，对应于旧算法的key数组
+	unsigned long long hashValue;//梅森旋转算法下，棋盘的哈希值，对应于旧算法的hashing_value_now
+
+
 	//这里准备写一个判断是PVP还是PVE的语句
 		//如果是PVE，选择黑子还是白子
 	printf("************************************************\n");
@@ -76,15 +88,25 @@ void main()
 
 	if (mode_choice == 1)
 	{
+		initTable(ZobristTable);//初始化哈希表（键值表）
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
-			
+				
 			
 			//chess_play(board, step_count);老的chessplay函数
 			get_coordinate(coordinate, board, step_count);
 			strncpy(roaming, board[coordinate[0]][coordinate[1]], 2);//记录上一步的状态
 			chess_play_ver2(board, step_count, coordinate);
+			//下面在PVP里面试用哈希函数，由于PVP不会搜索，因此思路是，先悔棋，然后再看看有没有将哈希值存进表里面
+			//hashValue = computeHash(board, ZobristTable);//计算当前棋局的哈希值
+			//上面那个hashValue先挂起，可能需要优化，先用下面这个语句代替
+
+			//在将coordinate使用之前，先将它与zobrist表统一一下，因为coordinate不可能有（0,0），但是zobrist却有
+			//这就是为什么coordinate[1]要减1的原因
+			hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
+			//写到这里了，下面就准备查询哈希表了
+
 			value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 			//my_value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 			//opponent_value = evaluation(board, step_count + 1, !my_turn, coordinate[0], coordinate[1]);
@@ -92,6 +114,9 @@ void main()
 			//上面这个分开打分的可能有问题
 			DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 			return_to_normal_chess(board, step_count, coordinate, coordinate);
+			
+
+
 			printf("是否想要悔棋？按y悔棋，按别的任意键正常继续游戏.\n");
 			char c_getback = ' ';
 			c_getback = getchar();
@@ -135,11 +160,8 @@ void main()
 		char *chess;
 		char *opponent_chess;
 		bool invalid_ai_choice = true;
-		//下面几个变量是zobrist哈希算法使用的
-		long long int key[15][15][2] = { 0 };//第三维度分别代表黑子和白子，0为空白
-		long long int hashing_value[depth_of_hashing][3] = { {0,0,0} };
-		//第二维度的[0]是整个棋盘的哈希值，[1]与[2]是此哈希值对应的棋盘评分，应该定义在函数外面
-		long long int hashing_value_now = 0;//目前的哈希值，这个是要在minimax.c里面进行运算的
+		
+
 		while (invalid_ai_choice)
 		{
 			ai_choice_index = scanf("%d", &ai_choice);
