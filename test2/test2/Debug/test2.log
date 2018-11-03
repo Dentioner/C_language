@@ -1,4 +1,3 @@
 ﻿  test2.c
-e:\coding\c_language\test2\test2\test2.c(10): warning C4013: “strpbrk”未定义；假设外部返回 int
-e:\coding\c_language\test2\test2\test2.c(10): warning C4047: “初始化”:“char *”与“int”的间接级别不同
+  LINK : 没有找到 E:\coding\C_language\test2\Debug\test2.exe 或上一个增量链接没有生成它；正在执行完全链接
   test2.vcxproj -> E:\coding\C_language\test2\Debug\test2.exe
