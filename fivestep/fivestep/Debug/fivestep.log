@@ -18,7 +18,6 @@ e:\coding\c_language\fivestep\fivestep\vct+vcf.c(674): warning C4996: 'strncpy':
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
   board.c
 e:\coding\c_language\fivestep\fivestep\board.c(138): warning C4020: “return_to_normal_chess”: 实参太多
-e:\coding\c_language\fivestep\fivestep\board.c(399): warning C4048: “__int64 (*)[2]”和“__int64 [100000][3]”数组的下标不同
 e:\coding\c_language\fivestep\fivestep\board.c(406): warning C4020: “return_to_normal_chess”: 实参太多
 e:\coding\c_language\fivestep\fivestep\board.c(413): warning C4020: “return_to_normal_chess”: 实参太多
 e:\coding\c_language\fivestep\fivestep\board.c(423): warning C4020: “return_to_normal_chess”: 实参太多
@@ -41,18 +40,7 @@ e:\coding\c_language\fivestep\fivestep\board.c(546): warning C4013: “system”
   enlighting_searching.c
   evaluation_function.c
   minimax.c
-e:\coding\c_language\fivestep\fivestep\minimax.c(148): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(149): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(192): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(277): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(278): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(318): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(354): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(355): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(419): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(479): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(480): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
-e:\coding\c_language\fivestep\fivestep\minimax.c(545): warning C4048: “__int64 (*)[3]”和“__int64 (*)[2]”数组的下标不同
+e:\coding\c_language\fivestep\fivestep\minimax.c(148): warning C4013: “Searching_Hashing2”未定义；假设外部返回 int
 e:\coding\c_language\fivestep\fivestep\minimax.c(143): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
 e:\coding\c_language\fivestep\fivestep\minimax.c(144): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
@@ -71,8 +59,8 @@ e:\coding\c_language\fivestep\fivestep\minimax.c(317): warning C4996: 'strncpy':
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
   zobrist_hashing.c
 e:\coding\c_language\fivestep\fivestep\zobrist_hashing.c(21): warning C4244: “函数”: 从“time_t”转换到“unsigned int”，可能丢失数据
-e:\coding\c_language\fivestep\fivestep\zobrist_hashing.c(78): warning C4244: “return”: 从“__int64”转换到“long”，可能丢失数据
-e:\coding\c_language\fivestep\fivestep\zobrist_hashing.c(82): warning C4244: “return”: 从“__int64”转换到“long”，可能丢失数据
+e:\coding\c_language\fivestep\fivestep\zobrist_hashing.c(79): warning C4244: “return”: 从“__int64”转换到“long”，可能丢失数据
+e:\coding\c_language\fivestep\fivestep\zobrist_hashing.c(83): warning C4244: “return”: 从“__int64”转换到“long”，可能丢失数据
   废弃代码区.c
   正在生成代码...
 e:\coding\c_language\fivestep\fivestep\mersenne_twister.c(172): warning C4715: “indexOf”: 不是所有的控件路径都返回值

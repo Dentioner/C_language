@@ -232,7 +232,7 @@ void main()
 
 		}
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
-		initialize_hashing_sheet(key);
+		//initialize_hashing_sheet(key);
 		while (continue_playing)
 		{
 			
@@ -396,19 +396,19 @@ void main()
 				double end_time, cost_time;
 				if (step_count > 2)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashing_value_now, key, hashing_value, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashValue, ZobristTable, hashing_value2, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
 					if ((coordinate[0] == 0) && (coordinate[1] == 1))
 					{
 						auto_play(board, chess, opponent_chess, coordinate);
 						chess_play_ver2(board, step_count, coordinate);
-						hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
+						hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
 						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
 					else
 					{
 						chess_play_ver2(board, step_count, coordinate);
-						hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
+						hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
 						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
@@ -418,7 +418,7 @@ void main()
 				{
 					auto_play(board, chess, opponent_chess, coordinate);
 					chess_play_ver2(board, step_count, coordinate);
-					hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
+					hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
 					DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 					return_to_normal_chess(board, step_count, coordinate, coordinate);
 					/*for (int p = 0; p < 15; p++)
@@ -485,7 +485,7 @@ void main()
 				strncpy(roaming, board[coordinate[0]][coordinate[1]], 2);//记录上一步的状态
 				value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 				chess_play_ver2(board, step_count, coordinate);
-				hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
+				hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
 				DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 				return_to_normal_chess(board, step_count, coordinate, coordinate);
 				//下面是悔棋代码，可能会有问题			
@@ -498,7 +498,7 @@ void main()
 				if (i_getback == 89 || i_getback == 121)
 				{
 					strncpy(board[coordinate[0]][coordinate[1]], roaming, 2);
-					hashing_value_now = hashing_value_now ^ key[coordinate[0]][coordinate[1]][(step_count % 2)];
+					hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
 					DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 					continue;
 				}

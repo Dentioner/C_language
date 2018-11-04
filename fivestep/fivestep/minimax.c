@@ -8,7 +8,7 @@
 long int Minimax2(char board[][17][3], int step_count,
 	bool my_turn, bool ai_first,
 	int floor, int coordinate[], long int best_score_of_upper[], int priority[][26][2], bool not_in_the_same_branch[], 
-	long long int hashing_value_now, long long int key[][15][2], long long int hashing_value[][2],
+	unsigned long long hashValue, unsigned long long ZobristTable[15][15][2], unsigned long long hashing_value2[depth_of_hashing][3],
 	int fatal_priority[][32][2], long int fatal_best_score_of_upper[], bool fatal_not_in_the_same_branch[])
 {
 	char black[2] = "○";
@@ -142,16 +142,16 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 							strncpy(temp_blank, board[raw][column], 2);
 							strncpy(board[raw][column], chess, 2);
-							hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
+							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
 							//下面这行是在测试的时候使用的，正式使用的时候关掉
 							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
-							long int temp_score1 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count, board, my_turn, hashing_value_now);
-							long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
+							long int temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+							long int temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
 							if (temp_score1 == 0 && temp_score2 == 0)
 							{
 								temp_score = Minimax2(board, step_count + 1,
 									!my_turn, ai_first,
-									floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashing_value_now, key, hashing_value, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
+									floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashValue, ZobristTable, hashing_value2, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
 							}
 							else
 							{
@@ -189,8 +189,8 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 							//复原
 							strncpy(board[raw][column], temp_blank, 2);
-							Zobrist_hashing(hashing_value, key, raw, column, true, step_count, board, my_turn, hashing_value_now);
-							hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
+							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
 							if (best_score > best_score_of_upper[floor - 1])
 							{
 								best_score_of_upper[floor - 1] = best_score;
@@ -273,9 +273,9 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 							strncpy(temp_blank, board[raw][column], 2);
 							strncpy(board[raw][column], chess, 2);
-							hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
-							long int temp_score1 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count, board, my_turn, hashing_value_now);
-							long int temp_score2 = Zobrist_hashing(hashing_value, key, raw, column, false, step_count + 1, board, !my_turn, hashing_value_now);
+							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
+							long int temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+							long int temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
 						
 							//下面这个是在测试的时候输出的，正式使用的时候可以关掉
 							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
@@ -283,7 +283,7 @@ long int Minimax2(char board[][17][3], int step_count,
 							{
 								temp_score = Minimax2(board, step_count + 1,
 									!my_turn, ai_first,
-									floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashing_value_now, key, hashing_value, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
+									floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashValue, ZobristTable, hashing_value2, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
 							}
 							else
 							{
@@ -315,8 +315,8 @@ long int Minimax2(char board[][17][3], int step_count,
 								}
 							}
 							strncpy(board[raw][column], temp_blank, 2);
-							Zobrist_hashing(hashing_value, key, raw, column, true, step_count, board, my_turn, hashing_value_now);
-							hashing_value_now = hashing_value_now ^ key[raw][column][(step_count % 2)];
+							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
 							if (best_score > best_score_of_upper[floor - 1])
 							{
 								best_score_of_upper[floor - 1] = best_score;
@@ -351,8 +351,8 @@ long int Minimax2(char board[][17][3], int step_count,
 			temp_score = 0;
 			//best_score_of_upper[floor] = 0;
 			//先搜索哈希表，如果有就不打分了
-			temp_score1 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count, board, my_turn, hashing_value_now);
-			temp_score2 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count + 1, board, !my_turn, hashing_value_now);
+			temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+			temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
 			if (temp_score1 == 0 && temp_score2 == 0)
 			{//如果哈希表没有值
 				//下面是在最底层进行算杀的试用版，目前废弃
@@ -416,7 +416,7 @@ long int Minimax2(char board[][17][3], int step_count,
 				}*/
 
 				//在循环结束后，将最佳的坐标输入进哈希表里面
-				Zobrist_hashing(hashing_value, key, best_raw, best_column, true, step_count, board, my_turn, hashing_value_now);
+				Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
 				
 			
 			
@@ -476,8 +476,8 @@ long int Minimax2(char board[][17][3], int step_count,
 		else
 		{
 			temp_score = 0;
-			temp_score1 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count, board, my_turn, hashing_value_now);
-			temp_score2 = Zobrist_hashing(hashing_value, key, best_raw, best_column, false, step_count + 1, board, !my_turn, hashing_value_now);
+			temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+			temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
 			
 			if (temp_score1 == 0 && temp_score2 == 0)
 			{
@@ -542,7 +542,7 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 				//在循环结束后，将最佳的坐标输入进哈希表里面
-				Zobrist_hashing(hashing_value, key, best_raw, best_column, true, step_count, board, my_turn, hashing_value_now);
+				Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
 
 			
 			
