@@ -76,4 +76,5 @@ e:\coding\c_language\fivestep\fivestep\zobrist_hashing.c(82): warning C4244: “
   废弃代码区.c
   正在生成代码...
 e:\coding\c_language\fivestep\fivestep\mersenne_twister.c(172): warning C4715: “indexOf”: 不是所有的控件路径都返回值
+  LINK : 没有找到 E:\coding\C_language\fivestep\Debug\fivestep.exe 或上一个增量链接没有生成它；正在执行完全链接
   fivestep.vcxproj -> E:\coding\C_language\fivestep\Debug\fivestep.exe
