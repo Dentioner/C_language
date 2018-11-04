@@ -38,6 +38,7 @@ long int fatal_step(char board[][17][3], int step_count, bool my_turn, bool ai_f
 void init_genrand64(unsigned long long seed);
 unsigned long long genrand64_int64(void);
 int indexOf(char chess[3]);
-void initTable(char ZobristTable[15][15][2]);
-unsigned long long computeHash(char board2[15][17][3], char ZobristTable[15][15][2]);
+void initTable(unsigned long long ZobristTable[15][15][2]);
+unsigned long long computeHash(char board2[15][17][3], unsigned long long ZobristTable[15][15][2]);
 long int Searching_Hashing(unsigned long long hashing_value2[][3], unsigned long long ZobristTable[15][15][2], int step_count, unsigned long long hashValue, bool my_turn, long temp_score, bool write);
+void init_genrand64(unsigned long long seed);

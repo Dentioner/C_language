@@ -84,6 +84,36 @@ void init_genrand64(unsigned long long seed)
 	for (mti = 1; mti < NN; mti++)
 		mt[mti] = (6364136223846793005ULL * (mt[mti - 1] ^ (mt[mti - 1] >> 62)) + mti);//这一行表达式没看懂是在算什么
 }
+
+
+/* initialize by an array with array-length */
+/* init_key is the array for initializing keys */
+/* key_length is its length */
+void init_by_array64(unsigned long long init_key[],
+	unsigned long long key_length)
+{
+	unsigned long long i, j, k;
+	init_genrand64(19650218ULL);
+	i = 1; j = 0;
+	k = (NN > key_length ? NN : key_length);
+	for (; k; k--) {
+		mt[i] = (mt[i] ^ ((mt[i - 1] ^ (mt[i - 1] >> 62)) * 3935559000370003845ULL))
+			+ init_key[j] + j; /* non linear */
+		i++; j++;
+		if (i >= NN) { mt[0] = mt[NN - 1]; i = 1; }
+		if (j >= key_length) j = 0;
+	}
+	for (k = NN - 1; k; k--) {
+		mt[i] = (mt[i] ^ ((mt[i - 1] ^ (mt[i - 1] >> 62)) * 2862933555777941757ULL))
+			- i; /* non linear */
+		i++;
+		if (i >= NN) { mt[0] = mt[NN - 1]; i = 1; }
+	}
+
+	mt[0] = 1ULL << 63; /* MSB is 1; assuring non-zero initial array */
+}
+
+
 /* generates a random number on [0, 2^64-1]-interval */
 unsigned long long genrand64_int64(void)
 {
@@ -141,8 +171,10 @@ int indexOf(char chess[3])
 	}
 }
 
-void initTable(char ZobristTable[15][15][2])
+void initTable(unsigned long long ZobristTable[15][15][2])
 {
+	unsigned long long init[4] = { 0x12345ULL, 0x23456ULL, 0x34567ULL, 0x45678ULL }, length = 4;
+	init_by_array64(init, length);
 	for (int i = 0; i < 15; i++)
 	{
 		for (int j = 0; j < 15; j++)
@@ -150,12 +182,16 @@ void initTable(char ZobristTable[15][15][2])
 			for (int k = 0; k < 2; k++)
 			{
 				ZobristTable[i][j][k] = genrand64_int64();
+				//test
+				//printf("%ull\n", ZobristTable[i][j][k]);
 			}
 		}
 	}
+	//test
+	//system("pause");
 }
 
-unsigned long long computeHash(char board[15][17][3], char ZobristTable[15][15][2])
+unsigned long long computeHash(char board[15][17][3], unsigned long long ZobristTable[15][15][2])
 {
 	unsigned long long h = 0;
 	char black[3] = "○";

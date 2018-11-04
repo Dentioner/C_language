@@ -91,6 +91,8 @@ void main()
 	if (mode_choice == 1)
 	{
 		initTable(ZobristTable);//初始化哈希表（键值表）
+		//下面这个是测试哈希表的
+		/*
 		for (int raw01 = 0; raw01 < 15; raw01++)
 		{
 			for (int raw02 = 0; raw02 < 15; raw02++)
@@ -101,7 +103,7 @@ void main()
 			}
 		}
 		system("pause");
-
+		*/
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
