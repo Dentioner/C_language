@@ -55,8 +55,10 @@ void main()
 	//以上是旧的哈希相关的变量
 
 	unsigned long long ZobristTable[15][15][2];//梅森旋转的哈希键值表，对应于旧算法的key数组
-	unsigned long long hashValue;//梅森旋转算法下，棋盘的哈希值，对应于旧算法的hashing_value_now
-
+	unsigned long long hashValue = 0;//梅森旋转算法下，棋盘的哈希值，对应于旧算法的hashing_value_now
+	unsigned long long hashing_value2[depth_of_hashing][3] = { {0,0,0} };//第二维度的[0]是整个棋盘的哈希值
+	//[1]与[2]是此哈希值对应的棋盘评分，应该定义在函数外面
+	//上面这个是新的棋盘哈希表，注意评分在输出的时候要进行类型转换
 
 	//这里准备写一个判断是PVP还是PVE的语句
 		//如果是PVE，选择黑子还是白子
@@ -89,6 +91,17 @@ void main()
 	if (mode_choice == 1)
 	{
 		initTable(ZobristTable);//初始化哈希表（键值表）
+		for (int raw01 = 0; raw01 < 15; raw01++)
+		{
+			for (int raw02 = 0; raw02 < 15; raw02++)
+			{
+				
+				printf("%ull, %ull\n", ZobristTable[raw01][raw02][0], ZobristTable[raw01][raw02][1]);
+				
+			}
+		}
+		system("pause");
+
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
@@ -105,9 +118,16 @@ void main()
 			//在将coordinate使用之前，先将它与zobrist表统一一下，因为coordinate不可能有（0,0），但是zobrist却有
 			//这就是为什么coordinate[1]要减1的原因
 			hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];
-			//写到这里了，下面就准备查询哈希表了
+			
+			value = Searching_Hashing(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+			if (value == 0)
+			{
+				value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+				Searching_Hashing(hashing_value2, ZobristTable, step_count, hashValue, my_turn, value, true);
+			}
+			
 
-			value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
+			
 			//my_value = evaluation(board, step_count, my_turn, coordinate[0], coordinate[1]);
 			//opponent_value = evaluation(board, step_count + 1, !my_turn, coordinate[0], coordinate[1]);
 			//value = my_value + opponent_value;
@@ -127,6 +147,7 @@ void main()
 			{
 				strncpy(board[coordinate[0]][coordinate[1]], roaming, 2);
 				DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
+				hashValue ^= ZobristTable[coordinate[0]][coordinate[1] - 1][(step_count % 2)];//再一次异或回来
 				continue;
 			}
 			continue_playing = judgement(board, step_count);

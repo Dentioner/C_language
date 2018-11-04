@@ -1,18 +1,31 @@
-﻿  minimax.c
-e:\coding\c_language\fivestep\fivestep\minimax.c(143): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  board.c
+e:\coding\c_language\fivestep\fivestep\board.c(93): warning C4133: “函数”: 从“unsigned __int64 [15][15][2]”到“char (*)[15][2]”的类型不兼容
+e:\coding\c_language\fivestep\fivestep\board.c(99): warning C4477: “printf”: 格式字符串“%u”需要类型“unsigned int”的参数，但可变参数 1 拥有了类型“unsigned __int64”
+  e:\coding\c_language\fivestep\fivestep\board.c(99): note: 请考虑在格式字符串中使用“%llu”
+  e:\coding\c_language\fivestep\fivestep\board.c(99): note: 请考虑在格式字符串中使用“%I64u”
+e:\coding\c_language\fivestep\fivestep\board.c(99): warning C4477: “printf”: 格式字符串“%u”需要类型“unsigned int”的参数，但可变参数 2 拥有了类型“unsigned __int64”
+  e:\coding\c_language\fivestep\fivestep\board.c(99): note: 请考虑在格式字符串中使用“%llu”
+  e:\coding\c_language\fivestep\fivestep\board.c(99): note: 请考虑在格式字符串中使用“%I64u”
+e:\coding\c_language\fivestep\fivestep\board.c(103): warning C4013: “system”未定义；假设外部返回 int
+e:\coding\c_language\fivestep\fivestep\board.c(136): warning C4020: “return_to_normal_chess”: 实参太多
+e:\coding\c_language\fivestep\fivestep\board.c(397): warning C4048: “__int64 (*)[2]”和“__int64 [100000][3]”数组的下标不同
+e:\coding\c_language\fivestep\fivestep\board.c(404): warning C4020: “return_to_normal_chess”: 实参太多
+e:\coding\c_language\fivestep\fivestep\board.c(411): warning C4020: “return_to_normal_chess”: 实参太多
+e:\coding\c_language\fivestep\fivestep\board.c(421): warning C4020: “return_to_normal_chess”: 实参太多
+e:\coding\c_language\fivestep\fivestep\board.c(488): warning C4020: “return_to_normal_chess”: 实参太多
+e:\coding\c_language\fivestep\fivestep\board.c(72): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+e:\coding\c_language\fivestep\fivestep\board.c(112): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(144): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\board.c(148): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(184): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\board.c(188): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+e:\coding\c_language\fivestep\fivestep\board.c(221): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(191): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\board.c(483): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(274): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+e:\coding\c_language\fivestep\fivestep\board.c(498): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(275): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(312): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
-e:\coding\c_language\fivestep\fivestep\minimax.c(317): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+  LINK : 没有找到 E:\coding\C_language\fivestep\Debug\fivestep.exe 或上一个增量链接没有生成它；正在执行完全链接
   fivestep.vcxproj -> E:\coding\C_language\fivestep\Debug\fivestep.exe
