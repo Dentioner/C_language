@@ -1,0 +1,3 @@
+﻿  winner.c
+e:\coding\c_language\my3chess\my3chess\winner.c(10): warning C4101: “k”: 未引用的局部变量
+  my3chess.vcxproj -> E:\coding\C_language\my3chess\Debug\my3chess.exe

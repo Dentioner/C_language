@@ -1,0 +1,8 @@
+﻿  1.c
+  main.cpp
+e:\coding\c_language\3chess\3chess\main.cpp(72): warning C4309: “=”: 截断常量值
+e:\coding\c_language\3chess\3chess\main.cpp(158): warning C4244: “=”: 从“short”转换到“char”，可能丢失数据
+e:\coding\c_language\3chess\3chess\main.cpp(162): warning C4244: “=”: 从“short”转换到“char”，可能丢失数据
+e:\coding\c_language\3chess\3chess\main.cpp(210): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+  3chess.vcxproj -> E:\coding\C_language\3chess\Debug\3chess.exe
