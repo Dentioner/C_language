@@ -53,6 +53,7 @@ long int Minimax2(char board[][3][3], int step_count,
 	{
 		if (my_turn)
 		{
+			bool initialized = false;//false表示best_score还没有被赋值过
 			//for (int a = 0; a < 26; a++)
 			for (int a = 0; a<3; a++)
 			{
@@ -68,6 +69,8 @@ long int Minimax2(char board[][3][3], int step_count,
 
 							strncpy(temp_blank, board[raw][column], 2);
 							strncpy(board[raw][column], chess, 2);
+							//下面这个是在测试的时候输出的，正式使用的时候可以关掉
+							DrawBoard(board, 15, 0, 2, coordinate, step_count);
 
 							temp_score = Minimax2(board, step_count + 1,
 								!my_turn, ai_first,
@@ -75,23 +78,30 @@ long int Minimax2(char board[][3][3], int step_count,
 
 
 
-							if ((temp_score != 0) && (best_score == 0))
+							//if ((temp_score != 0) && (best_score == 0))
+							if (!initialized)
 							{
 								best_score = temp_score;
+								initialized = true;
 
 							}
-							if ((temp_score != 0) && (temp_score >= best_score))
+							else
 							{
-								best_score = temp_score;
 
-
-								if (floor == FLOOR)
-
+							
+								if ((temp_score >= best_score))//这个地方去掉了(temp_score != 0)这个条件，五子棋也需要去掉，可能需要在后面添加上一个“当(temp_score = 0)”的处理语句
 								{
-									best_coordinate[0] = raw;
-									best_coordinate[1] = column;
-								}
+									best_score = temp_score;
 
+
+									if (floor == FLOOR)
+
+									{
+										best_coordinate[0] = raw;
+										best_coordinate[1] = column;
+									}
+
+								}
 							}
 							//复原
 							strncpy(board[raw][column], temp_blank, 2);
@@ -111,7 +121,7 @@ long int Minimax2(char board[][3][3], int step_count,
 		else
 		{
 			
-			
+			bool initialized = false;//false表示best_score还没有被赋值过
 
 			for (int a = 0; a < 3; a++)
 			{
@@ -120,8 +130,8 @@ long int Minimax2(char board[][3][3], int step_count,
 
 					int raw = a;
 					int column = b;
-					if ((raw != 0) || (column != 0))
-					{
+					
+					
 						if ((strncmp(board[raw][column], chess, 2) != 0)
 							&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 						{
@@ -131,34 +141,47 @@ long int Minimax2(char board[][3][3], int step_count,
 
 
 							//下面这个是在测试的时候输出的，正式使用的时候可以关掉
-							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
+							DrawBoard(board, 15, 0, 2, coordinate, step_count);
 
 							temp_score = Minimax2(board, step_count + 1,
 								!my_turn, ai_first,
 								floor - 1, coordinate);
 
-							if ((temp_score != 0) && (best_score == 0))
+							//if ((temp_score != 0) && (best_score == 0))
+	//之所以把这里的temp_score != 0也给去掉，是因为如果最后一个枝是一个大于0的数，那么它会直接赋给bestscore
+	//但是这一层是越小越好，如果之前有0的枝，但却被替代了，是不合理的
+	//例如先搜索到一个打分为0的点，最后一次搜到了打分为100的点，虽然应该向上一层传递0分的，但是由于这里的逻辑判断，传上去了100分
+	//但是什么都不写也不行，因为如果有负分，在“传递最小值”的情况下则会无法成为最优值
+								//这里应该采用状态机的方法，在搜索第一个值的时候保证会赋给best
+							if (!initialized)//初始化best_score
+
 							{
 								best_score = temp_score;
+								initialized = true;
 
 							}
-							if ((temp_score != 0) && (temp_score <= best_score))
+							else
 							{
-								best_score = temp_score;
-								//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的
 
-								if (floor == FLOOR)
-									//如果是最外层，记录此时坐标
+							
+								if ((temp_score <= best_score))//这个地方去掉了(temp_score != 0)这个条件，五子棋也需要去掉，可能需要在后面添加上一个“当(temp_score = 0)”的处理语句
 								{
-									best_coordinate[0] = raw;
-									best_coordinate[1] = column;
-								}
+									best_score = temp_score;
+									//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的
 
+									if (floor == FLOOR)
+										//如果是最外层，记录此时坐标
+									{
+										best_coordinate[0] = raw;
+										best_coordinate[1] = column;
+									}
+
+								}
 							}
 							strncpy(board[raw][column], temp_blank, 2);
 
 						}
-					}
+					
 				}
 			}
 
