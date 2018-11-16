@@ -251,7 +251,8 @@ long int Minimax2(char board[][3][3], int step_count,
 
 
 			
-				best_score = temp_score1 + temp_score2;
+				//best_score = temp_score1 + temp_score2;
+				//五子棋里也有这个东西，注意一下，可能要删掉
 			
 
 
@@ -304,8 +305,8 @@ long int Minimax2(char board[][3][3], int step_count,
 
 			
 			
-				best_score = temp_score1 + temp_score2;
-			
+				//best_score = temp_score1 + temp_score2;
+			//五子棋里也有这个东西，注意一下，可能要删掉
 
 		}
 	}

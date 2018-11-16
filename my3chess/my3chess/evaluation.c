@@ -159,10 +159,10 @@ long int evaluation(char board[][3][3], int step_count,
 	}
 
 	// ?¡ñ_
-	if ((strncmp(board[raw][column - 1], chess, 2) == 0)
-		&& (strncmp(board[raw][column-2], chess, 2) != 0)
-		&& (strncmp(board[raw][column-2], opponent_chess, 2) != 0)
-		&& (column - 2 >= 0))
+	if ((strncmp(board[raw][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw][column+2], chess, 2) != 0)
+		&& (strncmp(board[raw][column+2], opponent_chess, 2) != 0)
+		&& (column + 2 <= 2))
 		
 	{
 		value += Capped_Four;
@@ -214,10 +214,10 @@ long int evaluation(char board[][3][3], int step_count,
 	}
 
 	// ?¡ñ_
-	if ((strncmp(board[raw - 1][column], chess, 2) == 0)
-		&& (strncmp(board[raw - 2][column], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column], opponent_chess, 2) != 0)
-		&&(raw - 2 >= 0))
+	if ((strncmp(board[raw + 1][column], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column], opponent_chess, 2) != 0)
+		&&(raw + 2 <= 2))
 
 	{
 		value += Capped_Four;
@@ -271,11 +271,11 @@ long int evaluation(char board[][3][3], int step_count,
 	}
 
 	// ?¡ñ_
-	if ((strncmp(board[raw + 1][column - 1], chess, 2) == 0)
-		&& (strncmp(board[raw +2][column - 2], chess, 2) != 0)
-		&& (strncmp(board[raw +2][column - 2], opponent_chess, 2) != 0)
-		&& (raw + 2 <= 2)
-		&& (column - 2 >= 0))
+	if ((strncmp(board[raw - 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw -2][column + 2], chess, 2) != 0)
+		&& (strncmp(board[raw -2][column + 2], opponent_chess, 2) != 0)
+		&& (raw - 2 >= 0)
+		&& (column + 2 <= 2))
 
 	{
 		value += Capped_Four;
@@ -334,11 +334,11 @@ long int evaluation(char board[][3][3], int step_count,
 	}
 
 	// ?¡ñ_
-	if ((strncmp(board[raw - 1][column -1], chess, 2) == 0)
-		&& (strncmp(board[raw - 2][column-2], chess, 2) != 0)
-		&& (strncmp(board[raw - 2][column-2], opponent_chess, 2) != 0)
-		&& (raw - 2 >= 0)
-		&& (column -2 >= 0))
+	if ((strncmp(board[raw + 1][column + 1], chess, 2) == 0)
+		&& (strncmp(board[raw + 2][column+2], chess, 2) != 0)
+		&& (strncmp(board[raw + 2][column+2], opponent_chess, 2) != 0)
+		&& (raw + 2 <= 2)
+		&& (column + 2 <= 2))
 
 	{
 		value += Capped_Four;
@@ -367,7 +367,7 @@ long int evaluation(char board[][3][3], int step_count,
 	if ((strncmp(board[raw - 1][column-1], chess, 2) == 0)
 		&& (strncmp(board[raw - 2][column-2], chess, 2) != 0)
 		&& (strncmp(board[raw - 2][column-2], opponent_chess, 2) != 0)
-		&& (raw - 1 >= 0)
+		&& (raw - 2 >= 0)
 		&& (column - 2 >= 0))
 	{
 		value += Capped_Four;
