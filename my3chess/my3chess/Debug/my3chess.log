@@ -1,1 +1,33 @@
-﻿  my3chess.vcxproj -> E:\coding\C_language\my3chess\Debug\my3chess.exe
+﻿  borad.c
+e:\coding\c_language\my3chess\my3chess\borad.c(149): warning C4013: “return_to_normal_chess”未定义；假设外部返回 int
+e:\coding\c_language\my3chess\my3chess\borad.c(46): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+e:\coding\c_language\my3chess\my3chess\borad.c(89): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1274): note: 参见“scanf”的声明
+e:\coding\c_language\my3chess\my3chess\borad.c(122): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\borad.c(176): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\borad.c(190): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\borad.c(235): warning C4013: “system”未定义；假设外部返回 int
+  evaluation.c
+  minimax.c
+e:\coding\c_language\my3chess\my3chess\minimax.c(224): warning C4244: “=”: 从“double”转换到“long”，可能丢失数据
+e:\coding\c_language\my3chess\my3chess\minimax.c(282): warning C4244: “=”: 从“double”转换到“long”，可能丢失数据
+e:\coding\c_language\my3chess\my3chess\minimax.c(70): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\minimax.c(71): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\minimax.c(107): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\minimax.c(139): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\minimax.c(140): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+e:\coding\c_language\my3chess\my3chess\minimax.c(181): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: 参见“strncpy”的声明
+  winner.c
+e:\coding\c_language\my3chess\my3chess\winner.c(10): warning C4101: “k”: 未引用的局部变量
+  正在生成代码...
+  my3chess.vcxproj -> E:\coding\C_language\my3chess\Debug\my3chess.exe

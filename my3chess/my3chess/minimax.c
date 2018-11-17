@@ -219,6 +219,9 @@ long int Minimax2(char board[][3][3], int step_count,
 
 							temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 							temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+							//下面是对先手后手进行权重分配，暂定。
+							temp_score1 = temp_score1 * 2;
+							temp_score2 = temp_score2 * 0.5;
 							temp_score = temp_score1 + temp_score2;
 							if (temp_score != 0)
 							{
@@ -274,6 +277,11 @@ long int Minimax2(char board[][3][3], int step_count,
 							//temp_score = evaluation(board, step_count, my_turn, raw, column);
 							temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 							temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+							//下面是对先手后手进行权重分配，暂定。
+							temp_score1 = temp_score1 * 2;
+							temp_score2 = temp_score2 * 0.5;
+							
+							
 							temp_score = temp_score1 + temp_score2;
 							if (temp_score != 0)
 							{

@@ -1,5 +1,4 @@
-﻿  1.c
-  main.cpp
+﻿  main.cpp
 e:\coding\c_language\3chess\3chess\main.cpp(72): warning C4309: “=”: 截断常量值
 e:\coding\c_language\3chess\3chess\main.cpp(158): warning C4244: “=”: 从“short”转换到“char”，可能丢失数据
 e:\coding\c_language\3chess\3chess\main.cpp(162): warning C4244: “=”: 从“short”转换到“char”，可能丢失数据

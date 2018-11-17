@@ -144,7 +144,7 @@ int minimax(char _board[9])
 {
 	short int i;
 	int bestValue = +INFINITY, index = 0;
-	char bestMoves[9] = { 0 };
+	char bestMoves[9] = { 7 };
 	for (i = 0; i < 9; i++)
 	{
 		if (_board[i] == empty)
