@@ -133,6 +133,9 @@ void main()
 		DrawBoard(board, 15, value, mode_choice, coordinate, -1);
 		while (continue_playing)
 		{
+			long int best_score_of_upper[11] = { -89999900 , 89999900 , -89999900, 89999900 , -89999900, 89999900, -89999900 , 89999900 , -89999900, 89999900, -89999900 };//给minimax里面的剪枝用的
+			//注意上下这两个数组的编号问题。floor是从11往0递归的，因此要保持最后一个元素不变。
+			bool not_in_the_same_branch[11] = { true, true, true, true, true, true, true, true, true, true, true };
 
 			if (my_turn)
 			{
@@ -140,20 +143,20 @@ void main()
 				double end_time, cost_time;
 				if (step_count > 2)
 				{
-					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate);
-					if ((coordinate[0] == 0) && (coordinate[1] == 0))
+					value = Minimax2(board, step_count, my_turn, ai_first, floor, coordinate, best_score_of_upper, not_in_the_same_branch);
+					/*if ((coordinate[0] == 0) && (coordinate[1] == 0))
 					{
 						auto_play(board, chess, opponent_chess, coordinate);
 						chess_play_ver2(board, step_count, coordinate);
 						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 						return_to_normal_chess(board, step_count, coordinate, coordinate);
 					}
-					else
-					{
+					else*/
+					//{
 						chess_play_ver2(board, step_count, coordinate);
 						DrawBoard(board, 15, value, mode_choice, coordinate, step_count);
 						return_to_normal_chess(board, step_count, coordinate, coordinate);
-					}
+					//}
 
 				}
 				else

@@ -22,5 +22,6 @@ bool judgement(char board[][3][3], int step_count);
 long int evaluation(char board[][3][3], int step_count, bool my_turn, int raw, int column);
 void get_coordinate(int coordinate[], char board[][3][3], int step_count);
 void chess_play_ver2(char board[][3][3], int step_count, int coordinate[]);
-long int Minimax2(char board[][3][3], int step_count, bool my_turn, bool ai_first, int floor, int coordinate[]);
+long int Minimax2(char board[][3][3], int step_count, bool my_turn, bool ai_first, int floor, int coordinate[], long int best_score_of_upper[], bool not_in_the_same_branch[]);
 void auto_play(char board[][3][3], char chess[], char opponent_chess[], int coordinate[]);
+int before_evaluation(char board[][3][3], int step_count, bool my_turn);
