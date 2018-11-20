@@ -575,8 +575,8 @@ int before_evaluation_ver2(char board[][17][3], int priority[][26][2], int floor
 				&& find_three2
 				&& find_three3)
 			{
-				printf("进入了status = %d的情况\n", status);
-				system("pause");
+				//printf("进入了status = %d的情况\n", status);
+				//system("pause");
 				return status;
 			}
 
@@ -590,8 +590,8 @@ int before_evaluation_ver2(char board[][17][3], int priority[][26][2], int floor
 	{
 		
 		status = 2;
-		printf("进入了status = %d的情况\n", status);
-		system("pause");
+		//printf("进入了status = %d的情况\n", status);
+		//system("pause");
 	}
 	return status;
 }

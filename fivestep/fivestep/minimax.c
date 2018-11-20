@@ -24,6 +24,13 @@ long int Minimax2(char board[][17][3], int step_count,
 
 	//bool valid_coordinate = false;
 	//下面是在建立ai先手、回合数与“是否是我方回合”的关系
+	
+	//下面这个条件语句是用来打断点进行单步调试用的，正常工作的时候要注释掉
+	if (coordinate[0] == 4 && coordinate[1] == 13 && floor == FLOOR)
+	{
+		system("pause");
+	}
+
 
 	if ((step_count % 2) == 0)
 	{
@@ -67,23 +74,26 @@ long int Minimax2(char board[][17][3], int step_count,
 			
 			
 			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
-			/*
-			for (int test_raw = 0; test_raw < 10; test_raw++)
+			
+			if (coordinate[0] == 4 && coordinate[1] == 13)
 			{
-				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
+				for (int test_raw = 0; test_raw < 10; test_raw++)
 				{
+					for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
+					{
 					
-					printf("%d,", priority[test_raw][test_raw2][0]);
-					printf("%d", priority[test_raw][test_raw2][1]);
-					printf(" ");
+						printf("%d,", priority[test_raw][test_raw2][0]);
+						printf("%d", priority[test_raw][test_raw2][1]);
+						printf(" ");
+					}
+					printf("\n");
 				}
-				printf("\n");
 			}
-			*/
+			
 
 
 
-
+			printf("本语句是方便打断点设置的\n");
 
 
 
@@ -408,9 +418,24 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 							strncpy(temp_blank, board[raw][column], 2);
 							strncpy(board[raw][column], chess, 2);
+							//测试用，打印ZobristTable，看看是否正常
+							/*
+							for (int z1 = 0; z1 < 15; z1++)
+							{
+								for (int z2 = 0; z2 < 15; z2++)
+								{
+									printf("%llu, %llu\n", ZobristTable[z1][z2][0], ZobristTable[z1][z2][1]);
+								}
+							}
+							*/
+
+
 							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
-							//下面这行是在测试的时候使用的，正式使用的时候关掉
-							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
+							//下面这几行是在测试的时候使用的，正式使用的时候关掉
+							 
+							DrawBoard(board, 15, 0, 2, coordinate, step_count);
+							
+
 							long int temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
 							long int temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
 							if (temp_score1 == 0 && temp_score2 == 0)
@@ -518,19 +543,24 @@ long int Minimax2(char board[][17][3], int step_count,
 
 			
 			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
-			/*
-			for (int test_raw = 0; test_raw < 10; test_raw++)
+			
+			if (coordinate[0] == 4 && coordinate[1] == 13)
 			{
-				for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
+				for (int test_raw = 0; test_raw < 10; test_raw++)
 				{
+					for (int test_raw2 = 0; test_raw2 < 26; test_raw2++)
+					{
 					
-					printf("%d,", priority[test_raw][test_raw2][0]);
-					printf("%d", priority[test_raw][test_raw2][1]);
-					printf(" ");
+						printf("%d,", priority[test_raw][test_raw2][0]);
+						printf("%d", priority[test_raw][test_raw2][1]);
+						printf(" ");
+					}
+					printf("\n");
 				}
-				printf("\n");
 			}
-			*/
+			
+			printf("本语句是方便打断点设置的\n");
+
 			/*
 			//下面这个if是新加的迭代加深
 			if (!final_hit)
