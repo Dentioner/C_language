@@ -230,11 +230,18 @@ long int Searching_Hashing2(unsigned long long hashing_value2[][3], unsigned lon
 					//在表中就找到了对应的哈希值，那就返回对应的评分
 					if (my_turn)
 					{//目前[1]记录的是我方的得分
-						return (long)hashing_value2[index][1];
+						if (hashing_value2[index][1] != 0)
+						{
+							return (long)hashing_value2[index][1];
+						}
 					}
 					else//[2]记录的是对方的得分
 					{
-						return (long)hashing_value2[index][2];
+						if (hashing_value2[index][2] != 0)
+						{
+							return (long)hashing_value2[index][2];
+						}
+					
 					}
 
 				}
@@ -253,16 +260,47 @@ long int Searching_Hashing2(unsigned long long hashing_value2[][3], unsigned lon
 
 		for (index = 0; index < depth_of_hashing; index++)
 		{
-			if (hashing_value2[index][0] == 0)//如果这个哈希值为0
+			if (hashing_value2[index][0] == hashValue)//如果在记录的过程中发现已经存在已有的记录了
 			{
-				hashing_value2[index][0] = hashValue;
 				if (my_turn)
 				{
-					hashing_value2[index][1] = (unsigned long long)temp_score;
+					if ((hashing_value2[index][1] == 0)&&(temp_score != 0) )//当已有的记录中，我方得分为0（没有登记过我方得分），且将要登记的我方得分不为0，则登记我方得分
+					{
+						hashing_value2[index][1] = (unsigned long long)temp_score;
+						return 0; //这个操作也只能执行一次，如果执行了，就必须跳出循环
+					}
 				}
 				else
 				{
-					hashing_value2[index][2] = (unsigned long long)temp_score;
+					if ((hashing_value2[index][2] == 0)&&(temp_score != 0))//当已有的记录中，对方得分为0（没有登记过对方得分），且将要登记的对方得分不为0，则登记对方得分
+					{
+						hashing_value2[index][2] = (unsigned long long)temp_score;
+						return 0; //这个操作也只能执行一次，如果执行了，就必须跳出循环
+					}
+				}
+				
+			}
+
+
+			else if (hashing_value2[index][0] == 0)//如果没有现成记录，则找一个哈希值为0的空位
+			{
+				
+				if (my_turn)
+				{
+					if (temp_score != 0)//仅登记非0的得分
+					{
+						hashing_value2[index][0] = hashValue;
+						hashing_value2[index][1] = (unsigned long long)temp_score;
+					}
+				}
+				else
+				{
+					if (temp_score != 0)
+
+					{
+						hashing_value2[index][0] = hashValue;
+						hashing_value2[index][2] = (unsigned long long)temp_score;
+					}
 				}
 
 
