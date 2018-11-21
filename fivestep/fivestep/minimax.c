@@ -98,7 +98,7 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 			if (status != 0)
-			{
+			{//类似于最底层，先不hash了
 			
 			
 				long int temp_score1 = 0;
@@ -118,95 +118,14 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 
-					temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+					//temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
 
 					//if (temp_score1 == 0 && temp_score2 == 0)
-					if (temp_score == 0)
-
-					{//如果哈希表没有值
-						//下面是在最底层进行算杀的试用版，目前废弃
-						/*
-						temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-						if (fatal_best_coordinate[0] == 0 && fatal_best_coordinate[1] == 0)
-						{*/
+				
 
 
 
-						//这个for循环是一开始就有的，别把这个给删了
-						for (int raw = 0; raw < 15; raw++)
-						{
-							for (int column = 1; column < 16; column++)
-							{
-								if ((strncmp(board[raw][column], chess, 2) != 0)
-									&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
-								{
-									//temp_score = evaluation(board, step_count, my_turn, raw, column);
-
-									temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-									temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-
-									temp_score1 = abs(temp_score1) * 1.5;
-									temp_score2 = abs(temp_score2) * 0.75;
-									temp_score = temp_score1 + temp_score2;
-
-
-									if (temp_score != 0)
-									{
-
-
-										if (best_score == 0)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-
-										}
-										if (temp_score > best_score)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-											//best_coordinate[0] = raw;
-												//best_coordinate[1] = column;
-										}
-										/*
-										if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-										{
-
-											return -89999900;
-										}
-										*/
-									}
-								}
-							}
-						}
-						//下面这个大括号是和上面的那个算杀if配套的
-						//}
-						//下面这个也是废弃的算杀
-						/*
-						else
-						{
-							best_score = evaluation(board, step_count, my_turn, fatal_best_coordinate[0], fatal_best_coordinate[1]);
-						}*/
-
-						//在循环结束后，将最佳的坐标输入进哈希表里面
-						if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
-						{
-
-
-							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
-							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
-							/*
-							if (best_score == 0)
-							{
-								system("pause");
-							}
-							*/
-						}
-
-
-					}
-					/*
+					//这个for循环是一开始就有的，别把这个给删了
 					for (int raw = 0; raw < 15; raw++)
 					{
 						for (int column = 1; column < 16; column++)
@@ -218,7 +137,12 @@ long int Minimax2(char board[][17][3], int step_count,
 
 								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+
+								temp_score1 = abs(temp_score1) * 1.5;
+								temp_score2 = abs(temp_score2) * 0.75;
 								temp_score = temp_score1 + temp_score2;
+
+
 								if (temp_score != 0)
 								{
 
@@ -245,114 +169,66 @@ long int Minimax2(char board[][17][3], int step_count,
 										return -89999900;
 									}
 									*/
-
-
-					else
-					{
-						//temp_score1 = abs(temp_score1) * 1.5;
-						//temp_score2 = abs(temp_score2) * 0.75;
-						//temp_score = temp_score1 + temp_score2;
-						best_score = temp_score;
+								}
+							}
+						}
 					}
-
-
-
-
-
 
 				}
 				else
 				{
 					temp_score = 0;
-					//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-					//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-					temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+					
+					
+						
 
-
-					//if (temp_score1 == 0 && temp_score2 == 0)
-					if (temp_score == 0)
-
+					//下面这个for循环别删了
+					for (int raw = 0; raw < 15; raw++)
 					{
-						//下面先在最底层进行算杀，试用版
-						/*
-						temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-						if (fatal_best_coordinate[0] == 0 && fatal_best_coordinate[1] == 0)
-							//best_score_of_upper[floor] = 0;
-						{*/
-
-						//下面这个for循环别删了
-						for (int raw = 0; raw < 15; raw++)
+						for (int column = 1; column < 16; column++)
 						{
-							for (int column = 1; column < 16; column++)
+							if ((strncmp(board[raw][column], chess, 2) != 0)
+								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 							{
-								if ((strncmp(board[raw][column], chess, 2) != 0)
-									&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+								//temp_score = evaluation(board, step_count, my_turn, raw, column);
+								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+								temp_score = temp_score1 + temp_score2;
+								if (temp_score != 0)
 								{
-									//temp_score = evaluation(board, step_count, my_turn, raw, column);
-									temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-									temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-									temp_score = temp_score1 + temp_score2;
-									if (temp_score != 0)
+
+
+									if (best_score == 0)
+									{
+										best_score = temp_score;
+										best_raw = raw;
+										best_column = column;
+									}
+
+									if (temp_score < best_score)
+									{
+										best_score = temp_score;
+										best_raw = raw;
+										best_column = column;
+										//best_coordinate[0] = raw;
+											//best_coordinate[1] = column;
+									}
+									/*
+									if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
 									{
 
-
-										if (best_score == 0)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-										}
-
-										if (temp_score < best_score)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-											//best_coordinate[0] = raw;
-												//best_coordinate[1] = column;
-										}
-										/*
-										if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-										{
-
-											return 89999900;
-										}
-										*/
+										return 89999900;
 									}
+									*/
 								}
-
 							}
+
 						}
-						//下面这个也是算杀的
-						/*}
-
-						else
-						{
-							best_score = evaluation(board, step_count, my_turn, fatal_best_coordinate[0], fatal_best_coordinate[1]);
-						}
-						*/
-
-
-						//在循环结束后，将最佳的坐标输入进哈希表里面
-						if ((temp_score != -89999900) && (temp_score != 89999900))
-						{ 
-							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
-							/*
-							if (temp_score == 0)
-							{
-								system("pause");
-							}
-							*/
-						}
-
-
 					}
-					else
-					{
-						//best_score = temp_score1 + temp_score2;
-						best_score = temp_score;
-					}
+						
+
+
+					
 
 				}
 			
@@ -634,12 +510,11 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 
-					temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-
+					
 					//if (temp_score1 == 0 && temp_score2 == 0)
-					if (temp_score == 0)
+					
 
-					{//如果哈希表没有值
+					//如果哈希表没有值
 						//下面是在最底层进行算杀的试用版，目前废弃
 						/*
 						temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
@@ -649,78 +524,6 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 						//这个for循环是一开始就有的，别把这个给删了
-						for (int raw = 0; raw < 15; raw++)
-						{
-							for (int column = 1; column < 16; column++)
-							{
-								if ((strncmp(board[raw][column], chess, 2) != 0)
-									&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
-								{
-									//temp_score = evaluation(board, step_count, my_turn, raw, column);
-
-									temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-									temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-
-									temp_score1 = abs(temp_score1) * 1.5;
-									temp_score2 = abs(temp_score2) * 0.75;
-									temp_score = temp_score1 + temp_score2;
-
-
-									if (temp_score != 0)
-									{
-
-
-										if (best_score == 0)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-
-										}
-										if (temp_score > best_score)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-											//best_coordinate[0] = raw;
-												//best_coordinate[1] = column;
-										}
-										/*
-										if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-										{
-
-											return -89999900;
-										}
-										*/
-									}
-								}
-							}
-						}
-						//下面这个大括号是和上面的那个算杀if配套的
-						//}
-						//下面这个也是废弃的算杀
-						/*
-						else
-						{
-							best_score = evaluation(board, step_count, my_turn, fatal_best_coordinate[0], fatal_best_coordinate[1]);
-						}*/
-
-						//在循环结束后，将最佳的坐标输入进哈希表里面
-						if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
-						{
-							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
-							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
-							/*
-							if (best_score == 0)
-							{
-								system("pause");
-							}
-							*/
-						}
-
-
-					}
-					/*
 					for (int raw = 0; raw < 15; raw++)
 					{
 						for (int column = 1; column < 16; column++)
@@ -732,7 +535,12 @@ long int Minimax2(char board[][17][3], int step_count,
 
 								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+
+								temp_score1 = abs(temp_score1) * 1.5;
+								temp_score2 = abs(temp_score2) * 0.75;
 								temp_score = temp_score1 + temp_score2;
+
+
 								if (temp_score != 0)
 								{
 
@@ -759,121 +567,60 @@ long int Minimax2(char board[][17][3], int step_count,
 										return -89999900;
 									}
 									*/
-
-
-					else
-					{
-						//temp_score1 = abs(temp_score1) * 1.5;
-						//temp_score2 = abs(temp_score2) * 0.75;
-						//temp_score = temp_score1 + temp_score2;
-						best_score = temp_score;
+								}
+							}
+						}
 					}
-
-
-
-
-
-
+						
 				}
 				else
 				{
 					temp_score = 0;
-					//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-					//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-					temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+					
 
+					
 
-					//if (temp_score1 == 0 && temp_score2 == 0)
-					if (temp_score == 0)
-
-					{
-						//下面先在最底层进行算杀，试用版
-						/*
-						temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-						if (fatal_best_coordinate[0] == 0 && fatal_best_coordinate[1] == 0)
-							//best_score_of_upper[floor] = 0;
-						{*/
+					
 
 						//下面这个for循环别删了
-						for (int raw = 0; raw < 15; raw++)
-						{
-							for (int column = 1; column < 16; column++)
-							{
-								if ((strncmp(board[raw][column], chess, 2) != 0)
-									&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
-								{
-									//temp_score = evaluation(board, step_count, my_turn, raw, column);
-									temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-									temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-									temp_score = temp_score1 + temp_score2;
-									if (temp_score != 0)
-									{
-
-
-										if (best_score == 0)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-										}
-
-										if (temp_score < best_score)
-										{
-											best_score = temp_score;
-											best_raw = raw;
-											best_column = column;
-											//best_coordinate[0] = raw;
-												//best_coordinate[1] = column;
-										}
-										/*
-										if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-										{
-
-											return 89999900;
-										}
-										*/
-									}
-								}
-
-							}
-						}
-						//下面这个也是算杀的
-						/*}
-
-						else
-						{
-							best_score = evaluation(board, step_count, my_turn, fatal_best_coordinate[0], fatal_best_coordinate[1]);
-						}
-						*/
-
-
-						//在循环结束后，将最佳的坐标输入进哈希表里面
-						if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
-						{
-							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
-							/*
-							if (temp_score == 0)
-							{
-								system("pause");
-							}
-							*/
-						
-						}
-
-
-					}
-					else
+					for (int raw = 0; raw < 15; raw++)
 					{
-						//best_score = temp_score1 + temp_score2;
-						best_score = temp_score;
+						for (int column = 1; column < 16; column++)
+						{
+							if ((strncmp(board[raw][column], chess, 2) != 0)
+								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+							{
+								//temp_score = evaluation(board, step_count, my_turn, raw, column);
+								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+								temp_score = temp_score1 + temp_score2;
+								if (temp_score != 0)
+								{
+
+
+									if (best_score == 0)
+									{
+										best_score = temp_score;
+										best_raw = raw;
+										best_column = column;
+									}
+
+									if (temp_score < best_score)
+									{
+										best_score = temp_score;
+										best_raw = raw;
+										best_column = column;
+										//best_coordinate[0] = raw;
+											//best_coordinate[1] = column;
+									}
+
+								}
+							}
+
+						}
 					}
 
 				}
-
-
-
-
 
 			}
 			else
@@ -1011,7 +758,7 @@ long int Minimax2(char board[][17][3], int step_count,
 	}
 	//最底层↓
 	else
-	{
+	{//最底层暂时不用hash了
 		long int temp_score1 = 0;
 		long int temp_score2 = 0;
 		int best_raw = 0;
@@ -1022,99 +769,54 @@ long int Minimax2(char board[][17][3], int step_count,
 		if (my_turn)
 		{
 			temp_score = 0;
-			//best_score_of_upper[floor] = 0;
-			//先搜索哈希表，如果有就不打分了
-			//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-			//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-			
-			
-			
-			temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-			
-			//if (temp_score1 == 0 && temp_score2 == 0)
-			if (temp_score == 0)
-			
-			{//如果哈希表没有值
-				//下面是在最底层进行算杀的试用版，目前废弃
-				/*
-				temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-				if (fatal_best_coordinate[0] == 0 && fatal_best_coordinate[1] == 0)
-				{*/
-
+			//这里删了一堆注释，要恢复的去看别的地方存档的minimax文件
 				
 				
 					//这个for循环是一开始就有的，别把这个给删了
-					for (int raw = 0; raw < 15; raw++)
+			for (int raw = 0; raw < 15; raw++)
+			{
+				for (int column = 1; column < 16; column++)
+				{
+					if ((strncmp(board[raw][column], chess, 2) != 0)
+						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
-						for (int column = 1; column < 16; column++)
-						{
-							if ((strncmp(board[raw][column], chess, 2) != 0)
-								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
-							{
-								//temp_score = evaluation(board, step_count, my_turn, raw, column);
+						//temp_score = evaluation(board, step_count, my_turn, raw, column);
 
-								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
 								
-								temp_score1 = abs(temp_score1) * 1.5;
-								temp_score2 = abs(temp_score2) * 0.75;
-								temp_score = temp_score1 + temp_score2;
+						temp_score1 = abs(temp_score1) * 1.5;
+						temp_score2 = abs(temp_score2) * 0.75;
+						temp_score = temp_score1 + temp_score2;
 
 
-								if (temp_score != 0)
-								{
+						if (temp_score != 0)
+						{
 
 
-									if (best_score == 0)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
+							if (best_score == 0)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
 
-									}
-									if (temp_score > best_score)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-										//best_coordinate[0] = raw;
-											//best_coordinate[1] = column;
-									}
-									/*
-									if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-									{
-
-										return -89999900;
-									}
-									*/
-								}
 							}
+							if (temp_score > best_score)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
+								//best_coordinate[0] = raw;
+									//best_coordinate[1] = column;
+							}
+							
 						}
 					}
-				//下面这个大括号是和上面的那个算杀if配套的
-				//}
-				//下面这个也是废弃的算杀
-				/*
-				else
-				{
-					best_score = evaluation(board, step_count, my_turn, fatal_best_coordinate[0], fatal_best_coordinate[1]);
-				}*/
-
-				//在循环结束后，将最佳的坐标输入进哈希表里面
-				if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
-				{
-					Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
-					//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
-					/*
-					if (best_score == 0)
-					{
-						system("pause");
-					}
-					*/
 				}
-			
-			
 			}
+				
+
+
 			/*
 			for (int raw = 0; raw < 15; raw++)
 			{
@@ -1155,7 +857,7 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 							*/
 				
-
+			/*
 			else
 			{
 				//temp_score1 = abs(temp_score1) * 1.5;
@@ -1163,8 +865,8 @@ long int Minimax2(char board[][17][3], int step_count,
 				//temp_score = temp_score1 + temp_score2;
 				best_score = temp_score;
 			}
-				
 			
+			*/
 			
 			
 			
@@ -1173,95 +875,58 @@ long int Minimax2(char board[][17][3], int step_count,
 		else
 		{
 			temp_score = 0;
-			//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-			//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-			temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-
-
-			//if (temp_score1 == 0 && temp_score2 == 0)
-			if (temp_score == 0)
 			
-			{
-				//下面先在最底层进行算杀，试用版
-				/*
-				temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-				if (fatal_best_coordinate[0] == 0 && fatal_best_coordinate[1] == 0)
-					//best_score_of_upper[floor] = 0;
-				{*/
-
+				
 					//下面这个for循环别删了
-					for (int raw = 0; raw < 15; raw++)
+			for (int raw = 0; raw < 15; raw++)
+			{
+				for (int column = 1; column < 16; column++)
+				{
+					if ((strncmp(board[raw][column], chess, 2) != 0)
+						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
-						for (int column = 1; column < 16; column++)
+						//temp_score = evaluation(board, step_count, my_turn, raw, column);
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score = temp_score1 + temp_score2;
+						if (temp_score != 0)
 						{
-							if ((strncmp(board[raw][column], chess, 2) != 0)
-								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+
+
+							if (best_score == 0)
 							{
-								//temp_score = evaluation(board, step_count, my_turn, raw, column);
-								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-								temp_score = temp_score1 + temp_score2;
-								if (temp_score != 0)
-								{
-
-
-									if (best_score == 0)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-									}
-
-									if (temp_score < best_score)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-										//best_coordinate[0] = raw;
-											//best_coordinate[1] = column;
-									}
-									/*
-									if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-									{
-
-										return 89999900;
-									}
-									*/
-								}
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
 							}
-			
+
+							if (temp_score < best_score)
+							{
+								best_score = temp_score;
+								best_raw = raw;
+								best_column = column;
+								//best_coordinate[0] = raw;
+									//best_coordinate[1] = column;
+							}
+							/*
+							if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
+							{
+
+								return 89999900;
+							}
+							*/
 						}
 					}
-				//下面这个也是算杀的
-				/*}
+			
+				}
+			}
 				
-				else
-				{
-					best_score = evaluation(board, step_count, my_turn, fatal_best_coordinate[0], fatal_best_coordinate[1]);
-				}
-				*/
 
 
-				//在循环结束后，将最佳的坐标输入进哈希表里面
-				if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
-				{
-					Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
-					//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
-					/*
-					if (best_score == 0)
-					{
-						system("pause");
-					}
-					*/
-				}
+				
 			
 			
-			}
-			else
-			{
-				//best_score = temp_score1 + temp_score2;
-				best_score = temp_score;
-			}
+			
 
 		}
 	}
