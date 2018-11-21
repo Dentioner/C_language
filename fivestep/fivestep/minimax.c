@@ -332,18 +332,15 @@ long int Minimax2(char board[][17][3], int step_count,
 							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 							
 
-							long int temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-							long int temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-							if (temp_score1 == 0 && temp_score2 == 0)
+							temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+
+							if (temp_score == 0)
 							{
 								temp_score = Minimax2(board, step_count + 1,
 									!my_turn, ai_first,
 									floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashValue, ZobristTable, hashing_value2, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
 							}
-							else
-							{
-								temp_score = temp_score1 + temp_score2;
-							}
+							
 							//下面这行是在测试的时候使用的，正式使用的时候关掉
 							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 
@@ -647,21 +644,17 @@ long int Minimax2(char board[][17][3], int step_count,
 							strncpy(temp_blank, board[raw][column], 2);
 							strncpy(board[raw][column], chess, 2);
 							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
-							long int temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-							long int temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-						
+							temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+							
 							//下面这个是在测试的时候输出的，正式使用的时候可以关掉
 							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
-							if (temp_score1 == 0 && temp_score2 == 0)
+							if (temp_score == 0)
 							{
 								temp_score = Minimax2(board, step_count + 1,
 									!my_turn, ai_first,
 									floor - 1, coordinate, best_score_of_upper, priority, not_in_the_same_branch, hashValue, ZobristTable, hashing_value2, fatal_priority, fatal_best_score_of_upper, fatal_not_in_the_same_branch);
 							}
-							else
-							{
-								temp_score = temp_score1 + temp_score2;
-							}
+							
 
 
 							//下面是从井字棋那里搬过来的
