@@ -414,18 +414,21 @@ void main()
 					}
 
 					//测试，打印哈希表，看看表是否正常
-					for (int ha1 = 0;ha1 < depth_of_hashing; ha1++)
+					//if (coordinate[0] == 8 && coordinate[1] == 7)
 					{
-						if (hashing_value2[ha1][0] != 0)
+						for (int ha1 = 0; ha1 < depth_of_hashing; ha1++)
 						{
+							if (hashing_value2[ha1][0] != 0)
+							{
 
-						
-							printf("棋盘：%llu，我方：%lld，对方：%lld\n", hashing_value2[ha1][0], hashing_value2[ha1][1], hashing_value2[ha1][2]);
-						//第二维度的[0]是整个棋盘的哈希值
-						//[1]与[2]是此哈希值对应的棋盘评分，应该定义在函数外面;
+
+								printf("棋盘：%llu，我方：%lld，对方：%lld\n", hashing_value2[ha1][0], hashing_value2[ha1][1], hashing_value2[ha1][2]);
+								//第二维度的[0]是整个棋盘的哈希值
+								//[1]与[2]是此哈希值对应的棋盘评分，应该定义在函数外面;
+							}
 						}
+						printf("本语句是方便打断点设置的\n");
 					}
-					printf("本语句是方便打断点设置的\n");
 
 				}
 				else

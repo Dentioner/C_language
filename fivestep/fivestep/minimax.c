@@ -26,9 +26,9 @@ long int Minimax2(char board[][17][3], int step_count,
 	//下面是在建立ai先手、回合数与“是否是我方回合”的关系
 	
 	//下面这个条件语句是用来打断点进行单步调试用的，正常工作的时候要注释掉
-	if (coordinate[0] == 4 && coordinate[1] == 13 && floor == FLOOR)
+	if (coordinate[0] == 8 && coordinate[1] == 10 && floor == FLOOR)
 	{
-		system("pause");
+		printf("pause\n");
 	}
 
 
@@ -93,7 +93,7 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 
-			printf("本语句是方便打断点设置的\n");
+			//printf("本语句是方便打断点设置的\n");
 
 
 
@@ -190,8 +190,19 @@ long int Minimax2(char board[][17][3], int step_count,
 						}*/
 
 						//在循环结束后，将最佳的坐标输入进哈希表里面
-						Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+						if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+						{
 
+
+							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
+							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+							/*
+							if (best_score == 0)
+							{
+								system("pause");
+							}
+							*/
+						}
 
 
 					}
@@ -323,8 +334,17 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 						//在循环结束后，将最佳的坐标输入进哈希表里面
-						Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-
+						if ((temp_score != -89999900) && (temp_score != 89999900))
+						{ 
+							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+							/*
+							if (temp_score == 0)
+							{
+								system("pause");
+							}
+							*/
+						}
 
 
 					}
@@ -433,7 +453,7 @@ long int Minimax2(char board[][17][3], int step_count,
 							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
 							//下面这几行是在测试的时候使用的，正式使用的时候关掉
 							 
-							DrawBoard(board, 15, 0, 2, coordinate, step_count);
+							//DrawBoard(board, 15, 0, 2, coordinate, step_count);
 							
 
 							long int temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
@@ -512,7 +532,17 @@ long int Minimax2(char board[][17][3], int step_count,
 							//复原
 							}
 							strncpy(board[raw][column], temp_blank, 2);
-							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+							{
+								Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+								//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+								/*
+								if (temp_score == 0)
+								{
+									system("pause");
+								}
+								*/
+							}
 							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
 							if (best_score > best_score_of_upper[floor - 1])
 							{
@@ -559,7 +589,7 @@ long int Minimax2(char board[][17][3], int step_count,
 				}
 			}
 			
-			printf("本语句是方便打断点设置的\n");
+			//printf("本语句是方便打断点设置的\n");
 
 			/*
 			//下面这个if是新加的迭代加深
@@ -676,8 +706,17 @@ long int Minimax2(char board[][17][3], int step_count,
 						}*/
 
 						//在循环结束后，将最佳的坐标输入进哈希表里面
-						Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-
+						if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+						{
+							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
+							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+							/*
+							if (best_score == 0)
+							{
+								system("pause");
+							}
+							*/
+						}
 
 
 					}
@@ -809,8 +848,18 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 						//在循环结束后，将最佳的坐标输入进哈希表里面
-						Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-
+						if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+						{
+							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+							/*
+							if (temp_score == 0)
+							{
+								system("pause");
+							}
+							*/
+						
+						}
 
 
 					}
@@ -927,7 +976,19 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 
 							strncpy(board[raw][column], temp_blank, 2);
-							Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+							{
+								Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
+							
+								//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+								/*
+
+								if (temp_score == 0)
+								{
+									system("pause");
+								}
+								*/
+							}
 							hashValue ^= ZobristTable[raw][column - 1][(step_count % 2)];
 							if (best_score > best_score_of_upper[floor - 1])
 							{
@@ -1040,8 +1101,17 @@ long int Minimax2(char board[][17][3], int step_count,
 				}*/
 
 				//在循环结束后，将最佳的坐标输入进哈希表里面
-				Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-				
+				if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+				{
+					Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
+					//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+					/*
+					if (best_score == 0)
+					{
+						system("pause");
+					}
+					*/
+				}
 			
 			
 			}
@@ -1173,8 +1243,17 @@ long int Minimax2(char board[][17][3], int step_count,
 
 
 				//在循环结束后，将最佳的坐标输入进哈希表里面
-				Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, temp_score, true);
-
+				if ((temp_score != -89999900) && (temp_score != 89999900))//不要把被剪枝的分数给录进去
+				{
+					Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, best_score, true);
+					//下面是测试，看看究竟往哈希表里面存了什么东西。正常运作时注释掉
+					/*
+					if (best_score == 0)
+					{
+						system("pause");
+					}
+					*/
+				}
 			
 			
 			}
