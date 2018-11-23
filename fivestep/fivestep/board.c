@@ -414,7 +414,7 @@ void main()
 					}
 
 					//测试，打印哈希表，看看表是否正常
-					//if (coordinate[0] == 8 && coordinate[1] == 7)
+					/*if (coordinate[0] == 8 && coordinate[1] == 7)
 					{
 						for (int ha1 = 0; ha1 < depth_of_hashing; ha1++)
 						{
@@ -429,7 +429,7 @@ void main()
 						}
 						printf("本语句是方便打断点设置的\n");
 					}
-
+					*/
 				}
 				else
 				{

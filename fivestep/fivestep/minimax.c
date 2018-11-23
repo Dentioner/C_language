@@ -159,8 +159,8 @@ long int Minimax2(char board[][17][3], int step_count,
 										best_score = temp_score;
 										best_raw = raw;
 										best_column = column;
-										//best_coordinate[0] = raw;
-											//best_coordinate[1] = column;
+										best_coordinate[0] = raw;
+										best_coordinate[1] = column;
 									}
 									/*
 									if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//¼ôÖ¦
@@ -554,8 +554,8 @@ long int Minimax2(char board[][17][3], int step_count,
 										best_score = temp_score;
 										best_raw = raw;
 										best_column = column;
-										//best_coordinate[0] = raw;
-											//best_coordinate[1] = column;
+										best_coordinate[0] = raw;
+										best_coordinate[1] = column;
 									}
 									/*
 									if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//¼ôÖ¦
