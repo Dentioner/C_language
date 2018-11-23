@@ -105,133 +105,98 @@ long int Minimax2(char board[][17][3], int step_count,
 				long int temp_score2 = 0;
 				int best_raw = 0;
 				int best_column = 1;
+				bool initialized = false;
 				//int floor_vcx = FLOOR_VCX;//这个是算杀专用floor
 				//int fatal_best_coordinate[2] = { 0,1 };
 				//找最佳的点与最值
-				if (my_turn)
-				{
-					temp_score = 0;
-					//best_score_of_upper[floor] = 0;
-					//先搜索哈希表，如果有就不打分了
-					//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-					//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
+				
+				temp_score = 0;
+				//best_score_of_upper[floor] = 0;
+				//先搜索哈希表，如果有就不打分了
+				//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+				//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
 
 
 
-					//temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
+				//temp_score = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
 
-					//if (temp_score1 == 0 && temp_score2 == 0)
+				//if (temp_score1 == 0 && temp_score2 == 0)
 				
 
 
 
-					//这个for循环是一开始就有的，别把这个给删了
-					for (int raw = 0; raw < 15; raw++)
+				//这个for循环是一开始就有的，别把这个给删了
+				for (int raw = 0; raw < 15; raw++)
+				{
+					for (int column = 1; column < 16; column++)
 					{
-						for (int column = 1; column < 16; column++)
+						if ((strncmp(board[raw][column], chess, 2) != 0)
+							&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 						{
-							if ((strncmp(board[raw][column], chess, 2) != 0)
-								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+							//temp_score = evaluation(board, step_count, my_turn, raw, column);
+
+							temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+							temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+
+							temp_score1 = abs(temp_score1) * 1.5;
+							temp_score2 = abs(temp_score2) * 0.75;
+							temp_score = temp_score1 + temp_score2;
+
+							if (!initialized)
 							{
-								//temp_score = evaluation(board, step_count, my_turn, raw, column);
+								best_score = temp_score;
+								initialized = true;
+								best_raw = raw;
+								best_column = column;
 
-								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-
-								temp_score1 = abs(temp_score1) * 1.5;
-								temp_score2 = abs(temp_score2) * 0.75;
-								temp_score = temp_score1 + temp_score2;
-
-
-								if (temp_score != 0)
+							}
+							else
+							{
+								if (temp_score > best_score)
+									//之所以不取等，是因为如果所有分支的分值都为0的话，就拿最开始出现的那个落点来下，因为最开始的落点是本层评分最高的
 								{
-
-
-									if (best_score == 0)
+									best_score = temp_score;
+									if (floor == FLOOR)
+										//如果是最外层，记录此时坐标
 									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-
-									}
-									if (temp_score > best_score)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
 										best_coordinate[0] = raw;
 										best_coordinate[1] = column;
-									}
-									/*
-									if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-									{
+										best_raw = raw;
+										best_column = column;
 
-										return -89999900;
 									}
-									*/
 								}
 							}
-						}
-					}
 
-				}
-				else
-				{
-					temp_score = 0;
-					
-					
-						
-
-					//下面这个for循环别删了
-					for (int raw = 0; raw < 15; raw++)
-					{
-						for (int column = 1; column < 16; column++)
-						{
-							if ((strncmp(board[raw][column], chess, 2) != 0)
-								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+							/*
+							if (temp_score != 0)
 							{
-								//temp_score = evaluation(board, step_count, my_turn, raw, column);
-								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-								temp_score = temp_score1 + temp_score2;
-								if (temp_score != 0)
+
+
+								if (best_score == 0)
 								{
+									best_score = temp_score;
+									best_raw = raw;
+									best_column = column;
 
-
-									if (best_score == 0)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-									}
-
-									if (temp_score < best_score)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-										//best_coordinate[0] = raw;
-											//best_coordinate[1] = column;
-									}
-									/*
-									if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-									{
-
-										return 89999900;
-									}
-									*/
 								}
+								if (temp_score > best_score)
+								{
+									best_score = temp_score;
+									best_raw = raw;
+									best_column = column;
+									best_coordinate[0] = raw;
+									best_coordinate[1] = column;
+								}
+								
 							}
-
+							*/
 						}
 					}
-						
-
-
-					
-
 				}
+
 			
+				
 
 
 
@@ -378,7 +343,7 @@ long int Minimax2(char board[][17][3], int step_count,
 
 							
 								
-								if (temp_score >= best_score)
+								if (temp_score > best_score)
 								{
 									best_score = temp_score;
 
@@ -494,130 +459,90 @@ long int Minimax2(char board[][17][3], int step_count,
 				long int temp_score2 = 0;
 				int best_raw = 0;
 				int best_column = 1;
+				bool initialized = false;
 				//int floor_vcx = FLOOR_VCX;//这个是算杀专用floor
 				//int fatal_best_coordinate[2] = { 0,1 };
 				//找最佳的点与最值
-				if (my_turn)
+				
+				
+				temp_score = 0;
+					
+
+					
+
+					
+
+					//下面这个for循环别删了
+				for (int raw = 0; raw < 15; raw++)
 				{
-					temp_score = 0;
-					//best_score_of_upper[floor] = 0;
-					//先搜索哈希表，如果有就不打分了
-					//temp_score1 = Searching_Hashing2(hashing_value2, ZobristTable, step_count, hashValue, my_turn, 0, false);
-					//temp_score2 = Searching_Hashing2(hashing_value2, ZobristTable, step_count + 1, hashValue, !my_turn, 0, false);
-
-
-
-					
-					//if (temp_score1 == 0 && temp_score2 == 0)
-					
-
-					//如果哈希表没有值
-						//下面是在最底层进行算杀的试用版，目前废弃
-						/*
-						temp_score = fatal_step(board, step_count, my_turn, ai_first, floor_vcx, fatal_best_coordinate, fatal_best_score_of_upper, fatal_priority, fatal_not_in_the_same_branch);
-						if (fatal_best_coordinate[0] == 0 && fatal_best_coordinate[1] == 0)
-						{*/
-
-
-
-						//这个for循环是一开始就有的，别把这个给删了
-					for (int raw = 0; raw < 15; raw++)
+					for (int column = 1; column < 16; column++)
 					{
-						for (int column = 1; column < 16; column++)
+						if ((strncmp(board[raw][column], chess, 2) != 0)
+							&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 						{
-							if ((strncmp(board[raw][column], chess, 2) != 0)
-								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+							//temp_score = evaluation(board, step_count, my_turn, raw, column);
+							temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+							temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+							temp_score1 = abs(temp_score1) * 1.5;
+							temp_score2 = abs(temp_score2) * 0.75;
+							temp_score = -(temp_score1 + temp_score2);
+							
+							if (!initialized)
 							{
-								//temp_score = evaluation(board, step_count, my_turn, raw, column);
+								best_score = temp_score;
+								initialized = true;
+								best_raw = raw;
+								best_column = column;
 
-								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-
-								temp_score1 = abs(temp_score1) * 1.5;
-								temp_score2 = abs(temp_score2) * 0.75;
-								temp_score = temp_score1 + temp_score2;
-
-
-								if (temp_score != 0)
+							}
+							else
+							{
+								if (temp_score < best_score)
 								{
-
-
-									if (best_score == 0)
+									best_score = temp_score;
+									if (floor == FLOOR)
+										//如果是最外层，记录此时坐标
 									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-
-									}
-									if (temp_score > best_score)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
 										best_coordinate[0] = raw;
 										best_coordinate[1] = column;
-									}
-									/*
-									if ((best_score < best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-									{
+										best_raw = raw;
+										best_column = column;
 
-										return -89999900;
 									}
-									*/
 								}
 							}
-						}
-					}
-						
-				}
-				else
-				{
-					temp_score = 0;
-					
-
-					
-
-					
-
-						//下面这个for循环别删了
-					for (int raw = 0; raw < 15; raw++)
-					{
-						for (int column = 1; column < 16; column++)
-						{
-							if ((strncmp(board[raw][column], chess, 2) != 0)
-								&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
+							/*
+							temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+							temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+							temp_score = temp_score1 + temp_score2;
+							if (temp_score != 0)
 							{
-								//temp_score = evaluation(board, step_count, my_turn, raw, column);
-								temp_score1 = evaluation(board, step_count, my_turn, raw, column);
-								temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
-								temp_score = temp_score1 + temp_score2;
-								if (temp_score != 0)
+
+
+								if (best_score == 0)
 								{
-
-
-									if (best_score == 0)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-									}
-
-									if (temp_score < best_score)
-									{
-										best_score = temp_score;
-										best_raw = raw;
-										best_column = column;
-										//best_coordinate[0] = raw;
-											//best_coordinate[1] = column;
-									}
-
+									best_score = temp_score;
+									best_raw = raw;
+									best_column = column;
 								}
+
+								if (temp_score < best_score)
+								{
+									best_score = temp_score;
+									best_raw = raw;
+									best_column = column;
+									//best_coordinate[0] = raw;
+										//best_coordinate[1] = column;
+								}
+
 							}
-
+							*/
 						}
-					}
 
+					}
 				}
+
+				
 
 			}
 			else
@@ -692,7 +617,7 @@ long int Minimax2(char board[][17][3], int step_count,
 							{
 
 							
-								if (temp_score <= best_score)
+								if (temp_score < best_score)
 								{
 									best_score = temp_score;
 									//这里没有那个最外层判定坐标的东西，因为最外层是不可能会出现传递min的情况的
@@ -756,6 +681,7 @@ long int Minimax2(char board[][17][3], int step_count,
 		long int temp_score2 = 0;
 		int best_raw = 0;
 		int best_column = 1;
+		bool initialized = false;
 		//int floor_vcx = FLOOR_VCX;//这个是算杀专用floor
 		//int fatal_best_coordinate[2] = { 0,1 };
 		//找最佳的点与最值
@@ -781,8 +707,23 @@ long int Minimax2(char board[][17][3], int step_count,
 						temp_score1 = abs(temp_score1) * 1.5;
 						temp_score2 = abs(temp_score2) * 0.75;
 						temp_score = temp_score1 + temp_score2;
+						if (!initialized)
+						{
+							best_score = temp_score;
+							initialized = true;
+							best_raw = raw;
+							best_column = column;
 
-
+						}
+						else
+						{
+							if (temp_score > best_score)
+							{
+								best_score = temp_score;
+								
+							}
+						}
+						/*
 						if (temp_score != 0)
 						{
 
@@ -804,6 +745,7 @@ long int Minimax2(char board[][17][3], int step_count,
 							}
 							
 						}
+						*/
 					}
 				}
 			}
@@ -878,7 +820,30 @@ long int Minimax2(char board[][17][3], int step_count,
 					if ((strncmp(board[raw][column], chess, 2) != 0)
 						&& (strncmp(board[raw][column], opponent_chess, 2) != 0))
 					{
+						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
+						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
+						temp_score1 = abs(temp_score1) * 1.5;
+						temp_score2 = abs(temp_score2) * 0.75;
+						temp_score = -(temp_score1 + temp_score2);
+						
+						if (!initialized)
+						{
+							best_score = temp_score;
+							initialized = true;
+							best_raw = raw;
+							best_column = column;
+
+						}
+						else
+						{
+							if (temp_score < best_score)
+							{
+								best_score = temp_score;
+								
+							}
+						}
 						//temp_score = evaluation(board, step_count, my_turn, raw, column);
+						/*
 						temp_score1 = evaluation(board, step_count, my_turn, raw, column);
 						temp_score2 = evaluation(board, step_count + 1, !my_turn, raw, column);
 						temp_score = temp_score1 + temp_score2;
@@ -901,14 +866,9 @@ long int Minimax2(char board[][17][3], int step_count,
 								//best_coordinate[0] = raw;
 									//best_coordinate[1] = column;
 							}
-							/*
-							if ((best_score > best_score_of_upper[floor]) && not_in_the_same_branch[floor])//剪枝
-							{
-
-								return 89999900;
-							}
-							*/
+						
 						}
+						*/
 					}
 			
 				}
