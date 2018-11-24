@@ -599,7 +599,7 @@ int before_evaluation_ver2(char board[][17][3], int priority[][26][2], int floor
 
 
 int before_evaluation_ver3(char board[][17][3], int priority_ver2[][2], int floor,
-	int step_count, bool my_turn, char **chess_pointer)
+	int step_count, bool my_turn)
 {
 	//char * temp = *chess_pointer;
 	long int temp_priority[255][3] = { 0 };//先将255个点的评分全部存下来

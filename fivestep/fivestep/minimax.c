@@ -21,14 +21,14 @@ long int Minimax2(char board[][17][3], int step_count,
 	//0表示当前棋局正常
 	//1表示当前棋局发现我方连五
 	//2表示当前棋局没有发现我方连五，但是发现对方连五
-
+	int priority_ver2[10][2] = { {0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0},{0,0} };
 	//bool valid_coordinate = false;
 	//下面是在建立ai先手、回合数与“是否是我方回合”的关系
 	
 	//下面这个条件语句是用来打断点进行单步调试用的，正常工作的时候要注释掉
-	if (coordinate[0] == 8 && coordinate[1] == 10 && floor == FLOOR)
+	if (coordinate[0] == 7 && coordinate[1] == 10 && floor == FLOOR)
 	{
-		printf("pause\n");
+		printf("\n");
 	}
 
 
@@ -69,12 +69,14 @@ long int Minimax2(char board[][17][3], int step_count,
 		{
 			//best_score_of_upper[floor] = 0;
 			//先将优先的那些点找到并递归
-			status = before_evaluation_ver2(board, priority, floor, step_count, my_turn);
-			
+			//旧的启发式搜索
+			//status = before_evaluation_ver2(board, priority, floor, step_count, my_turn);
+			status = before_evaluation_ver3(board, priority_ver2, floor, step_count, my_turn);
+
 			
 			
 			//下面这个双层的for循环是在测试的时候输出的，正式使用的时候可以关掉
-			
+			/*
 			if (coordinate[0] == 4 && coordinate[1] == 13)
 			{
 				for (int test_raw = 0; test_raw < 10; test_raw++)
@@ -89,7 +91,7 @@ long int Minimax2(char board[][17][3], int step_count,
 					printf("\n");
 				}
 			}
-			
+			*/
 
 
 
@@ -260,12 +262,19 @@ long int Minimax2(char board[][17][3], int step_count,
 
 			
 				bool initialized = false;//false表示best_score还没有被赋值过
+				/*旧的启发式搜素遍历
 				for (int a = 0; a < 26; a++)
 				{
 					
 					not_in_the_same_branch[floor - 1] = true;//判断是否在同一分支中，以免误剪枝
 					int raw = priority[FLOOR - floor][a][0];
 					int column = priority[FLOOR - floor][a][1];
+					*/
+				for (int a = 0; a < 10; a++)
+				{
+					not_in_the_same_branch[floor - 1] = true;//判断是否在同一分支中，以免误剪枝
+					int raw = priority_ver2[a][0];
+					int column = priority_ver2[a][1];
 					if ((raw != 0) || (column != 0))
 					{
 						if ((strncmp(board[raw][column], chess, 2) != 0)
@@ -550,11 +559,19 @@ long int Minimax2(char board[][17][3], int step_count,
 
 			
 				bool initialized = false;//false表示best_score还没有被赋值过
+				/*旧的启发式搜索遍历
 				for (int a = 0; a < 26; a++)
 				{
 					not_in_the_same_branch[floor - 1] = true;
 					int raw = priority[FLOOR - floor][a][0];
 					int column = priority[FLOOR - floor][a][1];
+					*/
+				for (int a = 0; a < 10; a++)
+				{
+
+					not_in_the_same_branch[floor - 1] = true;
+					int raw = priority_ver2[a][0];
+					int column = priority_ver2[a][1];
 					if ((raw != 0) || (column != 0))
 					{
 						if ((strncmp(board[raw][column], chess, 2) != 0)
