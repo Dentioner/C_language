@@ -414,7 +414,7 @@ long int Minimax2(char board[][17][3], int step_count,
 		else
 		{
 			//best_score_of_upper[floor] = 0;
-			status = before_evaluation_ver2(board, priority, floor, step_count, my_turn);
+			status = before_evaluation_ver3(board, priority_ver2, floor, step_count, my_turn);
 			//final_hit = before_evaluation(board, priority, floor, step_count, my_turn);
 			
 
